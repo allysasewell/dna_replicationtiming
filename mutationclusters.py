@@ -22,7 +22,7 @@ def GetSequence(file):
 
 
 
-with open("UV_yeast_Merged_SNP_DIPs_sorted_anz2_tandem.txt") as f:
+with open("UVC_filter_mutations.txt") as f:
     data = f.read()
 lines = [s.strip().split() for s in data.splitlines()]
 genotypes = {'WT': 0, 'rad16':0, 'rad26':0, 'rad30': 0}
@@ -197,35 +197,53 @@ def FindClusters( isolate_list, strain):
             sorted_list = sorted(sorted_isolate_list, key = index)
 
             if sorted_list[0][1] == sorted_list [1][1] and (int(sorted_list[1][0]) <= int((sorted_list[ 0][0])) + 10):
-                if sorted_list[0] not in clusters.keys():# and (sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV'):
+                if sorted_list[0] not in clusters.keys():#and sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV':
                     clusters[sorted_list[0]] = [sorted_list[0]]
-                if sorted_list[1] not in clusters.keys():# and (sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV'):
+                if sorted_list[1] not in clusters.keys():# and sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV':
                     clusters[sorted_list[1]] = [sorted_list[1]]
             else:
-                if sorted_list[0] not in nonclusters.keys():# and (sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV'):
+                if sorted_list[0] not in nonclusters.keys():# and sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV':
                     nonclusters[sorted_list[0]] = [sorted_list[0]]
             if sorted_list[len (sorted_list) - 2][1] == sorted_list[len (sorted_list) - 1][1] and ((int(sorted_list[len (sorted_list) - 1][0])) <= (int((sorted_list[ len (sorted_list) - 2][0])) + 10)):
-                if sorted_list[len(sorted_list) - 1] not in clusters.keys():# and (sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV'):
+                if sorted_list[len(sorted_list) - 1] not in clusters.keys():# and sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV':
                     clusters[sorted_list[len(sorted_list) - 1]] = [sorted_list[len(sorted_list) - 1]]
-                if sorted_list[len(sorted_list) - 2] not in clusters.keys():# and (sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV'):
+                if sorted_list[len(sorted_list) - 2] not in clusters.keys():# and sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV':
                     clusters[sorted_list[len(sorted_list) - 2]] = [sorted_list[len(sorted_list) - 2]]
             else:
-                if sorted_list[len(sorted_list) - 1] not in nonclusters.keys():# and (sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV'):
+                if sorted_list[len(sorted_list) - 1] not in nonclusters.keys():# and sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV':
                     nonclusters[sorted_list[len(sorted_list) - 1]] = [sorted_list[len(sorted_list) - 1]]
            
             for j in range (1,len (sorted_list) - 1):
                     if (sorted_list[j][1] == sorted_list[j - 1][1] and (int(sorted_list[j][0]) <= int((sorted_list[j - 1][0])) + 10)) or (sorted_list[j + 1][1] == sorted_list[j][1] and (int(sorted_list[j + 1][0]) <= int((sorted_list[j][0])) + 10)): #or ((isolate_list[key][j + n][6], int(isolate_list[key][j + n][0]), isolate_list[key][j + n][1]) in homopolymers.keys() and (int(isolate_list[key][j + n][0]) <= int((isolate_list[key][j + n - 1][0])) + 10 + homopolymers[key])) : 
-                            if sorted_list[j] not in clusters.keys():# and (sorted_list[j][5] == 'SNP' or sorted_list[0][5] == 'SNV'):
+                            if sorted_list[j] not in clusters.keys():# and sorted_list[j][5] == 'SNP' or sorted_list[0][5] == 'SNV':
                                 clusters[sorted_list[j]] = [sorted_list[j]]
-                    elif sorted_list[j] not in nonclusters.keys():# and (sorted_list[j][5] == 'SNP' or sorted_list[0][5] == 'SNV'):
+                    elif sorted_list[j] not in nonclusters.keys():# and sorted_list[j][5] == 'SNP' or sorted_list[0][5] == 'SNV':
                                 nonclusters[sorted_list[j]] = [sorted_list[j]]
 
 
-    
+                               
+    for key in clusters.keys():
+        if len(clusters[key]) in lengths.keys():
+            lengths[len(clusters[key])] = lengths[len(clusters[key])] + 1
+        else:
+            lengths[len(clusters[key])] = 1
+        if len(clusters[key]) > 5:
+            print(str(clusters[key][0]) + ": " + str(len(clusters[key])))
+    for key in lengths.keys():
+        print(str(key) + ": " + str(lengths[key]))
+    for key in cluster_numbers.keys():
+        print(str(key) + ": " + str(cluster_numbers[key]/ len(isolate_list[key])))
+    new_clusters = {}
+    for key in clusters.keys():
+        for i in range(0, len(clusters[key])):
+            if (clusters[key][i][6], clusters[key][i][1], clusters[key][i][0]) not in new_clusters.keys():
+                new_clusters[(clusters[key][i][6], clusters[key][i][1], clusters[key][i][0])] = [(clusters[key][i][6], clusters[key][i][1], clusters[key][i][0])]
+                                    
                                     
                                       
      
         return clusters, nonclusters
+
 
 
 
@@ -339,7 +357,7 @@ cluster_file.close()
 
 indel_file = open('indel_list', 'w+')
 
-with open("UVB_New_Combined_All_v2_format_filter.txt") as f2:
+with open("UVB_filter_mutations.txt") as f2:
     data2 = f2.read()
 lines2 = [s.strip().split() for s in data2.splitlines()]
 lines2.pop(0)
