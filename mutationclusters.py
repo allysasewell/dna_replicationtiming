@@ -184,13 +184,13 @@ def index(tuple):
 
 
 def FindClusters( isolate_list, strain):
-    lengths = {}
+    #lengths = {}
     clusters = {}
     nonclusters = {}
-    homopolymers = {}
-    cluster_numbers = {}
+    #homopolymers = {}
+    #cluster_numbers = {}
     for key in isolate_list.keys():
-        number = 0
+        #number = 0
         if strain in key[1] and len(isolate_list[key]) > 1:
             print(isolate_list[key])
             sorted_isolate_list = sorted(isolate_list[key])
@@ -219,30 +219,10 @@ def FindClusters( isolate_list, strain):
                                 clusters[sorted_list[j]] = [sorted_list[j]]
                     elif sorted_list[j] not in nonclusters.keys():# and sorted_list[j][5] == 'SNP' or sorted_list[0][5] == 'SNV':
                                 nonclusters[sorted_list[j]] = [sorted_list[j]]
-
-
-                               
-    for key in clusters.keys():
-        if len(clusters[key]) in lengths.keys():
-            lengths[len(clusters[key])] = lengths[len(clusters[key])] + 1
-        else:
-            lengths[len(clusters[key])] = 1
-        if len(clusters[key]) > 5:
-            print(str(clusters[key][0]) + ": " + str(len(clusters[key])))
-    for key in lengths.keys():
-        print(str(key) + ": " + str(lengths[key]))
-    for key in cluster_numbers.keys():
-        print(str(key) + ": " + str(cluster_numbers[key]/ len(isolate_list[key])))
-    new_clusters = {}
-    for key in clusters.keys():
-        for i in range(0, len(clusters[key])):
-            if (clusters[key][i][6], clusters[key][i][1], clusters[key][i][0]) not in new_clusters.keys():
-                new_clusters[(clusters[key][i][6], clusters[key][i][1], clusters[key][i][0])] = [(clusters[key][i][6], clusters[key][i][1], clusters[key][i][0])]
-                                    
                                     
                                       
      
-        return clusters, nonclusters
+    return clusters, nonclusters
 
 
 
