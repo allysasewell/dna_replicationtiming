@@ -94,7 +94,7 @@ def getChromosome(data):
     chr_counts = {}
     chromosome = []
     for i in range (0, len(lines)):
-        if lines[i][0] != "chrXII" or (int(lines[i][2]) < 451430) or (int(lines[i][2]) > 468920 and int(lines[i][2]) < 489928) or (int(lines[i][2]) > 490455):
+        #if lines[i][0] != "chrXII" or (int(lines[i][2]) < 451430) or (int(lines[i][2]) > 468920 and int(lines[i][2]) < 489928) or (int(lines[i][2]) > 490455):
             chromosome.append(lines[i][0])
             if lines[i][0] not in chr_counts.keys():
                 chr_counts[lines[i][0]] = 1
@@ -145,7 +145,7 @@ def getPosition1(data):
     lines = [s.strip().split() for s in data.splitlines()]   
     position1 = []
     for j in range (0, len(lines)):
-        if lines[j][0] != "chrXII" or (int(lines[j][2]) < 451430) or (int(lines[j][2]) > 468920 and int(lines[j][2]) < 489928) or (int(lines[j][2]) > 490455):
+        #if lines[j][0] != "chrXII" or (int(lines[j][2]) < 451430) or (int(lines[j][2]) > 468920 and int(lines[j][2]) < 489928) or (int(lines[j][2]) > 490455):
             position1.append(float(lines[j][1]))
     return position1
 position1 = getPosition1(data)
@@ -190,7 +190,7 @@ def getPosition2(data):
     lines = [s.strip().split() for s in data.splitlines()]   
     position2 = []
     for k in range (0, len(lines) ):
-        if lines[k][0] != "chrXII" or (int(lines[k][2]) < 451430) or (int(lines[k][2]) > 468920 and int(lines[k][2]) < 489928) or (int(lines[k][2]) > 490455):
+        #if lines[k][0] != "chrXII" or (int(lines[k][2]) < 451430) or (int(lines[k][2]) > 468920 and int(lines[k][2]) < 489928) or (int(lines[k][2]) > 490455):
             position2.append(float(lines[k][2]))
     return position2
 position2 = getPosition2(data)
@@ -235,7 +235,7 @@ def getTrinucleotide(data):
     lines = [s.strip().split() for s in data.splitlines()]   
     trinucleotide = []
     for m in range (0, len(lines)):
-        if lines[m][0] != "chrXII" or (int(lines[m][2]) < 451430) or (int(lines[m][2]) > 468920 and int(lines[m][2]) < 489928) or (int(lines[m][2]) > 490455):
+        #if lines[m][0] != "chrXII" or (int(lines[m][2]) < 451430) or (int(lines[m][2]) > 468920 and int(lines[m][2]) < 489928) or (int(lines[m][2]) > 490455):
             trinucleotide.append(lines[m][3].replace('-', ''))
     return trinucleotide
 trinucleotide = getTrinucleotide(data)
@@ -627,6 +627,10 @@ def CountMutations(filename, times, chromosome, chr_name):
 
 
     f1.close()
+    print(max(early_mut.values()))
+    print(min(middle_mut.values()))
+    print(max(middle_mut.values()))
+    print(min(late_mut.values()))
     return [early_mut, middle_mut, late_mut, early1_mut, early2_mut, early3_mut, middle1_mut, middle2_mut, middle3_mut, late1_mut, late2_mut, late3_mut]
 
 muts = CountMutations("WT_mutations", times, chromosome, 'chrXVI')
@@ -902,17 +906,23 @@ def AddTimeColumn(filename, file1, file2, file3, data, times, early_mut, middle_
             if e in early_mut.keys():
                 fa.write(d)
                 fa.write('\n')
+                fi.write(d)
+                fi.write('\n')
             if e in middle_mut.keys():
                 fb.write(d)
                 fb.write('\n')
+                fi.write(d)
+                fi.write('\n')
             if e in late_mut.keys():
                 fc.write(d)
                 fc.write('\n')
+                fi.write(d)
+                fi.write('\n')
             e = e + 1
        
         
-        fi.write(d)
-        fi.write('\n')
+        #fi.write(d)
+        #fi.write('\n')
     
    
     fi.close()
@@ -1271,7 +1281,7 @@ def TrinucleotideContext(file, name, start, scores, early, middle, dicts, num, c
         if chr[i] == name and chr[i - 1] == name:
             
             for q in range(int(start[i -1]) - 1, int(start[i]) - 1):
-                if chr[i] != "chrXII" or (q < 451430) or (q  > 468920 and q  < 489928) or (q  > 490455):
+                #if chr[i] != "chrXII" or (q < 451430) or (q  > 468920 and q  < 489928) or (q  > 490455):
                     if sequence[(q - 1):(q+num - 1)][1] == 'A' or sequence[(q-1):(q+num -1)][1] == 'G':
                         seq1 =GetReverseComplement (sequence[(q-1):(q + num - 1)])
                     else:

@@ -197,27 +197,27 @@ def FindClusters( isolate_list, strain):
             sorted_list = sorted(sorted_isolate_list, key = index)
 
             if sorted_list[0][1] == sorted_list [1][1] and (int(sorted_list[1][0]) <= int((sorted_list[ 0][0])) + 10):
-                if sorted_list[0] not in clusters.keys():#and sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV':
+                if sorted_list[0] not in clusters.keys() and (sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV'):
                     clusters[sorted_list[0]] = [sorted_list[0]]
-                if sorted_list[1] not in clusters.keys():# and sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV':
+                if sorted_list[1] not in clusters.keys() and (sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV'):
                     clusters[sorted_list[1]] = [sorted_list[1]]
             else:
-                if sorted_list[0] not in nonclusters.keys():# and sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV':
+                if sorted_list[0] not in nonclusters.keys() and (sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV'):
                     nonclusters[sorted_list[0]] = [sorted_list[0]]
             if sorted_list[len (sorted_list) - 2][1] == sorted_list[len (sorted_list) - 1][1] and ((int(sorted_list[len (sorted_list) - 1][0])) <= (int((sorted_list[ len (sorted_list) - 2][0])) + 10)):
-                if sorted_list[len(sorted_list) - 1] not in clusters.keys():# and sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV':
+                if sorted_list[len(sorted_list) - 1] not in clusters.keys() and (sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV'):
                     clusters[sorted_list[len(sorted_list) - 1]] = [sorted_list[len(sorted_list) - 1]]
-                if sorted_list[len(sorted_list) - 2] not in clusters.keys():# and sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV':
+                if sorted_list[len(sorted_list) - 2] not in clusters.keys() and (sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV'):
                     clusters[sorted_list[len(sorted_list) - 2]] = [sorted_list[len(sorted_list) - 2]]
             else:
-                if sorted_list[len(sorted_list) - 1] not in nonclusters.keys():# and sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV':
+                if sorted_list[len(sorted_list) - 1] not in nonclusters.keys() and (sorted_list[0][5] == 'SNP' or sorted_list[0][5] == 'SNV'):
                     nonclusters[sorted_list[len(sorted_list) - 1]] = [sorted_list[len(sorted_list) - 1]]
            
             for j in range (1,len (sorted_list) - 1):
                     if (sorted_list[j][1] == sorted_list[j - 1][1] and (int(sorted_list[j][0]) <= int((sorted_list[j - 1][0])) + 10)) or (sorted_list[j + 1][1] == sorted_list[j][1] and (int(sorted_list[j + 1][0]) <= int((sorted_list[j][0])) + 10)): #or ((isolate_list[key][j + n][6], int(isolate_list[key][j + n][0]), isolate_list[key][j + n][1]) in homopolymers.keys() and (int(isolate_list[key][j + n][0]) <= int((isolate_list[key][j + n - 1][0])) + 10 + homopolymers[key])) : 
-                            if sorted_list[j] not in clusters.keys():# and sorted_list[j][5] == 'SNP' or sorted_list[0][5] == 'SNV':
+                            if sorted_list[j] not in clusters.keys() and (sorted_list[j][5] == 'SNP' or sorted_list[0][5] == 'SNV'):
                                 clusters[sorted_list[j]] = [sorted_list[j]]
-                    elif sorted_list[j] not in nonclusters.keys():# and sorted_list[j][5] == 'SNP' or sorted_list[0][5] == 'SNV':
+                    elif sorted_list[j] not in nonclusters.keys() and (sorted_list[j][5] == 'SNP' or sorted_list[0][5] == 'SNV'):
                                 nonclusters[sorted_list[j]] = [sorted_list[j]]
                                     
                                       
@@ -242,7 +242,7 @@ def WriteChr(chr_name, clusters, file):
 
     sorted_chromosome1 = sorted(chromosome1)
     for y in range(0, len(chromosome1)):
-        #if len(sorted_chromosome1[y][1]) == 3:# and '-' not in sorted_chromosome1[y][1]:
+        if len(sorted_chromosome1[y][1]) == 3 and '-' not in sorted_chromosome1[y][1]:
             file.write(chr_name  + '\t'   + str(sorted_chromosome1[y][0] - 1) + '\t' + str(sorted_chromosome1[y][0]) + '\t' + sorted_chromosome1[y][1] + '\t'+ sorted_chromosome1[y][2] + '\t'+ sorted_chromosome1[y][3])
             file.write('\n')  
     return counts
@@ -414,7 +414,7 @@ for line in lines2:
 
 
 for pos in range(0, len(position2_2)):
-    if mutation_type_2[pos] == 'SNV' or mutation_type_2[pos] == 'Deletion' and len(allele2[pos]) == 1:
+    if mutation_type_2[pos] == 'SNV':#or mutation_type_2[pos] == 'Deletion' and len(allele2[pos]) == 1:
         if chromosome2[pos] == 'chrI':
             sequence = GetSequence('chr1.txt')
             if strand2[pos] == '+':
