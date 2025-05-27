@@ -1000,3 +1000,100 @@ f2.close()
 f2a.close()
 f3.close()
 f3a.close()
+
+
+def NormalizeHomopolymer(sequences, lengths, file):
+    homopolymer_dict = {}
+    homopolymer_counts = {}
+    homopolymer_dict['11-15'] = 0
+    homopolymer_dict['16-20'] = 0
+    homopolymer_dict['21+'] = 0
+
+    for l in range(0, len(lengths)):
+        if lengths[l] not in homopolymer_counts.keys():
+            homopolymer_counts[lengths[l]] = 1
+            homopolymer_dict[lengths[l]] = 0
+        else:
+            homopolymer_counts[lengths[l]] = homopolymer_counts[lengths[l]] + 1
+
+    homopolymer_dict[1] = 0
+    for seq in sequences:
+        sequence = seq
+        if sequence[len(sequence) - 1] != sequence[len(sequence) - 2]:
+            homopolymer_dict[1] = homopolymer_dict[1] + 1
+        b = 0
+        while b < len(sequence) - 1:
+            polymer_range = {}
+            length = 1
+            if sequence[b] != 'N':# and b not in coordinates:
+                i = 1
+                polymer_range[0] = b
+                while sequence[b] == sequence[b + i]:
+                    length = length + 1
+                    polymer_range[1] = b + i
+                    if (b + i) < len(sequence) - 1:
+                        i = i + 1
+                    else:
+                        break
+     
+                polymer_count = length
+          
+                if polymer_count in homopolymer_dict.keys():
+                            homopolymer_dict[polymer_count] = homopolymer_dict[polymer_count] + length
+                            
+                           
+                                  
+
+    
+
+                else:
+                            homopolymer_dict[polymer_count] = length
+                
+                if polymer_count >= 11:
+                    if polymer_count >= 21:
+                        homopolymer_dict['21+'] = homopolymer_dict['21+'] + length
+                    elif polymer_count >= 16:
+                        homopolymer_dict['16-20'] = homopolymer_dict['16-20'] + length
+                    else:
+                        homopolymer_dict['11-15'] = homopolymer_dict['11-15'] + length
+                            
+                b = b + length 
+            else:
+                b = b + 1
+                    
+    for key in homopolymer_dict.keys():
+        #homopolymer_dict[key] = homopolymer_counts[key]/homopolymer_dict[key]
+        file.write(str(key) + ':' + str(homopolymer_dict[key]))
+        file.write('\n')
+    return homopolymer_dict
+
+
+
+
+def PrintFrequencies(homopolymer_dict, lengths, mutation_type, allele, mutation, file, file2):
+    homopolymer_counts = {}
+    homopolymer_counts['21+'] = 0
+    homopolymer_counts['16-20'] = 0
+    homopolymer_counts['11-15'] = 0
+    for l in range(0, len(lengths)):
+        if allele[l] != 'NA' and lengths[l] != 'NA':
+            #if (len(allele[l]) == 1 and mutation_type[l] == "deletion") or (len(mutation[l]) == 1 and mutation_type[l] == "insertion") :
+                if lengths[l] not in homopolymer_counts.keys():
+                    homopolymer_counts[lengths[l]] = 1
+                    #homopolymer_dict[lengths[l]] = 0
+                else:
+                    homopolymer_counts[lengths[l]] = homopolymer_counts[lengths[l]] + 1
+                if int(lengths[l]) >= 11:
+                    if int(lengths[l]) >= 21:
+                            homopolymer_counts['21+'] = homopolymer_counts['21+'] + 1
+                    elif int(lengths[l]) >= 16:
+                            homopolymer_counts['16-20'] = homopolymer_counts['16-20'] + 1
+                    else:
+                            homopolymer_counts['11-15'] = homopolymer_counts['11-15'] + 1
+                
+    for key in homopolymer_counts.keys():
+        if homopolymer_dict[key] != 0:
+            homopolymer_counts[key] = homopolymer_counts[key]/homopolymer_dict[key]
+            file.write(str(key) + ':' + str(homopolymer_counts[key]))
+            file.write('\n')
+   
