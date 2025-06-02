@@ -243,110 +243,146 @@ for pos in range(0, len(position2)):
     #if mutation_type_2[pos] == 'Insertion' or mutation_type_2[pos] == 'Deletion':# or mutation_type_2[pos] == 'Deletion' and len(allele2[pos]) == 1:
         if chromosome[pos] == 'chrI':
             sequence = GetSequence('chr1.txt')
-            if strand[pos] == '+':
+            if sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'C' or sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'T':
                 trinucleotide.append(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1])
+                strand.append('+')
             else:
                 trinucleotide.append(GetReverseComplement(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1]))
-
+                strand.append('-')
         elif chromosome[pos] == 'chrII':
             sequence = GetSequence('chr2.txt')
-            if strand[pos] == '+':
+            if sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'C' or sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'T':
                 trinucleotide.append(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1])
+                strand.append('+')
             else:
                 trinucleotide.append(GetReverseComplement(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1]))
+                strand.append('-')
         elif chromosome[pos] == 'chrIII':
             sequence = GetSequence('chr3.txt')
-            if strand[pos] == '+':
+            if sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'C' or sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'T':
                 trinucleotide.append(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1])
+                strand.append('+')
             else:
                 trinucleotide.append(GetReverseComplement(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1]))
+                strand.append('-')
         elif chromosome[pos] == 'chrIV':
             sequence = GetSequence('chr4.txt')
-            if strand[pos] == '+':
+            if sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'C' or sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'T':
                 trinucleotide.append(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1])
+                strand.append('+')
             else:
                 trinucleotide.append(GetReverseComplement(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1]))
+                strand.append('-')
         elif chromosome[pos] == 'chrV':
             sequence = GetSequence('chr5.txt')
-            if strand[pos] == '+':
+            if sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'C' or sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'T':
                 trinucleotide.append(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1])
+                strand.append('+')
             else:
                 trinucleotide.append(GetReverseComplement(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1]))
+                strand.append('-')
         elif chromosome[pos] == 'chrVI':
             sequence = GetSequence('chr6.txt')
-            if strand[pos] == '+':
+            if sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'C' or sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'T':
                 trinucleotide.append(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1])
+                strand.append('+')
             else:
                 trinucleotide.append(GetReverseComplement(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1]))
+                strand.append('-')
         elif chromosome[pos] == 'chrVII':
             sequence = GetSequence('chr7.txt')
-            if strand[pos] == '+':
+            if sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'C' or sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'T':
                 trinucleotide.append(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1])
+                strand.append('+')
             else:
                 trinucleotide.append(GetReverseComplement(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1]))
+                strand.append('-')
         elif chromosome[pos] == 'chrVIII':
             sequence = GetSequence('chr8.txt')
-            if strand[pos] == '+':
+            if sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'C' or sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'T':
                 trinucleotide.append(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1])
+                strand.append('+')
             else:
                 trinucleotide.append(GetReverseComplement(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1]))
+                strand.append('-')
         elif chromosome[pos] == 'chrIX':
             sequence = GetSequence('chr9.txt')
-            if strand[pos] == '+':
+            if sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'C' or sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'T':
                 trinucleotide.append(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1])
+                strand.append('+')
             else:
                 trinucleotide.append(GetReverseComplement(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1]))
+                strand.append('-')
         elif chromosome[pos] == 'chrX':
             sequence = GetSequence('chr10.txt')
-            if strand[pos] == '+':
+            if sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'C' or sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'T':
                 trinucleotide.append(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1])
+                strand.append('+')
             else:
                 trinucleotide.append(GetReverseComplement(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1]))
+                strand.append('-')
         elif chromosome[pos] == 'chrXI':
             sequence = GetSequence('chr11.txt')
-            if strand[pos] == '+':
+            if sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'C' or sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'T':
                 trinucleotide.append(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1])
+                strand.append('+')
             else:
                 trinucleotide.append(GetReverseComplement(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1]))
+                strand.append('-')
         elif chromosome[pos] == 'chrXII':
             sequence = GetSequence('chr12.txt')
-            if strand[pos] == '+':
+            if sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'C' or sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'T':
                 trinucleotide.append(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1])
+                strand.append('+')
             else:
                 trinucleotide.append(GetReverseComplement(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1]))
+                strand.append('-')
         elif chromosome[pos] == 'chrXIII':
             sequence = GetSequence('chr13.txt')
-            if strand[pos] == '+':
+            if sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'C' or sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'T':
                 trinucleotide.append(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1])
+                strand.append('+')
             else:
                 trinucleotide.append(GetReverseComplement(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1]))
+                strand.append('-')
         elif chromosome[pos] == 'chrXIV':
             sequence = GetSequence('chr14.txt')
-            if strand[pos] == '+':
+            if sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'C' or sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'T':
                 trinucleotide.append(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1])
+                strand.append('+')
             else:
                 trinucleotide.append(GetReverseComplement(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1]))
+                strand.append('-')
         elif chromosome[pos] == 'chrXV':
             sequence = GetSequence('chr15.txt')
-            if strand[pos] == '+':
+            if sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'C' or sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'T':
                 trinucleotide.append(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1])
+                strand.append('+')
             else:
                 trinucleotide.append(GetReverseComplement(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1]))
+                strand.append('-')
         elif chromosome[pos] == 'chrXVI':
             sequence = GetSequence('chr16.txt')
-            if strand[pos] == '+':
+            if sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'C' or sequence[int(position1[pos]) - 1: int(position2[pos]) + 1][1] == 'T':
                 trinucleotide.append(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1])
+                strand.append('+')
             else:
                 trinucleotide.append(GetReverseComplement(sequence[int(position1[pos]) - 1: int(position2[pos]) + 1]))
+                strand.append('-')
         else:
             trinucleotide.append('NA')
+            strand.append('+')
+for m in range(0, len(mutation)):
+    if strand[m] == '-':
+        mutation[m] = GetReverseComplement(mutation[m])
 
-for i1 in range(0, len(isolate_list)):
 
-    if (isolate_list[i1], genotype[i1]) not in isolate_list.keys():
-            isolate_list[(isolate_list[i1], genotype[i1])] = [(position2[i1], 'chr' + str(chromosome[i1]), trinucleotide[i1], mutation[i1], strand[i1], mutation_type[i1], isolate[i1])]
+for i1 in range(0, len(isolate)):
+
+    if (isolate[i1], genotype[i1]) not in isolate_list.keys():
+            isolate_list[(isolate[i1], genotype[i1])] = [(position2[i1], 'chr' + str(chromosome[i1]), trinucleotide[i1], mutation[i1], strand[i1], mutation_type[i1], isolate[i1])]
     else:
-        isolate_list[(isolate_list[i1], genotype[i1])] .append((position2[i1], 'chr' + str(chromosome[i1]), trinucleotide[i1], mutation[i1], strand[i1], mutation_type[i1], isolate[i1]))
+        isolate_list[(isolate[i1], genotype[i1])] .append((position2[i1], 'chr' + str(chromosome[i1]), trinucleotide[i1], mutation[i1], strand[i1], mutation_type[i1], isolate[i1]))
 
 
 f1a = open("WT_substitutions_sorted_tandem.bed", 'w+')
@@ -934,7 +970,7 @@ def MakePentaNucFile(file_1, file_2):
             file_2.write(new_chromosome[i] + '\t' + str(int(new_position[i]) - 1)  + '\t' + str(new_position[i]) + '\t' + new_trinucleotide[i] + '\t' +  new_mutation[i] + '\t' + new_strand[i] + '\t' + pentanucleotide[i] + '\t' + str(GetHomopolymerLength(pentanucleotide[i], new_position1[i], new_position[i], int(len(pentanucleotide[i])/2) + 1)[0]) + '\t' + new_isolate[i])
             file_2.write('\n')
 
-    return pentanucleotide, new_strand, new_chromosome, new_position, new_isolate, new_trinucleotide, new_mutation, new_allele, lengths
+    return pentanucleotide, new_strand, new_chromosome, new_position, new_isolate, new_trinucleotide, new_mutation, new_allele, lengths, new_position1
 
 def GetPolymerCounts(pentanucleotide,  new_chromosome, new_position, new_isolate, new_trinucleotide, new_mutation, new_allele, lengths):
     homopolymers = {}
@@ -992,14 +1028,30 @@ f3a = open("rad16_substitutions_multinucleotide.bed", 'w+')
 #f4a = open("rad26_substitutions_multinucleotide.bed")
 
 WT_data = MakePentaNucFile(f2, f2a)
+WT_isolate = WT_data[4]
+WT_chromosome = WT_data[2]
+WT_position1 = WT_data[9]
+WT_position = WT_data[3]
+WT_trinucleotide = WT_data[5]
+WT_mutation = WT_data[6]
+WT_strand = WT_data[1]
+WT_multinucleotide = WT_data[0] 
+
 rad16_data = MakePentaNucFile(f3, f3a)
+WT_isolate_list = {}
+for i1 in range(0, len(WT_isolate)):
+
+    if WT_isolate[i1] not in WT_isolate.keys():
+            WT_isolate[WT_isolate[i1]] = [(WT_position[i1], 'chr' + str(WT_chromosome[i1]), WT_trinucleotide[i1], WT_mutation[i1], WT_strand[i1], WT_multinucleotide[i1], WT_isolate[i1], WT_position1[i1])]
+    else:
+        WT_isolate_list[isolate[i1]] .append((WT_position[i1], 'chr' + str(WT_chromosome[i1]), WT_trinucleotide[i1], WT_mutation[i1], WT_strand[i1], WT_multinucleotide[i1], WT_isolate[i1], WT_position1[i1]))
 WT_polymer_counts = GetPolymerCounts(WT_data[0],  WT_data[2], WT_data[3], WT_data[4], WT_data[5], WT_data[6], WT_data[7], WT_data[8])[0]
 rad16_polymer_counts = GetPolymerCounts(rad16_data[0],  rad16_data[2], rad16_data[3], rad16_data[4], rad16_data[5], rad16_data[6], rad16_data[7], rad16_data[8])[0]
-
 f2.close()
 f2a.close()
 f3.close()
 f3a.close()
+
 
 
 def NormalizeHomopolymer(sequences, lengths, file):
@@ -1097,3 +1149,95 @@ def PrintFrequencies(homopolymer_dict, lengths, mutation_type, allele, mutation,
             file.write(str(key) + ':' + str(homopolymer_counts[key]))
             file.write('\n')
    
+
+def index(tuple):
+    return tuple[1]   
+
+def FindClusters( isolate_list):
+    lengths = {}
+    clusters = {}
+    nonclusters = {}
+    total_clusters = 0
+    for key in isolate_list.keys():
+            sorted_isolate_list = sorted(isolate_list[key])
+            sorted_list = sorted(sorted_isolate_list, key = index)
+            if sorted_list[0][1] == sorted_list[1][1] and (int(sorted_list[1][0]) <= int((sorted_list[ 0][0])) + 10):
+                if sorted_list[0] not in clusters.keys():
+                    clusters[sorted_list[0]] = [sorted_list[0]]
+                   
+                if sorted_list[1] not in clusters.keys():
+                    clusters[sorted_list[1]] = [sorted_list[1]]
+                    
+            else:#if strand[0] == '+':
+                end_position = GetHomopolymerLength(sorted_list[0][5], int(sorted_list[0][7]), int(sorted_list[0][0]), int(len(sorted_list[0][5])/2) + 1)[1][1]
+                if int(sorted_list[1][0]) <= (end_position + 10) and int(sorted_list[0][1]) == sorted_list[1][1]:
+                    if sorted_list[0] not in clusters.keys():
+                        clusters[sorted_list[0]] = [sorted_list[0]]
+                    if sorted_list[1] not in clusters.keys():
+                        clusters[sorted_list[1]] = [sorted_list[1]]
+                start_position = GetHomopolymerLength(sorted_list[1][5], int(sorted_list[1][7]), int(sorted_list[1][0]), int(len(sorted_list[1][5])/2) + 1)[1][0]
+                if start_position <= (sorted_list[0][0] + 10) and int(sorted_list[0][1]) == sorted_list[1][1]:
+                    if sorted_list[0] not in clusters.keys():
+                        clusters[sorted_list[0]] = [sorted_list[0]]
+                    if sorted_list[1] not in clusters.keys():
+                        clusters[sorted_list[1]] = [sorted_list[1]]
+
+            if sorted_list[len (sorted_list) - 2][1] == sorted_list[len (sorted_list) - 1][1] and (int(sorted_list[len (sorted_list) - 1][0]) <= int((sorted_list[ len (sorted_list) - 2][0])) + 10):
+                if sorted_list[len(sorted_list) - 1] not in clusters.keys():
+                    clusters[sorted_list[len(sorted_list) - 1]] = [sorted_list[len(sorted_list) - 1]]
+                  
+                if sorted_list[len(sorted_list) - 2] not in clusters.keys() and (sorted_list[len(sorted_list) - 2][7] == "DIP" or sorted_list[len(sorted_list) - 2][7] == "Complex DIP" or sorted_list[len(sorted_list) - 2][7] == "Deletion" or sorted_list[len(sorted_list) - 2][7] == "Insertion"):
+                    clusters[sorted_list[len(sorted_list) - 2]] = [sorted_list[len(sorted_list) - 2]]
+                    
+            else:#if strand[0] == '+':
+                end_position = GetHomopolymerLength(sorted_list[len(sorted_list) - 2][5], int(sorted_list[len(sorted_list) - 2][7]), int(sorted_list[len(sorted_list) - 2][0]), int(len(sorted_list[len(sorted_list) - 2][5])/2) + 1)[1][1]
+                if int(sorted_list[len(sorted_list) - 1][0]) <= (end_position + 10) and int(sorted_list[len(sorted_list) - 1][1]) == sorted_list[len(sorted_list) - 2][1]:
+                    if sorted_list[len(sorted_list) - 1] not in clusters.keys():
+                        clusters[sorted_list[len(sorted_list) - 1]] = [sorted_list[len(sorted_list) - 1]]
+                    if sorted_list[len(sorted_list) - 2] not in clusters.keys():
+                        clusters[sorted_list[len(sorted_list) - 2]] = [sorted_list[len(sorted_list) - 2]]
+                start_position = GetHomopolymerLength(sorted_list[len(sorted_list) - 1][5], int(sorted_list[len(sorted_list) - 1][7]), int(sorted_list[len(sorted_list) - 1][0]), int(len(sorted_list[len(sorted_list) - 1][5])/2) + 1)[1][0]
+                if start_position <= (sorted_list[len(sorted_list) - 2][0] + 10) and int(sorted_list[len(sorted_list) - 2][1]) == sorted_list[len(sorted_list) - 1][1]:
+                    if sorted_list[len(sorted_list) - 1] not in clusters.keys():
+                        clusters[sorted_list[len(sorted_list) - 1]] = [sorted_list[len(sorted_list) - 1]]
+                    if sorted_list[1] not in clusters.keys():
+                        clusters[sorted_list[len(sorted_list) - 2]] = [sorted_list[len(sorted_list) - 2]]
+                   
+            for j in range (1,len (sorted_list) - 1):
+                    if (sorted_list[j][1] == sorted_list[j - 1][1] and (int(sorted_list[j][0]) <= int((sorted_list[j - 1][0])) + 10)) or (sorted_list[j + 1][1] == sorted_list[j][1] and (int(sorted_list[j + 1][0]) <= int((sorted_list[j][0])) + 10)): #or ((isolate_list[key][j + n][6], int(isolate_list[key][j + n][0]), isolate_list[key][j + n][1]) in homopolymers.keys() and (int(isolate_list[key][j + n][0]) <= int((isolate_list[key][j + n - 1][0])) + 10 + homopolymers[key])) : 
+                            if sorted_list[j] not in clusters.keys():
+                                #if j == 0 or isolate_list[key][j - n] not in clusters.keys():
+                                clusters[(sorted_list[j][6], sorted_list[j][1], sorted_list[j][0])] = [sorted_list[j]]
+                    else:
+                        end_position = GetHomopolymerLength(sorted_list[j][5], int(sorted_list[j][7]), int(sorted_list[j][0]), int(len(sorted_list[j][5])/2) + 1)[1][1]
+                        if int(sorted_list[j + 1][0]) <= (end_position + 10) and int(sorted_list[j][1]) == sorted_list[j + 1][1]:
+                            if sorted_list[j] not in clusters.keys():
+                                clusters[sorted_list[j]] = [sorted_list[j]]
+                            if sorted_list[j + 1] not in clusters.keys():
+                                clusters[sorted_list[j + 1]] = (sorted_list[j + 1])
+                        start_position = GetHomopolymerLength(sorted_list[j][5], int(sorted_list[j][7]), int(sorted_list[j][0]), int(len(sorted_list[j][5])/2) + 1)[1][0]
+                        if start_position <= (sorted_list[j - 1][0] + 10) and int(sorted_list[j - 1][1]) == sorted_list[j][1]:
+                            if sorted_list[j - 1] not in clusters.keys():
+                                clusters[sorted_list[j - 1]] = [sorted_list[j - 1]]
+                            if sorted_list[j] not in clusters.keys():
+                                clusters[sorted_list[j]] = [sorted_list[j]]           
+                    #elif (sorted_list[j][1] == sorted_list[j + 1][1]) and(sorted_list[j][6], int(sorted_list[j][0]), sorted_list[j][1]) in homopolymers.keys() and (int(sorted_list[j + 1][0]) <= int((sorted_list[j][0])) + 10 + (homopolymers[(sorted_list[j][6], int(sorted_list[j][0]), sorted_list[j][1])][0][1] - sorted_list[j][0])):
+                        #if sorted_list[j] not in clusters.keys() and (sorted_list[j][7] == "DIP" or sorted_list[j][7] == "Complex DIP" or sorted_list[key][j][7] == "Deletion" or sorted_list[j][7] == "Insertion"):
+                            #clusters[(sorted_list[j][6], sorted_list[j][1], sorted_list[j][0])] = [sorted_list[j]]
+                        #if sorted_list[j + 1] not in clusters.keys() and (sorted_list[j + 1][7] == "DIP" or sorted_list[j + 1][7] == "Complex DIP" or sorted_list[j + 1][7] == "Deletion" or sorted_list[j + 1][7] == "Insertion"):
+                            #clusters[(sorted_list[j + 1][6], sorted_list[j + 1][1], sorted_list[j + 1][0])] = [sorted_list[j + 1]]
+                        
+                    #elif (sorted_list[j][1] == sorted_list[j - 1][1]) and (sorted_list[j][6], sorted_list[j][0], sorted_list[j][1]) in homopolymers.keys() and (int(sorted_list[j][0]) <= int((sorted_list[j-1][0])) + 10 + (sorted_list[j][0] - homopolymers[sorted_list[j][6], int(sorted_list[j][0]), sorted_list[j][1]][0][0] )):
+                        #if sorted_list[j] not in clusters.keys() and (sorted_list[j][7] == "DIP" or sorted_list[j][7] == "Complex DIP" or sorted_list[j][7] == "Deletion" or sorted_list[j][7] == "Insertion"):
+                            #clusters[(sorted_list[j][6], sorted_list[j][1], sorted_list[j][0])] = [sorted_list[j]]
+                        #if sorted_list[j - 1] not in clusters.keys() and (sorted_list[j - 1][7] == "DIP" or sorted_list[j - 1][7] == "Complex DIP" or sorted_list[j - 1][7] == "Deletion" or sorted_list[j - 1][7] == "Insertion"):
+                            #clusters[(sorted_list[j - 1][6], sorted_list[j - 1][1], sorted_list[j - 1][0])] = [sorted_list[j - 1]]
+        
+   
+
+    complex_count = []
+    for key in homopolymers.keys():
+        if key in clusters.keys():
+            complex_count.append(key)
+    
+    return clusters
