@@ -188,7 +188,7 @@ for line in lines:
             if line[27].isalpha() == False and len(line[24]) <= 10:
                     if line[24][1] == "G" or line[24][1] == "A":
                         #trinucleotide.append(GetReverseComplement(line[24]))
-                        strand.append('-')
+                        #strand.append('-')
                         if '-' not in line[13]:
                             mutation.append(GetReverseComplement(line[13]))
                         else:
@@ -196,11 +196,11 @@ for line in lines:
                     else:
                         #trinucleotide.append(line[24])
                         mutation.append(line[13])
-                        strand.append('+')
+                        #strand.append('+')
             elif len(line[27]) <= 10:
                     if line[27][1] == "A" or line[27][1] == "G":
                         #trinucleotide.append(GetReverseComplement(line[27]))
-                        strand.append('-')
+                        #strand.append('-')
                         if '-' not in line[13]:
                             mutation.append(GetReverseComplement(line[13]))
                         else:
@@ -208,11 +208,11 @@ for line in lines:
                     else:
                         #trinucleotide.append(line[27])
                         mutation.append(line[13])
-                        strand.append('+')
+                        #strand.append('+')
             else:
                     if line[28][1] == "A" or line[28][1] == "G":
                         #trinucleotide.append(GetReverseComplement(line[28]))
-                        strand.append('-')
+                        #strand.append('-')
                         if '-' not in line[13]:
                             mutation.append(GetReverseComplement(line[13]))
                         else:
@@ -220,7 +220,7 @@ for line in lines:
                     else:
                         #trinucleotide.append(line[28])
                         mutation.append(line[13])
-                        strand.append('+')
+                        #strand.append('+')
         
 
 
@@ -233,10 +233,7 @@ for line in lines:
             right_consensus.append('NA')
             #trinucleotide.append('NA')
             mutation.append(line[13])
-            if allele[len(allele) - 1] == 'A' or allele[len(allele) - 1] == 'G':
-                strand.append('-')
-            else:
-                strand.append('+')
+       
 
 
 for pos in range(0, len(position2)):
@@ -372,17 +369,25 @@ for pos in range(0, len(position2)):
         else:
             trinucleotide.append('NA')
             strand.append('+')
+
 for m in range(0, len(mutation)):
-    if strand[m] == '-':
+    if '-' in allele[m]:
+        if mutation[m] == 'A' or mutation[m] == 'G':
+            strand[m] = '-'
+        else:
+            strand[m] = '+'
+    elif strand[m] == '-':
         mutation[m] = GetReverseComplement(mutation[m])
 
-
+WT_isolate_list = {}
+rad16_isolate_list = {}
 for i1 in range(0, len(isolate)):
 
     if (isolate[i1], genotype[i1]) not in isolate_list.keys():
             isolate_list[(isolate[i1], genotype[i1])] = [(position2[i1], 'chr' + str(chromosome[i1]), trinucleotide[i1], mutation[i1], strand[i1], mutation_type[i1], isolate[i1])]
     else:
         isolate_list[(isolate[i1], genotype[i1])] .append((position2[i1], 'chr' + str(chromosome[i1]), trinucleotide[i1], mutation[i1], strand[i1], mutation_type[i1], isolate[i1]))
+    
 
 
 f1a = open("WT_substitutions_sorted_tandem.bed", 'w+')
@@ -490,6 +495,7 @@ def MakePentaNucFile(file_1, file_2):
     new_trinucleotide = []
     new_strand = []
     new_isolate = []
+    #new_isolate = []
     lengths = []
     new_lines = [s.strip().split() for s in new_data.splitlines()]
     for line in new_lines:
@@ -500,7 +506,8 @@ def MakePentaNucFile(file_1, file_2):
         new_allele.append(line[3][1])
         new_trinucleotide.append(line[3])
         new_strand.append(line[5])
-        new_isolate.append(line[6])
+        if len(line) > 6:
+            new_isolate.append(line[6])
 
     #Add two more nucleotides after the 3' base
     pentanucleotide = []
@@ -964,15 +971,15 @@ def MakePentaNucFile(file_1, file_2):
     
     for i in range(0, len(new_position)):
         if new_strand[i] == '-':
-            file_2.write(new_chromosome[i] + '\t' + str(int(new_position[i]) - 1) + '\t'  +str(new_position[i]) + '\t' + new_trinucleotide[i] + '\t' + new_mutation[i] + '\t' + new_strand[i]  + '\t'+ GetReverseComplement(pentanucleotide[i]) + '\t' +str(GetHomopolymerLength(GetReverseComplement(pentanucleotide[i]), new_position1[i], new_position[i], int(len(pentanucleotide[i])/2) + 1)[0]) + '\t' + new_isolate[i])
+            file_2.write(new_chromosome[i] + '\t' + str(int(new_position[i]) - 1) + '\t'  +str(new_position[i]) + '\t' + new_trinucleotide[i] + '\t' + new_mutation[i] + '\t' + new_strand[i]  + '\t'+ GetReverseComplement(pentanucleotide[i]) + '\t' +str(GetHomopolymerLength(GetReverseComplement(pentanucleotide[i]), new_position1[i], new_position[i], int(len(pentanucleotide[i])/2) + 1)[0]))
             file_2.write('\n')
         if new_strand[i] == '+':
-            file_2.write(new_chromosome[i] + '\t' + str(int(new_position[i]) - 1)  + '\t' + str(new_position[i]) + '\t' + new_trinucleotide[i] + '\t' +  new_mutation[i] + '\t' + new_strand[i] + '\t' + pentanucleotide[i] + '\t' + str(GetHomopolymerLength(pentanucleotide[i], new_position1[i], new_position[i], int(len(pentanucleotide[i])/2) + 1)[0]) + '\t' + new_isolate[i])
+            file_2.write(new_chromosome[i] + '\t' + str(int(new_position[i]) - 1)  + '\t' + str(new_position[i]) + '\t' + new_trinucleotide[i] + '\t' +  new_mutation[i] + '\t' + new_strand[i] + '\t' + pentanucleotide[i] + '\t' + str(GetHomopolymerLength(pentanucleotide[i], new_position1[i], new_position[i], int(len(pentanucleotide[i])/2) + 1)[0]))
             file_2.write('\n')
 
-    return pentanucleotide, new_strand, new_chromosome, new_position, new_isolate, new_trinucleotide, new_mutation, new_allele, lengths, new_position1
+    return pentanucleotide, new_strand, new_chromosome, new_position,  new_trinucleotide, new_mutation, new_allele, lengths, new_position1, new_isolate
 
-def GetPolymerCounts(pentanucleotide,  new_chromosome, new_position, new_isolate, new_trinucleotide, new_mutation, new_allele, lengths):
+def GetPolymerCounts(pentanucleotide,  new_chromosome, new_position, new_trinucleotide, new_mutation, new_allele, lengths):
     homopolymers = {}
     homopolymer_list = {}
     polymer_counts = []
@@ -987,12 +994,12 @@ def GetPolymerCounts(pentanucleotide,  new_chromosome, new_position, new_isolate
             #elif strand[i] == '-':
                 #key = GetHomopolymerLength(GetReverseComplement(sequence), )[1]
             
-            if key >= 4:
-                homopolymers[(new_isolate[i], new_chromosome[i], new_position[i])] = key
+            #if key >= 4:
+                #homopolymers[(new_isolate[i], new_chromosome[i], new_position[i])] = key
                 #homopolymer_list[key[1]] = [(new_chromosome[i], key[0][0], key[0][1])]
-                print(new_trinucleotide[i])
-                print(pentanucleotide[i])
-                print(key)
+            print(new_trinucleotide[i])
+            print(pentanucleotide[i])
+            print(key)
 
             if new_allele[i] == 'C' or new_allele[i] == 'G':
 
@@ -1020,24 +1027,72 @@ def GetPolymerCounts(pentanucleotide,  new_chromosome, new_position, new_isolate
                     polymer_counts[3][key] = 1
     return polymer_counts, homopolymers, homopolymer_list
 
-f2 = open("WT_substitutions_sorted_tandem.bed")
+f2 = open("WT_UV_bothruns_Muts_allSNVs_sorted.bed")
 f2a = open("WT_substitutions_sorted_multinucleotide.bed", 'w+')
-f3 = open("rad16_substitutions_sorted_tandem.bed")
+f3 = open("rad16_UV_bothruns_Muts_allSNVs_sorted.bed")
 f3a = open("rad16_substitutions_multinucleotide.bed", 'w+')
-#f4 = open("rad26_UV_bothruns_Muts_allSNVs_sorted.bed")
-#f4a = open("rad26_substitutions_multinucleotide.bed")
+f4 = open("rad26_UV_bothruns_Muts_allSNVs_sorted.bed")
+f4a = open("rad26_substitutions_multinucleotide.bed", 'w+')
+f10 = open("rad30_UV_bothruns_Muts_allSNVs_sorted.bed")
+f10a = open("rad30_substitutions_multinucleotide.bed", 'w+')
 
 WT_data = MakePentaNucFile(f2, f2a)
-WT_isolate = WT_data[4]
+WT_isolate = WT_data[9]
 WT_chromosome = WT_data[2]
-WT_position1 = WT_data[9]
+WT_position1 = WT_data[8]
 WT_position = WT_data[3]
-WT_trinucleotide = WT_data[5]
-WT_mutation = WT_data[6]
+WT_trinucleotide = WT_data[4]
+WT_mutation = WT_data[5]
 WT_strand = WT_data[1]
 WT_multinucleotide = WT_data[0] 
+WT_lengths = WT_data[7]
 
 rad16_data = MakePentaNucFile(f3, f3a)
+rad16_isolate = rad16_data[9]
+rad16_chromosome = rad16_data[2]
+rad16_position1 = rad16_data[8]
+rad16_position = rad16_data[3]
+rad16_trinucleotide = rad16_data[4]
+rad16_mutation = rad16_data[5]
+rad16_strand = rad16_data[1]
+rad16_multinucleotide = rad16_data[0] 
+rad16_lengths = rad16_data[7]
+
+rad26_data = MakePentaNucFile(f4, f4a)
+
+rad26_chromosome = rad26_data[2]
+rad26_position1 = rad26_data[8]
+rad26_position = rad26_data[3]
+rad26_trinucleotide = rad26_data[4]
+rad26_mutation = rad26_data[5]
+rad26_strand = rad26_data[1]
+rad26_multinucleotide = rad26_data[0] 
+rad26_lengths = rad26_data[7]
+
+rad30_data = MakePentaNucFile(f10, f10a)
+rad30_chromosome = rad30_data[2]
+rad30_position1 = rad30_data[8]
+rad30_position = rad30_data[3]
+rad30_trinucleotide = rad30_data[4]
+rad30_mutation = rad30_data[5]
+rad30_strand = rad30_data[1]
+rad30_multinucleotide = rad30_data[0] 
+rad30_lengths = rad30_data[7]
+
+
+
+WT_polymer_counts = GetPolymerCounts(WT_data[0],  WT_data[2], WT_data[3],  WT_data[4], WT_data[5], WT_data[6], WT_data[7])[0]
+rad16_polymer_counts = GetPolymerCounts(rad16_data[0],  rad16_data[2], rad16_data[3], rad16_data[4] , rad16_data[5], rad16_data[6], rad16_data[7])[0]
+rad26_polymer_counts = GetPolymerCounts(rad26_data[0],  rad26_data[2], rad26_data[3], rad26_data[4], rad26_data[5], rad26_data[6], rad26_data[7])[0]
+rad30_polymer_counts = GetPolymerCounts(rad30_data[0],  rad30_data[2], rad30_data[3], rad30_data[4], rad30_data[5], rad30_data[6], rad30_data[7])[0]
+
+f2.close()
+f2a.close()
+f3.close()
+f3a.close()
+f4.close()
+f4a.close()
+
 WT_isolate_list = {}
 for i1 in range(0, len(WT_isolate)):
 
@@ -1045,28 +1100,27 @@ for i1 in range(0, len(WT_isolate)):
             WT_isolate[WT_isolate[i1]] = [(WT_position[i1], 'chr' + str(WT_chromosome[i1]), WT_trinucleotide[i1], WT_mutation[i1], WT_strand[i1], WT_multinucleotide[i1], WT_isolate[i1], WT_position1[i1])]
     else:
         WT_isolate_list[isolate[i1]] .append((WT_position[i1], 'chr' + str(WT_chromosome[i1]), WT_trinucleotide[i1], WT_mutation[i1], WT_strand[i1], WT_multinucleotide[i1], WT_isolate[i1], WT_position1[i1]))
-WT_polymer_counts = GetPolymerCounts(WT_data[0],  WT_data[2], WT_data[3], WT_data[4], WT_data[5], WT_data[6], WT_data[7], WT_data[8])[0]
-rad16_polymer_counts = GetPolymerCounts(rad16_data[0],  rad16_data[2], rad16_data[3], rad16_data[4], rad16_data[5], rad16_data[6], rad16_data[7], rad16_data[8])[0]
-f2.close()
-f2a.close()
-f3.close()
-f3a.close()
+rad16_isolate_list = {}
+for i1 in range(0, len(rad16_isolate)):
 
+    if rad16_isolate[i1] not in rad16_isolate.keys():
+            rad16_isolate[rad16_isolate[i1]] = [(rad16_position[i1], 'chr' + str(rad16_chromosome[i1]), rad16_trinucleotide[i1], rad16_mutation[i1], rad16_strand[i1], rad16_multinucleotide[i1], rad16_isolate[i1], rad16_position1[i1])]
+    else:
+        rad16_isolate_list[isolate[i1]] .append((rad16_position[i1], 'chr' + str(rad16_chromosome[i1]), rad16_trinucleotide[i1], rad16_mutation[i1], rad16_strand[i1], rad16_multinucleotide[i1], rad16_isolate[i1], rad16_position1[i1]))
 
-
-def NormalizeHomopolymer(sequences, lengths, file):
+def NormalizeHomopolymer(sequences,  file):
     homopolymer_dict = {}
     homopolymer_counts = {}
     homopolymer_dict['11-15'] = 0
     homopolymer_dict['16-20'] = 0
     homopolymer_dict['21+'] = 0
 
-    for l in range(0, len(lengths)):
-        if lengths[l] not in homopolymer_counts.keys():
-            homopolymer_counts[lengths[l]] = 1
-            homopolymer_dict[lengths[l]] = 0
-        else:
-            homopolymer_counts[lengths[l]] = homopolymer_counts[lengths[l]] + 1
+    #for l in range(0, len(lengths)):
+        #if lengths[l] not in homopolymer_counts.keys():
+            #homopolymer_counts[lengths[l]] = 1
+            #homopolymer_dict[lengths[l]] = 0
+        #else:
+            #homopolymer_counts[lengths[l]] = homopolymer_counts[lengths[l]] + 1
 
     homopolymer_dict[1] = 0
     for seq in sequences:
@@ -1119,17 +1173,24 @@ def NormalizeHomopolymer(sequences, lengths, file):
         file.write('\n')
     return homopolymer_dict
 
+f5 = open('Homopolymer_numbers', 'w+')
+
+homopolymer_dict = NormalizeHomopolymer(sequences, f5 )
+
+f6 = open('WT_Homopolymer_counts', 'w+')
+f7 = open('rad16_Homopolymer_counts', 'w+')
+f8 = open('rad26_Homopolymer_counts', 'w+')
+f9 = open('rad30_Homopolymer_counts', 'w+')
 
 
-
-def PrintFrequencies(homopolymer_dict, lengths, mutation_type, allele, mutation, file, file2):
+def PrintFrequencies(homopolymer_dict, lengths, file):
     homopolymer_counts = {}
     homopolymer_counts['21+'] = 0
     homopolymer_counts['16-20'] = 0
     homopolymer_counts['11-15'] = 0
     for l in range(0, len(lengths)):
-        if allele[l] != 'NA' and lengths[l] != 'NA':
-            #if (len(allele[l]) == 1 and mutation_type[l] == "deletion") or (len(mutation[l]) == 1 and mutation_type[l] == "insertion") :
+        if lengths[l] != 'NA':
+            #if len(allele[l]) == 1: #and mutation_type[l] == "deletion") or (len(mutation[l]) == 1 and mutation_type[l] == "insertion") :
                 if lengths[l] not in homopolymer_counts.keys():
                     homopolymer_counts[lengths[l]] = 1
                     #homopolymer_dict[lengths[l]] = 0
@@ -1149,6 +1210,10 @@ def PrintFrequencies(homopolymer_dict, lengths, mutation_type, allele, mutation,
             file.write(str(key) + ':' + str(homopolymer_counts[key]))
             file.write('\n')
    
+PrintFrequencies(homopolymer_dict, WT_lengths, f6 )
+PrintFrequencies(homopolymer_dict, rad16_lengths, f7 )
+PrintFrequencies(homopolymer_dict, rad26_lengths, f8 )
+PrintFrequencies(homopolymer_dict, rad30_lengths, f9 )
 
 def index(tuple):
     return tuple[1]   
