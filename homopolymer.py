@@ -379,8 +379,6 @@ for m in range(0, len(mutation)):
     elif strand[m] == '-':
         mutation[m] = GetReverseComplement(mutation[m])
 
-WT_isolate_list = {}
-rad16_isolate_list = {}
 for i1 in range(0, len(isolate)):
 
     if (isolate[i1], genotype[i1]) not in isolate_list.keys():
@@ -394,6 +392,10 @@ f1a = open("WT_substitutions_sorted_tandem.bed", 'w+')
 f1b = open("rad16_substitutions_sorted_tandem.bed", 'w+')
 f1c = open("rad26_substitutions_sorted_tandem.bed", 'w+')
 f1d = open("rad30_substitutions_sorted_tandem.bed", 'w+')
+#f11a  = open("WT_mutations_sorted_tandem.bed", 'w+')
+#f11b = open("rad16_mutations_sorted_tandem.bed", 'w+')
+#f11c = open("rad26_mutations_sorted_tandem.bed", 'w+')
+#f11d = open("rad30_mutations_sorted_tandem.bed", 'w+')
 
 
 def WriteChr(chr_name, file1a, file1b, file1c, file1d, chromosome, position1, position2,
@@ -402,7 +404,7 @@ def WriteChr(chr_name, file1a, file1b, file1c, file1d, chromosome, position1, po
     chromosome1_dict = {}
     chromosome1 =[]
     for x in range(0, len(mutation_type)):
-        if mutation_type[x] == 'SNV' or mutation_type[x] == 'SNP':
+        #if mutation_type[x] == 'SNV' or mutation_type[x] == 'SNP':
                 if trinucleotide[x].isalpha():# len(trinucleotide[x]) == 3 and trinucleotide[x].isalpha():
                     if chromosome[x] == chr_name: 
                         chromosome1_dict[int(position1[x]), isolate[x]] = x
@@ -483,6 +485,11 @@ f1a.close()
 f1b.close()
 f1c.close()
 f1d.close()
+
+#f11a.close()
+#f11b.close()
+#f11c.close()
+#f11d.close()
 
 
 def MakePentaNucFile(file_1, file_2):
@@ -979,7 +986,7 @@ def MakePentaNucFile(file_1, file_2):
 
     return pentanucleotide, new_strand, new_chromosome, new_position,  new_trinucleotide, new_mutation, new_allele, lengths, new_position1, new_isolate
 
-def GetPolymerCounts(pentanucleotide,  new_chromosome, new_position, new_trinucleotide, new_mutation, new_allele, lengths):
+def GetPolymerCounts(pentanucleotide,  new_chromosome, new_position, new_trinucleotide, new_mutation, new_allele, lengths):# new_isolate):
     homopolymers = {}
     homopolymer_list = {}
     polymer_counts = []
@@ -1013,24 +1020,17 @@ def GetPolymerCounts(pentanucleotide,  new_chromosome, new_position, new_trinucl
                     polymer_counts[1][key] = polymer_counts[1][key] + 1
                 else:
                     polymer_counts[1][key] = 1
-            if new_mutation[i] == 'C' or new_mutation[i] == 'G':
-
-                if key in polymer_counts[2].keys():
-                    polymer_counts[2][key] = polymer_counts[2][key] + 1
-                else:
-                    polymer_counts[2][key] = 1
-            if new_mutation[i] == 'A' or new_mutation[i] == 'T':
-
-                if key in polymer_counts[3].keys():
-                    polymer_counts[3][key] = polymer_counts[3][key] + 1
-                else:
-                    polymer_counts[3][key] = 1
+            
     return polymer_counts, homopolymers, homopolymer_list
 
 f2 = open("WT_UV_bothruns_Muts_allSNVs_sorted.bed")
+#f2 = open("WT_mutations_sorted_tandem.bed")
 f2a = open("WT_substitutions_sorted_multinucleotide.bed", 'w+')
+#f2a = open("WT_all_sorted_multinucleotide.bed", 'w+')
 f3 = open("rad16_UV_bothruns_Muts_allSNVs_sorted.bed")
+#f3 = open("rad16_mutations_sorted_tandem.bed")
 f3a = open("rad16_substitutions_multinucleotide.bed", 'w+')
+#f3a = open("rad16_all_sorted_multinucleotide.bed", 'w+')
 f4 = open("rad26_UV_bothruns_Muts_allSNVs_sorted.bed")
 f4a = open("rad26_substitutions_multinucleotide.bed", 'w+')
 f10 = open("rad30_UV_bothruns_Muts_allSNVs_sorted.bed")
@@ -1046,6 +1046,7 @@ WT_mutation = WT_data[5]
 WT_strand = WT_data[1]
 WT_multinucleotide = WT_data[0] 
 WT_lengths = WT_data[7]
+
 
 rad16_data = MakePentaNucFile(f3, f3a)
 rad16_isolate = rad16_data[9]
@@ -1071,7 +1072,7 @@ rad26_lengths = rad26_data[7]
 
 rad30_data = MakePentaNucFile(f10, f10a)
 rad30_chromosome = rad30_data[2]
-rad30_position1 = rad30_data[8]
+#rad30_position1 = rad30_data[8]
 rad30_position = rad30_data[3]
 rad30_trinucleotide = rad30_data[4]
 rad30_mutation = rad30_data[5]
@@ -1082,9 +1083,18 @@ rad30_lengths = rad30_data[7]
 
 
 WT_polymer_counts = GetPolymerCounts(WT_data[0],  WT_data[2], WT_data[3],  WT_data[4], WT_data[5], WT_data[6], WT_data[7])[0]
+WT_Ccount = WT_polymer_counts[0]
+WT_Tcount = WT_polymer_counts[1]
 rad16_polymer_counts = GetPolymerCounts(rad16_data[0],  rad16_data[2], rad16_data[3], rad16_data[4] , rad16_data[5], rad16_data[6], rad16_data[7])[0]
+rad16_Ccount = rad16_polymer_counts[0]
+rad16_Tcount = rad16_polymer_counts[1]
+WT_homopolymers = GetPolymerCounts(WT_data[0],  WT_data[2], WT_data[3],  WT_data[4], WT_data[5], WT_data[6], WT_data[7], WT_isolate)[1]
 rad26_polymer_counts = GetPolymerCounts(rad26_data[0],  rad26_data[2], rad26_data[3], rad26_data[4], rad26_data[5], rad26_data[6], rad26_data[7])[0]
+rad26_Ccount = rad26_polymer_counts[0]
+rad26_Tcount = rad26_polymer_counts[1]
 rad30_polymer_counts = GetPolymerCounts(rad30_data[0],  rad30_data[2], rad30_data[3], rad30_data[4], rad30_data[5], rad30_data[6], rad30_data[7])[0]
+rad30_Ccount = rad30_polymer_counts[0]
+rad30_Tcount = rad30_polymer_counts[1]
 
 f2.close()
 f2a.close()
@@ -1092,46 +1102,48 @@ f3.close()
 f3a.close()
 f4.close()
 f4a.close()
+f10.close()
+f10a.close()
 
 WT_isolate_list = {}
 for i1 in range(0, len(WT_isolate)):
 
-    if WT_isolate[i1] not in WT_isolate.keys():
-            WT_isolate[WT_isolate[i1]] = [(WT_position[i1], 'chr' + str(WT_chromosome[i1]), WT_trinucleotide[i1], WT_mutation[i1], WT_strand[i1], WT_multinucleotide[i1], WT_isolate[i1], WT_position1[i1])]
+    if WT_isolate[i1] not in WT_isolate_list.keys():
+            WT_isolate_list[WT_isolate[i1]] = [(WT_position[i1], 'chr' + str(WT_chromosome[i1]), WT_trinucleotide[i1], WT_mutation[i1], WT_strand[i1], WT_multinucleotide[i1], WT_isolate[i1], WT_position1[i1])]
     else:
-        WT_isolate_list[isolate[i1]] .append((WT_position[i1], 'chr' + str(WT_chromosome[i1]), WT_trinucleotide[i1], WT_mutation[i1], WT_strand[i1], WT_multinucleotide[i1], WT_isolate[i1], WT_position1[i1]))
+        WT_isolate_list[WT_isolate[i1]] .append((WT_position[i1], 'chr' + str(WT_chromosome[i1]), WT_trinucleotide[i1], WT_mutation[i1], WT_strand[i1], WT_multinucleotide[i1], WT_isolate[i1], WT_position1[i1]))
 rad16_isolate_list = {}
 for i1 in range(0, len(rad16_isolate)):
 
-    if rad16_isolate[i1] not in rad16_isolate.keys():
-            rad16_isolate[rad16_isolate[i1]] = [(rad16_position[i1], 'chr' + str(rad16_chromosome[i1]), rad16_trinucleotide[i1], rad16_mutation[i1], rad16_strand[i1], rad16_multinucleotide[i1], rad16_isolate[i1], rad16_position1[i1])]
+    if rad16_isolate[i1] not in rad16_isolate_list.keys():
+            rad16_isolate_list[rad16_isolate[i1]] = [(rad16_position[i1], 'chr' + str(rad16_chromosome[i1]), rad16_trinucleotide[i1], rad16_mutation[i1], rad16_strand[i1], rad16_multinucleotide[i1], rad16_isolate[i1], rad16_position1[i1])]
     else:
-        rad16_isolate_list[isolate[i1]] .append((rad16_position[i1], 'chr' + str(rad16_chromosome[i1]), rad16_trinucleotide[i1], rad16_mutation[i1], rad16_strand[i1], rad16_multinucleotide[i1], rad16_isolate[i1], rad16_position1[i1]))
+        rad16_isolate_list[rad16_isolate[i1]] .append((rad16_position[i1], 'chr' + str(rad16_chromosome[i1]), rad16_trinucleotide[i1], rad16_mutation[i1], rad16_strand[i1], rad16_multinucleotide[i1], rad16_isolate[i1], rad16_position1[i1]))
 
 def NormalizeHomopolymer(sequences,  file):
     homopolymer_dict = {}
-    homopolymer_counts = {}
-    homopolymer_dict['11-15'] = 0
-    homopolymer_dict['16-20'] = 0
-    homopolymer_dict['21+'] = 0
+    C_dict = {}
+    T_dict = {}
 
-    #for l in range(0, len(lengths)):
-        #if lengths[l] not in homopolymer_counts.keys():
-            #homopolymer_counts[lengths[l]] = 1
-            #homopolymer_dict[lengths[l]] = 0
-        #else:
-            #homopolymer_counts[lengths[l]] = homopolymer_counts[lengths[l]] + 1
-
+  
     homopolymer_dict[1] = 0
+    C_dict[1] = 0
+    T_dict[1] = 0
     for seq in sequences:
+        #coordinates = []
         sequence = seq
         if sequence[len(sequence) - 1] != sequence[len(sequence) - 2]:
             homopolymer_dict[1] = homopolymer_dict[1] + 1
+            if sequence[len(sequence) - 1] == 'C' or sequence[len(sequence) - 1] == 'G':
+                C_dict[1] = C_dict[1] + 1
+            elif sequence[len(sequence) - 1] == 'T' or sequence[len(sequence) - 1] == 'A':
+                T_dict[1] = T_dict[1] + 1
         b = 0
         while b < len(sequence) - 1:
+        #for b in range(0, len(sequence) - 1):
             polymer_range = {}
-            length = 1
             if sequence[b] != 'N':# and b not in coordinates:
+                length = 1
                 i = 1
                 polymer_range[0] = b
                 while sequence[b] == sequence[b + i]:
@@ -1141,46 +1153,69 @@ def NormalizeHomopolymer(sequences,  file):
                         i = i + 1
                     else:
                         break
-     
+             
                 polymer_count = length
-          
+                
+                        #polymer_range = number[1]
+                #if length > 1:
                 if polymer_count in homopolymer_dict.keys():
+                            #homopolymer_dict[polymer_count] = homopolymer_dict[polymer_count] + 1
+                            #for i in range (polymer_range[0], polymer_range[1] + 1):
                             homopolymer_dict[polymer_count] = homopolymer_dict[polymer_count] + length
-                            
-                           
-                                  
+                                #coordinates.append(i)
+                            if sequence[b] == 'C' or sequence[b] == 'G':
+                                if polymer_count in C_dict.keys():
+                                    #C_dict[polymer_count] = C_dict[polymer_count] + 1
+                                    #for k in range (polymer_range[0], polymer_range[1] + 1):
+                                    C_dict[polymer_count] = C_dict[polymer_count] + length
+                                else:
+                                    C_dict[polymer_count] = length
+                                    #for l in range (polymer_range[0], polymer_range[1] + 1):
+                                        #C_dict[polymer_count] = C_dict[polymer_count] + 1
+                            if sequence[b] == 'T' or sequence[b] == 'A':
+                                if polymer_count in T_dict.keys():
+                                    #T_dict[polymer_count] = T_dict[polymer_count] + 1
+                                    #for k in range (polymer_range[0], polymer_range[1] + 1):
+                                    T_dict[polymer_count] = T_dict[polymer_count] + length
+                                else:
+                                    T_dict[polymer_count] = length
+                                    #for l in range (polymer_range[0], polymer_range[1] + 1):
+                                        #T_dict[polymer_count] = T_dict[polymer_count] + 1
 
     
 
                 else:
                             homopolymer_dict[polymer_count] = length
-                
-                if polymer_count >= 11:
-                    if polymer_count >= 21:
-                        homopolymer_dict['21+'] = homopolymer_dict['21+'] + length
-                    elif polymer_count >= 16:
-                        homopolymer_dict['16-20'] = homopolymer_dict['16-20'] + length
-                    else:
-                        homopolymer_dict['11-15'] = homopolymer_dict['11-15'] + length
-                            
-                b = b + length 
-            else:
-                b = b + 1
-                    
-    for key in homopolymer_dict.keys():
-        #homopolymer_dict[key] = homopolymer_counts[key]/homopolymer_dict[key]
-        file.write(str(key) + ':' + str(homopolymer_dict[key]))
-        file.write('\n')
-    return homopolymer_dict
-
+                            #for j in range (polymer_range[0], polymer_range[1] + 1):
+                                #homopolymer_dict[polymer_count] = homopolymer_dict[polymer_count] + 1
+                                #coordinates.append(j)
+                            if sequence[b] == 'C' or sequence[b] == 'G':
+                                C_dict[polymer_count] = length
+                                #for m in range (polymer_range[0], polymer_range[1] + 1):
+                                    #C_dict[polymer_count] = C_dict[polymer_count] + 1
+                            if sequence[b] == 'T' or sequence[b] == 'A':
+                                T_dict[polymer_count] = length
+                                #for n in range (polymer_range[0], polymer_range[1] + 1):
+                                    #T_dict[polymer_count] = T_dict[polymer_count] + 1
+             
+                b = b + length
+         
+    
+    return homopolymer_dict, C_dict, T_dict
 f5 = open('Homopolymer_numbers', 'w+')
 
 homopolymer_dict = NormalizeHomopolymer(sequences, f5 )
+f5.close()
 
-f6 = open('WT_Homopolymer_counts', 'w+')
-f7 = open('rad16_Homopolymer_counts', 'w+')
-f8 = open('rad26_Homopolymer_counts', 'w+')
-f9 = open('rad30_Homopolymer_counts', 'w+')
+f6 = open('WT_CHomopolymer_counts', 'w+')
+f7 = open('rad16_CHomopolymer_counts', 'w+')
+f8 = open('rad26_CHomopolymer_counts', 'w+')
+f9 = open('rad30_CHomopolymer_counts', 'w+')
+f6a = open('WT_THomopolymer_counts', 'w+')
+f7a = open('rad16_THomopolymer_counts', 'w+')
+f8a = open('rad26_THomopolymer_counts', 'w+')
+f9a = open('rad30_THomopolymer_counts', 'w+')
+
 
 
 def PrintFrequencies(homopolymer_dict, lengths, file):
@@ -1210,15 +1245,64 @@ def PrintFrequencies(homopolymer_dict, lengths, file):
             file.write(str(key) + ':' + str(homopolymer_counts[key]))
             file.write('\n')
    
-PrintFrequencies(homopolymer_dict, WT_lengths, f6 )
-PrintFrequencies(homopolymer_dict, rad16_lengths, f7 )
-PrintFrequencies(homopolymer_dict, rad26_lengths, f8 )
-PrintFrequencies(homopolymer_dict, rad30_lengths, f9 )
+#PrintFrequencies(homopolymer_dict, WT_lengths, f6 )
+#PrintFrequencies(homopolymer_dict, rad16_lengths, f7 )
+#PrintFrequencies(homopolymer_dict, rad26_lengths, f8 )
+#PrintFrequencies(homopolymer_dict, rad30_lengths, f9 )
+#f6.close()
+#f7.close()
+#f8.close()
+#f9.close()
+
+def PrintCTFrequencies(homopolymer_dict, counts, file):
+    homopolymer_counts = {}
+    homopolymer_counts['21+'] = 0
+    homopolymer_counts['16-20'] = 0
+    homopolymer_counts['11-15'] = 0
+    for key in counts.keys():
+        
+            #if len(allele[l]) == 1: #and mutation_type[l] == "deletion") or (len(mutation[l]) == 1 and mutation_type[l] == "insertion") :
+                if key not in homopolymer_counts.keys():
+                    homopolymer_counts[key] = 1
+                    #homopolymer_dict[lengths[l]] = 0
+                else:
+                    homopolymer_counts[key] = homopolymer_counts[key] + 1
+                if int(key) >= 11:
+                    if int(key) >= 21:
+                            homopolymer_counts['21+'] = homopolymer_counts['21+'] + 1
+                    elif int(key) >= 16:
+                            homopolymer_counts['16-20'] = homopolymer_counts['16-20'] + 1
+                    else:
+                            homopolymer_counts['11-15'] = homopolymer_counts['11-15'] + 1
+                
+    for key in homopolymer_counts.keys():
+        if homopolymer_dict[key] != 0:
+            homopolymer_counts[key] = homopolymer_counts[key]/homopolymer_dict[key]
+            file.write(str(key) + ':' + str(homopolymer_counts[key]))
+            file.write('\n')
+
+PrintCTFrequencies(homopolymer_dict[0], WT_Ccount, f6)
+PrintCTFrequencies(homopolymer_dict[0], rad16_Ccount, f7)
+PrintCTFrequencies(homopolymer_dict[0], rad26_Ccount, f8)
+PrintCTFrequencies(homopolymer_dict[0], rad30_Ccount, f9)
+PrintCTFrequencies(homopolymer_dict[1], WT_Tcount, f6a)
+PrintCTFrequencies(homopolymer_dict[1], rad16_Tcount, f7a)
+PrintCTFrequencies(homopolymer_dict[1], rad26_Tcount, f8a)
+PrintCTFrequencies(homopolymer_dict[1], rad30_Tcount, f9a)
+
+f6.close()
+f6a.close()
+f7.close()
+f7a.close()
+f8.close()
+f8a.close()
+f9.close()
+f9a.close()
 
 def index(tuple):
     return tuple[1]   
 
-def FindClusters( isolate_list):
+def FindClusters( isolate_list, homopolymers):
     lengths = {}
     clusters = {}
     nonclusters = {}
@@ -1227,65 +1311,64 @@ def FindClusters( isolate_list):
             sorted_isolate_list = sorted(isolate_list[key])
             sorted_list = sorted(sorted_isolate_list, key = index)
             if sorted_list[0][1] == sorted_list[1][1] and (int(sorted_list[1][0]) <= int((sorted_list[ 0][0])) + 10):
-                if sorted_list[0] not in clusters.keys():
-                    clusters[sorted_list[0]] = [sorted_list[0]]
+                if (sorted_list[0][6], sorted_list[0][1], sorted_list[0][6]) not in clusters.keys():
+                    clusters[(sorted_list[0][6], sorted_list[0][1], sorted_list[0][6])] = [sorted_list[0]]
                    
-                if sorted_list[1] not in clusters.keys():
-                    clusters[sorted_list[1]] = [sorted_list[1]]
+                if (sorted_list[1][6], sorted_list[1][1], sorted_list[1][6]) not in clusters.keys():
+                    clusters[(sorted_list[1][6], sorted_list[1][1], sorted_list[1][6])] = [sorted_list[1]]
                     
             else:#if strand[0] == '+':
                 end_position = GetHomopolymerLength(sorted_list[0][5], int(sorted_list[0][7]), int(sorted_list[0][0]), int(len(sorted_list[0][5])/2) + 1)[1][1]
                 if int(sorted_list[1][0]) <= (end_position + 10) and int(sorted_list[0][1]) == sorted_list[1][1]:
-                    if sorted_list[0] not in clusters.keys():
-                        clusters[sorted_list[0]] = [sorted_list[0]]
-                    if sorted_list[1] not in clusters.keys():
-                        clusters[sorted_list[1]] = [sorted_list[1]]
+                    if (sorted_list[0][6], sorted_list[0][1], sorted_list[0][6]) not in clusters.keys():
+                        clusters[(sorted_list[0][6], sorted_list[0][1], sorted_list[0][6])] = [sorted_list[0]]
+                    if (sorted_list[1][6], sorted_list[1][1], sorted_list[1][6]) not in clusters.keys():
+                        clusters[(sorted_list[1][6], sorted_list[1][1], sorted_list[1][6])] = [sorted_list[1]]
                 start_position = GetHomopolymerLength(sorted_list[1][5], int(sorted_list[1][7]), int(sorted_list[1][0]), int(len(sorted_list[1][5])/2) + 1)[1][0]
                 if start_position <= (sorted_list[0][0] + 10) and int(sorted_list[0][1]) == sorted_list[1][1]:
-                    if sorted_list[0] not in clusters.keys():
-                        clusters[sorted_list[0]] = [sorted_list[0]]
-                    if sorted_list[1] not in clusters.keys():
-                        clusters[sorted_list[1]] = [sorted_list[1]]
-
+                    if (sorted_list[0][6], sorted_list[0][1], sorted_list[0][6]) not in clusters.keys():
+                        clusters[(sorted_list[0][6], sorted_list[0][1], sorted_list[0][6])] = [sorted_list[0]]
+                    if (sorted_list[1][6], sorted_list[1][1], sorted_list[1][6]) not in clusters.keys():
+                        clusters[(sorted_list[1][6], sorted_list[1][1], sorted_list[1][6])] = [sorted_list[1]]
             if sorted_list[len (sorted_list) - 2][1] == sorted_list[len (sorted_list) - 1][1] and (int(sorted_list[len (sorted_list) - 1][0]) <= int((sorted_list[ len (sorted_list) - 2][0])) + 10):
-                if sorted_list[len(sorted_list) - 1] not in clusters.keys():
-                    clusters[sorted_list[len(sorted_list) - 1]] = [sorted_list[len(sorted_list) - 1]]
+                if (sorted_list[len(sorted_list) - 1][6], sorted_list[len(sorted_list) - 1][1], sorted_list[len(sorted_list) - 1][6]) not in clusters.keys():
+                    clusters[(sorted_list[len(sorted_list) - 1][6], sorted_list[len(sorted_list) - 1][1], sorted_list[len(sorted_list) - 1][6])] = [sorted_list[len(sorted_list) - 1]]
                   
-                if sorted_list[len(sorted_list) - 2] not in clusters.keys() and (sorted_list[len(sorted_list) - 2][7] == "DIP" or sorted_list[len(sorted_list) - 2][7] == "Complex DIP" or sorted_list[len(sorted_list) - 2][7] == "Deletion" or sorted_list[len(sorted_list) - 2][7] == "Insertion"):
-                    clusters[sorted_list[len(sorted_list) - 2]] = [sorted_list[len(sorted_list) - 2]]
+                if (sorted_list[len(sorted_list) - 2][6], sorted_list[len(sorted_list) - 2][1], sorted_list[len(sorted_list) - 2][6]) not in clusters.keys():
+                    clusters[(sorted_list[len(sorted_list) - 2][6], sorted_list[len(sorted_list) - 2][1], sorted_list[len(sorted_list) - 2][6])] = [sorted_list[len(sorted_list) - 2]]
                     
             else:#if strand[0] == '+':
                 end_position = GetHomopolymerLength(sorted_list[len(sorted_list) - 2][5], int(sorted_list[len(sorted_list) - 2][7]), int(sorted_list[len(sorted_list) - 2][0]), int(len(sorted_list[len(sorted_list) - 2][5])/2) + 1)[1][1]
                 if int(sorted_list[len(sorted_list) - 1][0]) <= (end_position + 10) and int(sorted_list[len(sorted_list) - 1][1]) == sorted_list[len(sorted_list) - 2][1]:
-                    if sorted_list[len(sorted_list) - 1] not in clusters.keys():
-                        clusters[sorted_list[len(sorted_list) - 1]] = [sorted_list[len(sorted_list) - 1]]
-                    if sorted_list[len(sorted_list) - 2] not in clusters.keys():
-                        clusters[sorted_list[len(sorted_list) - 2]] = [sorted_list[len(sorted_list) - 2]]
+                    if (sorted_list[len(sorted_list) - 1][6], sorted_list[len(sorted_list) - 1][1], sorted_list[len(sorted_list) - 1][6]) not in clusters.keys():
+                        clusters[(sorted_list[len(sorted_list) - 1][6], sorted_list[len(sorted_list) - 1][1], sorted_list[len(sorted_list) - 1][6])] = [sorted_list[len(sorted_list) - 1]]
+                    if (sorted_list[len(sorted_list) - 2][6], sorted_list[len(sorted_list) - 2][1], sorted_list[len(sorted_list) - 2][6]) not in clusters.keys():
+                        clusters[(sorted_list[len(sorted_list) - 2][6], sorted_list[len(sorted_list) - 2][1], sorted_list[len(sorted_list) - 2][6])] = [sorted_list[len(sorted_list) - 2]]
                 start_position = GetHomopolymerLength(sorted_list[len(sorted_list) - 1][5], int(sorted_list[len(sorted_list) - 1][7]), int(sorted_list[len(sorted_list) - 1][0]), int(len(sorted_list[len(sorted_list) - 1][5])/2) + 1)[1][0]
                 if start_position <= (sorted_list[len(sorted_list) - 2][0] + 10) and int(sorted_list[len(sorted_list) - 2][1]) == sorted_list[len(sorted_list) - 1][1]:
-                    if sorted_list[len(sorted_list) - 1] not in clusters.keys():
-                        clusters[sorted_list[len(sorted_list) - 1]] = [sorted_list[len(sorted_list) - 1]]
-                    if sorted_list[1] not in clusters.keys():
-                        clusters[sorted_list[len(sorted_list) - 2]] = [sorted_list[len(sorted_list) - 2]]
+                    if (sorted_list[len(sorted_list) - 1][6], sorted_list[len(sorted_list) - 1][1], sorted_list[len(sorted_list) - 1][6]) not in clusters.keys():
+                        clusters[(sorted_list[len(sorted_list) - 2][6], sorted_list[len(sorted_list) - 2][1], sorted_list[len(sorted_list) - 2][6])] = [sorted_list[len(sorted_list) - 1]]
+                    if (sorted_list[len(sorted_list) - 2][6], sorted_list[len(sorted_list) - 2][1], sorted_list[len(sorted_list) - 2][6]) not in clusters.keys():
+                        clusters[(sorted_list[len(sorted_list) - 2][6], sorted_list[len(sorted_list) - 2][1], sorted_list[len(sorted_list) - 2][6])] = [sorted_list[len(sorted_list) - 2]]
                    
             for j in range (1,len (sorted_list) - 1):
                     if (sorted_list[j][1] == sorted_list[j - 1][1] and (int(sorted_list[j][0]) <= int((sorted_list[j - 1][0])) + 10)) or (sorted_list[j + 1][1] == sorted_list[j][1] and (int(sorted_list[j + 1][0]) <= int((sorted_list[j][0])) + 10)): #or ((isolate_list[key][j + n][6], int(isolate_list[key][j + n][0]), isolate_list[key][j + n][1]) in homopolymers.keys() and (int(isolate_list[key][j + n][0]) <= int((isolate_list[key][j + n - 1][0])) + 10 + homopolymers[key])) : 
-                            if sorted_list[j] not in clusters.keys():
+                            if (sorted_list[j][6], sorted_list[j][1], sorted_list[j][0]) not in clusters.keys():
                                 #if j == 0 or isolate_list[key][j - n] not in clusters.keys():
                                 clusters[(sorted_list[j][6], sorted_list[j][1], sorted_list[j][0])] = [sorted_list[j]]
                     else:
                         end_position = GetHomopolymerLength(sorted_list[j][5], int(sorted_list[j][7]), int(sorted_list[j][0]), int(len(sorted_list[j][5])/2) + 1)[1][1]
                         if int(sorted_list[j + 1][0]) <= (end_position + 10) and int(sorted_list[j][1]) == sorted_list[j + 1][1]:
-                            if sorted_list[j] not in clusters.keys():
-                                clusters[sorted_list[j]] = [sorted_list[j]]
-                            if sorted_list[j + 1] not in clusters.keys():
-                                clusters[sorted_list[j + 1]] = (sorted_list[j + 1])
+                            if (sorted_list[j][6], sorted_list[j][1], sorted_list[j][0]) not in clusters.keys():
+                                clusters[(sorted_list[j][6], sorted_list[j][1], sorted_list[j][0])] = [sorted_list[j]]
+                            if (sorted_list[j + 1][6], sorted_list[j + 1][1], sorted_list[j + 1][0]) not in clusters.keys():
+                                clusters[(sorted_list[j + 1][6], sorted_list[j + 1][1], sorted_list[j + 1][0])] = (sorted_list[j + 1])
                         start_position = GetHomopolymerLength(sorted_list[j][5], int(sorted_list[j][7]), int(sorted_list[j][0]), int(len(sorted_list[j][5])/2) + 1)[1][0]
                         if start_position <= (sorted_list[j - 1][0] + 10) and int(sorted_list[j - 1][1]) == sorted_list[j][1]:
-                            if sorted_list[j - 1] not in clusters.keys():
-                                clusters[sorted_list[j - 1]] = [sorted_list[j - 1]]
-                            if sorted_list[j] not in clusters.keys():
-                                clusters[sorted_list[j]] = [sorted_list[j]]           
+                            if (sorted_list[j - 1][6], sorted_list[j - 1][1], sorted_list[j - 1][0]) not in clusters.keys():
+                                clusters[(sorted_list[j - 1][6], sorted_list[j - 1][1], sorted_list[j - 1][0])] = [sorted_list[j - 1]]
+                            if (sorted_list[j][6], sorted_list[j][1], sorted_list[j][0]) not in clusters.keys():
+                                clusters[(sorted_list[j][6], sorted_list[j][1], sorted_list[j][0])] = [sorted_list[j]]           
                     #elif (sorted_list[j][1] == sorted_list[j + 1][1]) and(sorted_list[j][6], int(sorted_list[j][0]), sorted_list[j][1]) in homopolymers.keys() and (int(sorted_list[j + 1][0]) <= int((sorted_list[j][0])) + 10 + (homopolymers[(sorted_list[j][6], int(sorted_list[j][0]), sorted_list[j][1])][0][1] - sorted_list[j][0])):
                         #if sorted_list[j] not in clusters.keys() and (sorted_list[j][7] == "DIP" or sorted_list[j][7] == "Complex DIP" or sorted_list[key][j][7] == "Deletion" or sorted_list[j][7] == "Insertion"):
                             #clusters[(sorted_list[j][6], sorted_list[j][1], sorted_list[j][0])] = [sorted_list[j]]
@@ -1300,9 +1383,11 @@ def FindClusters( isolate_list):
         
    
 
-    complex_count = []
-    for key in homopolymers.keys():
-        if key in clusters.keys():
-            complex_count.append(key)
+    #complex_count = []
+    #for key in homopolymers.keys():
+        #if key in clusters.keys():
+            #complex_count.append(key)
     
     return clusters
+
+#FindClusters(WT_isolate_list, WT_homopolymers)
