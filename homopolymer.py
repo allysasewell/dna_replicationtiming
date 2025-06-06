@@ -1088,7 +1088,7 @@ WT_Tcount = WT_polymer_counts[1]
 rad16_polymer_counts = GetPolymerCounts(rad16_data[0],  rad16_data[2], rad16_data[3], rad16_data[4] , rad16_data[5], rad16_data[6], rad16_data[7])[0]
 rad16_Ccount = rad16_polymer_counts[0]
 rad16_Tcount = rad16_polymer_counts[1]
-WT_homopolymers = GetPolymerCounts(WT_data[0],  WT_data[2], WT_data[3],  WT_data[4], WT_data[5], WT_data[6], WT_data[7], WT_isolate)[1]
+#WT_homopolymers = GetPolymerCounts(WT_data[0],  WT_data[2], WT_data[3],  WT_data[4], WT_data[5], WT_data[6], WT_data[7], WT_isolate)[1]
 rad26_polymer_counts = GetPolymerCounts(rad26_data[0],  rad26_data[2], rad26_data[3], rad26_data[4], rad26_data[5], rad26_data[6], rad26_data[7])[0]
 rad26_Ccount = rad26_polymer_counts[0]
 rad26_Tcount = rad26_polymer_counts[1]
@@ -1124,7 +1124,16 @@ def NormalizeHomopolymer(sequences,  file):
     homopolymer_dict = {}
     C_dict = {}
     T_dict = {}
-
+    
+    homopolymer_dict['11-15'] = 0
+    homopolymer_dict['16-20'] = 0
+    homopolymer_dict['21+'] = 0
+    C_dict['11-15'] = 0
+    C_dict['16-20'] = 0
+    C_dict['21+'] = 0
+    T_dict['11-15'] = 0
+    T_dict['16-20'] = 0
+    T_dict['21+'] = 0
   
     homopolymer_dict[1] = 0
     C_dict[1] = 0
@@ -1196,7 +1205,26 @@ def NormalizeHomopolymer(sequences,  file):
                             if sequence[b] == 'T' or sequence[b] == 'A':
                                 T_dict[polymer_count] = length
                                 #for n in range (polymer_range[0], polymer_range[1] + 1):
-                                    #T_dict[polymer_count] = T_dict[polymer_count] + 1
+                if polymer_count >= 11:
+                    if polymer_count >= 21:
+                        homopolymer_dict['21+'] = homopolymer_dict['21+'] + length
+                        if sequence[b] == 'C' or sequence[b] == 'G':
+                            C_dict['21+'] = C_dict['21+'] + length
+                        if sequence[b] == 'T' or sequence[b] == 'A':
+                            T_dict['21+'] = T_dict['21+'] + length
+                    elif polymer_count >= 16:
+                        homopolymer_dict['16-20'] = homopolymer_dict['16-20'] + length
+                        if sequence[b] == 'C' or sequence[b] == 'G':
+                            C_dict['16-20'] = C_dict['16-20'] + length
+                        if sequence[b] == 'T' or sequence[b] == 'A':
+                            T_dict['16-20'] = T_dict['16-20'] + length
+                    else:
+                        homopolymer_dict['11-15'] = homopolymer_dict['11-15'] + length
+                        if sequence[b] == 'C' or sequence[b] == 'G':
+                            C_dict['11-15'] = C_dict['11-15'] + length
+                        if sequence[b] == 'T' or sequence[b] == 'A':
+                            T_dict['11-15'] = T_dict['11-15'] + length                    #T_dict[polymer_count] = T_dict[polymer_count] + 1
+                                   #T_dict[polymer_count] = T_dict[polymer_count] + 1
              
                 b = b + length
          
@@ -1204,7 +1232,7 @@ def NormalizeHomopolymer(sequences,  file):
     return homopolymer_dict, C_dict, T_dict
 f5 = open('Homopolymer_numbers', 'w+')
 
-homopolymer_dict = NormalizeHomopolymer(sequences, f5 )
+new_homopolymer_dict = NormalizeHomopolymer(sequences, f5 )
 f5.close()
 
 f6 = open('WT_CHomopolymer_counts', 'w+')
@@ -1255,40 +1283,41 @@ def PrintFrequencies(homopolymer_dict, lengths, file):
 #f9.close()
 
 def PrintCTFrequencies(homopolymer_dict, counts, file):
-    homopolymer_counts = {}
+    homopolymer_counts = counts
     homopolymer_counts['21+'] = 0
     homopolymer_counts['16-20'] = 0
     homopolymer_counts['11-15'] = 0
     for key in counts.keys():
-        
+        if key != '11-15' and key != '16-20' and key != '21+':
             #if len(allele[l]) == 1: #and mutation_type[l] == "deletion") or (len(mutation[l]) == 1 and mutation_type[l] == "insertion") :
-                if key not in homopolymer_counts.keys():
-                    homopolymer_counts[key] = 1
+                #if key not in homopolymer_counts.keys():
+                    #homopolymer_counts[key] = 1
                     #homopolymer_dict[lengths[l]] = 0
-                else:
-                    homopolymer_counts[key] = homopolymer_counts[key] + 1
+                #else:
+                    #homopolymer_counts[key] = homopolymer_counts[key] + 1
                 if int(key) >= 11:
                     if int(key) >= 21:
-                            homopolymer_counts['21+'] = homopolymer_counts['21+'] + 1
+                            homopolymer_counts['21+'] = homopolymer_counts['21+'] + homopolymer_counts[key]
                     elif int(key) >= 16:
-                            homopolymer_counts['16-20'] = homopolymer_counts['16-20'] + 1
+                            homopolymer_counts['16-20'] = homopolymer_counts['16-20'] + homopolymer_counts[key]
                     else:
-                            homopolymer_counts['11-15'] = homopolymer_counts['11-15'] + 1
+                            homopolymer_counts['11-15'] = homopolymer_counts['11-15'] + homopolymer_counts[key]
                 
     for key in homopolymer_counts.keys():
-        if homopolymer_dict[key] != 0:
-            homopolymer_counts[key] = homopolymer_counts[key]/homopolymer_dict[key]
-            file.write(str(key) + ':' + str(homopolymer_counts[key]))
-            file.write('\n')
+        if key in homopolymer_dict.keys():
+            if homopolymer_dict[key] != 0:
+                homopolymer_counts[key] = homopolymer_counts[key]/homopolymer_dict[key]
+                file.write(str(key) + ':' + str(homopolymer_counts[key]))
+                file.write('\n')
 
-PrintCTFrequencies(homopolymer_dict[0], WT_Ccount, f6)
-PrintCTFrequencies(homopolymer_dict[0], rad16_Ccount, f7)
-PrintCTFrequencies(homopolymer_dict[0], rad26_Ccount, f8)
-PrintCTFrequencies(homopolymer_dict[0], rad30_Ccount, f9)
-PrintCTFrequencies(homopolymer_dict[1], WT_Tcount, f6a)
-PrintCTFrequencies(homopolymer_dict[1], rad16_Tcount, f7a)
-PrintCTFrequencies(homopolymer_dict[1], rad26_Tcount, f8a)
-PrintCTFrequencies(homopolymer_dict[1], rad30_Tcount, f9a)
+PrintCTFrequencies(new_homopolymer_dict[1], WT_Ccount, f6)
+PrintCTFrequencies(new_homopolymer_dict[1], rad16_Ccount, f7)
+PrintCTFrequencies(new_homopolymer_dict[1], rad26_Ccount, f8)
+PrintCTFrequencies(new_homopolymer_dict[1], rad30_Ccount, f9)
+PrintCTFrequencies(new_homopolymer_dict[2], WT_Tcount, f6a)
+PrintCTFrequencies(new_homopolymer_dict[2], rad16_Tcount, f7a)
+PrintCTFrequencies(new_homopolymer_dict[2], rad26_Tcount, f8a)
+PrintCTFrequencies(new_homopolymer_dict[2], rad30_Tcount, f9a)
 
 f6.close()
 f6a.close()
