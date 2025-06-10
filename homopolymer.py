@@ -386,16 +386,263 @@ for i1 in range(0, len(isolate)):
     else:
         isolate_list[(isolate[i1], genotype[i1])] .append((position2[i1], 'chr' + str(chromosome[i1]), trinucleotide[i1], mutation[i1], strand[i1], mutation_type[i1], isolate[i1]))
     
+with open("UVB_New_Combined_All_v2_format_filter.txt") as f2:
+    data2 = f2.read()
+lines2 = [s.strip().split() for s in data2.splitlines()]
+lines2.pop(0)
+genotypes2 = {'WT': 0, 'Rad16':0, 'Rad26':0, 'Rad30': 0}
+WT_indels_2 = 0
+rad16_indels_2 = 0
+rad26_indels_2 = 0
+rad30_indels_2 = 0
+isolates2 = []
+genotype2 = []
+chromosome2 = []
+position1_2 = []
+position2_2 = []
+mutation_type_2 = []
+length2 = []
+allele2 = []
+mutation2 = []
+frequency2 = []
+trinucleotide2 = []
+strand2 = []
+isolate_list2 = {}
+WT_chromosomes2 = {}
+rad16_chromosomes2 = {}
+rad26_chromosomes2 = {}
+rad30_chromosomes2 = {}
+for line in lines2:
+    if line[13] != 'Replacement' and line[13] != 'MNV' and line[14] != 'Replacement' and line[14] != 'MNV' and 'Mito' not in line[5] and line[2] != 'RP':
+        isolates2.append(line[0])
+        genotype2.append(line[1])
+        mutation_type_2.append(line[13])
+        if 'WT' in line[1]:
+            genotypes2['WT'] = genotypes2['WT'] + 1
+        if 'Rad16' in line[1]:
+            genotypes2['Rad16'] = genotypes2['Rad16'] + 1
+        if 'Rad26' in line[1]:
+            genotypes2['Rad26'] = genotypes2['Rad26'] + 1
+        if 'Rad30' in line[1]:
+            genotypes2['Rad30'] = genotypes2['Rad30'] + 1
+        if line[2] != 'RP':
+            chromosome2.append(line[4])
+        else:
+            chromosome2.append(line[5])
+        if 'WT' in line[1]:
+            if chromosome2[len(chromosome2) - 1] in WT_chromosomes2.keys():
+                WT_chromosomes2[chromosome2[len(chromosome2) - 1]] = WT_chromosomes2[chromosome2[len(chromosome2) - 1]] + 1
+
+            else:
+                WT_chromosomes2[chromosome2[len(chromosome2) - 1]] = 1
+            if line[13] == "Deletion" or line[13] == "Insertion" or line[14] == "Deletion" or line[14] == "Insertion":
+                WT_indels_2 = WT_indels_2 + 1
+        if 'Rad16' in line[1]:
+            if chromosome2[len(chromosome2) - 1] in rad16_chromosomes2.keys():
+                rad16_chromosomes2[chromosome2[len(chromosome2) - 1]] = rad16_chromosomes2[chromosome2[len(chromosome2) - 1]] + 1
+            else:
+                rad16_chromosomes2[chromosome2[len(chromosome2) - 1]] = 1
+            if line[13] == "Deletion" or line[13] == "Insertion" or line[14] == "Deletion" or line[14] == "Insertion":
+                rad16_indels_2 = rad16_indels_2 + 1
+        if 'Rad26' in line[1]:
+            if chromosome2[len(chromosome2) - 1] in rad26_chromosomes2.keys():
+                rad26_chromosomes2[chromosome2[len(chromosome2) - 1]] = rad26_chromosomes2[chromosome2[len(chromosome2) - 1]] + 1
+            else:
+                rad26_chromosomes2[chromosome2[len(chromosome2) - 1]] = 1
+            if line[13] == "Deletion" or line[13] == "Insertion" or line[14] == "Deletion" or line[14] == "Insertion":
+                rad26_indels_2 = rad26_indels_2 + 1
+        if 'Rad30' in line[1]:
+            if chromosome2[len(chromosome2) - 1] in rad30_chromosomes2.keys():
+                rad30_chromosomes2[chromosome2[len(chromosome2) - 1]] = rad30_chromosomes2[chromosome2[len(chromosome2) - 1]] + 1
+            else:
+                rad30_chromosomes2[chromosome2[len(chromosome2) - 1]] = 1
+            if line[13] == "Deletion" or line[13] == "Insertion" or line[14] == "Deletion" or line[14] == "Insertion":
+                rad30_indels_2 = rad30_indels_2 + 1
+        position1_2.append(int(line[6]) - 1)
+        position2_2.append(int(line[6]))
+        allele2.append(line[14])
+        #if line[14] == 'C' or line[14] == 'T':
+        mutation2.append(line[15])
+            #strand2.append('+')
+        #else:
+            #mutation2.append(GetReverseComplement(line[15]))
+            #strand2.append('-')
+        #else:
+            #position1_2.append(int(line[7]) - 1)
+            #position2_2.append(int(line[7]))
+            #allele2.append(line[15])
+            #if line[15] == 'C' or line[15] == 'T':
+                #mutation2.append(line[16])
+                #strand2.append('+')
+            #else:
+                #mutation2.append(GetReverseComplement(line[16]))
+                #strand2.append('-')
 
 
-f1a = open("WT_substitutions_sorted_tandem.bed", 'w+')
-f1b = open("rad16_substitutions_sorted_tandem.bed", 'w+')
-f1c = open("rad26_substitutions_sorted_tandem.bed", 'w+')
-f1d = open("rad30_substitutions_sorted_tandem.bed", 'w+')
-#f11a  = open("WT_mutations_sorted_tandem.bed", 'w+')
-#f11b = open("rad16_mutations_sorted_tandem.bed", 'w+')
-#f11c = open("rad26_mutations_sorted_tandem.bed", 'w+')
-#f11d = open("rad30_mutations_sorted_tandem.bed", 'w+')
+for pos in range(0, len(position2_2)):
+    #if mutation_type_2[pos] == 'Insertion' or mutation_type_2[pos] == 'Deletion':# or mutation_type_2[pos] == 'Deletion' and len(allele2[pos]) == 1:
+        if chromosome2[pos] == 'chrI':
+            sequence = GetSequence('chr1.txt')
+            if sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'C' or sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'T':
+                trinucleotide2.append(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1])
+                strand2.append('+')
+            else:
+                trinucleotide2.append(GetReverseComplement(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1]))
+                strand2.append('-')
+
+        elif chromosome2[pos] == 'chrII':
+            sequence = GetSequence('chr2.txt')
+            if sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'C' or sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'T':
+                trinucleotide2.append(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1])
+                strand2.append('+')
+            else:
+                trinucleotide2.append(GetReverseComplement(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1]))
+                strand2.append('-')
+        elif chromosome2[pos] == 'chrIII':
+            sequence = GetSequence('chr3.txt')
+            if sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'C' or sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'T':
+                trinucleotide2.append(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1])
+                strand2.append('+')
+            else:
+                trinucleotide2.append(GetReverseComplement(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1]))
+                strand2.append('-')
+        elif chromosome2[pos] == 'chrIV':
+            sequence = GetSequence('chr4.txt')
+            if sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'C' or sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'T':
+                trinucleotide2.append(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1])
+                strand2.append('+')
+            else:
+                trinucleotide2.append(GetReverseComplement(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1]))
+                strand2.append('-')
+        elif chromosome2[pos] == 'chrV':
+            sequence = GetSequence('chr5.txt')
+            if sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'C' or sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'T':
+                trinucleotide2.append(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1])
+                strand2.append('+')
+            else:
+                trinucleotide2.append(GetReverseComplement(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1]))
+                strand2.append('-')
+        elif chromosome2[pos] == 'chrVI':
+            sequence = GetSequence('chr6.txt')
+            if sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'C' or sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'T':
+                trinucleotide2.append(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1])
+                strand2.append('+')
+            else:
+                trinucleotide2.append(GetReverseComplement(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1]))
+                strand2.append('-')
+        elif chromosome2[pos] == 'chrVII':
+            sequence = GetSequence('chr7.txt')
+            if sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'C' or sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'T':
+                trinucleotide2.append(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1])
+                strand2.append('+')
+            else:
+                trinucleotide2.append(GetReverseComplement(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1]))
+                strand2.append('-')
+        elif chromosome2[pos] == 'chrVIII':
+            sequence = GetSequence('chr8.txt')
+            if sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'C' or sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'T':
+                trinucleotide2.append(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1])
+                strand2.append('+')
+            else:
+                trinucleotide2.append(GetReverseComplement(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1]))
+                strand2.append('-')
+        elif chromosome2[pos] == 'chrIX':
+            sequence = GetSequence('chr9.txt')
+            if sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'C' or sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'T':
+                trinucleotide2.append(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1])
+                strand2.append('+')
+            else:
+                trinucleotide2.append(GetReverseComplement(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1]))
+                strand2.append('-')
+        elif chromosome2[pos] == 'chrX':
+            sequence = GetSequence('chr10.txt')
+            if sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'C' or sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'T':
+                trinucleotide2.append(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1])
+                strand2.append('+')
+            else:
+                trinucleotide2.append(GetReverseComplement(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1]))
+                strand2.append('-')
+        elif chromosome2[pos] == 'chrXI':
+            sequence = GetSequence('chr11.txt')
+            if sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'C' or sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'T':
+                trinucleotide2.append(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1])
+                strand2.append('+')
+            else:
+                trinucleotide2.append(GetReverseComplement(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1]))
+                strand2.append('-')
+        elif chromosome2[pos] == 'chrXII':
+            sequence = GetSequence('chr12.txt')
+            if sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'C' or sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'T':
+                trinucleotide2.append(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1])
+                strand2.append('+')
+            else:
+                trinucleotide2.append(GetReverseComplement(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1]))
+                strand2.append('-')
+        elif chromosome2[pos] == 'chrXIII':
+            sequence = GetSequence('chr13.txt')
+            if sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'C' or sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'T':
+                trinucleotide2.append(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1])
+                strand2.append('+')
+            else:
+                trinucleotide2.append(GetReverseComplement(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1]))
+                strand2.append('-')
+        elif chromosome2[pos] == 'chrXIV':
+            sequence = GetSequence('chr14.txt')
+            if sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'C' or sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'T':
+                trinucleotide2.append(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1])
+                strand2.append('+')
+            else:
+                trinucleotide2.append(GetReverseComplement(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1]))
+                strand2.append('-')
+        elif chromosome2[pos] == 'chrXV':
+            sequence = GetSequence('chr15.txt')
+            if sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'C' or sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'T':
+                trinucleotide2.append(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1])
+                strand2.append('+')
+            else:
+                trinucleotide2.append(GetReverseComplement(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1]))
+                strand2.append('-')
+        elif chromosome2[pos] == 'chrXVI':
+            sequence = GetSequence('chr16.txt')
+            if sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'C' or sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1][1] == 'T':
+                trinucleotide2.append(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1])
+                strand2.append('+')
+            else:
+                trinucleotide2.append(GetReverseComplement(sequence[int(position1_2[pos]) - 1: int(position2_2[pos]) + 1]))
+                strand2.append('-')
+        else:
+            trinucleotide2.append('NA')
+            strand2.append('+')
+    #else:
+        #trinucleotide2.append('NA')
+for m1 in  range(0, len(mutation2)):
+    if mutation_type_2[m1] == 'Insertion':
+        if mutation2[m1] == 'A' or mutation2[m1] == 'G':
+            strand2[m1] = '-'
+        else:
+            strand2[m1] = '+'
+    elif strand2[m1] == '-':
+        mutation2[m1] = GetReverseComplement(mutation2[m1])
+for i1 in range(0, len(isolates2)):
+
+    if (isolates2[i1], genotype2[i1]) not in isolate_list2.keys():
+            isolate_list2[(isolates2[i1], genotype2[i1])] = [(position2_2[i1], 'chr' + str(chromosome2[i1]), trinucleotide2[i1], mutation2[i1], strand2[i1], mutation_type_2[i1], isolates2[i1])]
+    else:
+        isolate_list2[(isolates2[i1], genotype2[i1])] .append((position2_2[i1], 'chr' + str(chromosome2[i1]), trinucleotide2[i1], mutation2[i1], strand2[i1], mutation_type_2[i1], isolates2[i1]))
+
+#f1a = open("WT_substitutions_sorted_tandem.bed", 'w+')
+#f1b = open("rad16_substitutions_sorted_tandem.bed", 'w+')
+#f1c = open("rad26_substitutions_sorted_tandem.bed", 'w+')
+#f1d = open("rad30_substitutions_sorted_tandem.bed", 'w+')
+f1a  = open("WT_mutations_sorted_tandem.bed", 'w+')
+f1b = open("rad16_mutations_sorted_tandem.bed", 'w+')
+f1c = open("rad26_mutations_sorted_tandem.bed", 'w+')
+f1d = open("rad30_mutations_sorted_tandem.bed", 'w+')
+
+f1ua  = open("WT_UVB_mutations_sorted_tandem.bed", 'w+')
+f1ub = open("rad16_UVB_mutations_sorted_tandem.bed", 'w+')
+f1uc = open("rad26_UVB_mutations_sorted_tandem.bed", 'w+')
+f1ud = open("rad30_UVB_mutations_sorted_tandem.bed", 'w+')
 
 
 def WriteChr(chr_name, file1a, file1b, file1c, file1d, chromosome, position1, position2,
@@ -481,10 +728,50 @@ trinucleotide, allele, mutation, genotype, mutation_type, isolate, strand)
 WriteChr('chrXVI', f1a, f1b, f1c, f1d, chromosome, position1, position2,
 trinucleotide, allele, mutation, genotype, mutation_type, isolate, strand)
 
+
+WriteChr('chrI',f1ua, f1ub, f1uc, f1ud, chromosome2, position1_2, position2_2,
+trinucleotide2, allele2, mutation2, genotype2, mutation_type_2, isolates2, strand2)
+WriteChr('chrII', f1ua, f1ub, f1uc, f1ud, chromosome2, position1_2, position2_2,
+trinucleotide2, allele2, mutation2, genotype2, mutation_type_2, isolates2, strand2)
+WriteChr('chrIII',  f1ua, f1ub, f1uc, f1ud, chromosome2, position1_2, position2_2,
+trinucleotide2, allele2, mutation2, genotype2, mutation_type_2, isolates2, strand2)
+WriteChr('chrIV', f1ua, f1ub, f1uc, f1ud, chromosome2, position1_2, position2_2,
+trinucleotide2, allele2, mutation2, genotype2, mutation_type_2, isolates2, strand2)
+WriteChr('chrIX', f1ua, f1ub, f1uc, f1ud, chromosome2, position1_2, position2_2,
+trinucleotide2, allele2, mutation2, genotype2, mutation_type_2, isolates2, strand2)
+WriteChr('chrV', f1ua, f1ub, f1uc, f1ud, chromosome2, position1_2, position2_2,
+trinucleotide2, allele2, mutation2, genotype2, mutation_type_2, isolates2, strand2)
+WriteChr('chrVI', f1ua, f1ub, f1uc, f1ud, chromosome2, position1_2, position2_2,
+trinucleotide2, allele2, mutation2, genotype2, mutation_type_2, isolates2, strand2)
+WriteChr('chrVII', f1ua, f1ub, f1uc, f1ud, chromosome2, position1_2, position2_2,
+trinucleotide2, allele2, mutation2, genotype2, mutation_type_2, isolates2, strand2)
+WriteChr('chrVIII', f1ua, f1ub, f1uc, f1ud, chromosome2, position1_2, position2_2,
+trinucleotide2, allele2, mutation2, genotype2, mutation_type_2, isolates2, strand2)
+WriteChr('chrX', f1ua, f1ub, f1uc, f1ud, chromosome2, position1_2, position2_2,
+trinucleotide2, allele2, mutation2, genotype2, mutation_type_2, isolates2, strand2)
+WriteChr('chrXI', f1ua, f1ub, f1uc, f1ud, chromosome2, position1_2, position2_2,
+trinucleotide2, allele2, mutation2, genotype2, mutation_type_2, isolates2, strand2)
+WriteChr('chrXII',f1ua, f1ub, f1uc, f1ud, chromosome2, position1_2, position2_2,
+trinucleotide2, allele2, mutation2, genotype2, mutation_type_2, isolates2, strand2)
+WriteChr('chrXIII', f1ua, f1ub, f1uc, f1ud, chromosome2, position1_2, position2_2,
+trinucleotide2, allele2, mutation2, genotype2, mutation_type_2, isolates2, strand2)
+WriteChr('chrXIV', f1ua, f1ub, f1uc, f1ud, chromosome2, position1_2, position2_2,
+trinucleotide2, allele2, mutation2, genotype2, mutation_type_2, isolates2, strand2) 
+WriteChr('chrXV', f1ua, f1ub, f1uc, f1ud, chromosome2, position1_2, position2_2,
+trinucleotide2, allele2, mutation2, genotype2, mutation_type_2, isolates2, strand2)
+WriteChr('chrXVI',f1ua, f1ub, f1uc, f1ud, chromosome2, position1_2, position2_2,
+trinucleotide2, allele2, mutation2, genotype2, mutation_type_2, isolates2, strand2)
+
+
 f1a.close()
 f1b.close()
 f1c.close()
 f1d.close()
+
+f1ua.close()
+f1ub.close()
+f1uc.close()
+f1ud.close()
 
 #f11a.close()
 #f11b.close()
@@ -492,7 +779,7 @@ f1d.close()
 #f11d.close()
 
 
-def MakePentaNucFile(file_1, file_2):
+def MakePentaNucFile(file_1, file_2, file_3):
     new_data = file_1.read()
     new_chromosome = []
     new_position = []
@@ -977,12 +1264,20 @@ def MakePentaNucFile(file_1, file_2):
             
     
     for i in range(0, len(new_position)):
-        if new_strand[i] == '-':
-            file_2.write(new_chromosome[i] + '\t' + str(int(new_position[i]) - 1) + '\t'  +str(new_position[i]) + '\t' + new_trinucleotide[i] + '\t' + new_mutation[i] + '\t' + new_strand[i]  + '\t'+ GetReverseComplement(pentanucleotide[i]) + '\t' +str(GetHomopolymerLength(GetReverseComplement(pentanucleotide[i]), new_position1[i], new_position[i], int(len(pentanucleotide[i])/2) + 1)[0]))
-            file_2.write('\n')
-        if new_strand[i] == '+':
+        #if new_strand[i] == '-':
+            #file_2.write(new_chromosome[i] + '\t' + str(int(new_position[i]) - 1) + '\t'  +str(new_position[i]) + '\t' + new_trinucleotide[i] + '\t' + new_mutation[i] + '\t' + new_strand[i]  + '\t'+ GetReverseComplement(pentanucleotide[i]) + '\t' +str(GetHomopolymerLength(GetReverseComplement(pentanucleotide[i]), new_position1[i], new_position[i], int(len(pentanucleotide[i])/2) + 1)[0]))
+            #file_2.write('\n')
+        #if new_strand[i] == '+':
             file_2.write(new_chromosome[i] + '\t' + str(int(new_position[i]) - 1)  + '\t' + str(new_position[i]) + '\t' + new_trinucleotide[i] + '\t' +  new_mutation[i] + '\t' + new_strand[i] + '\t' + pentanucleotide[i] + '\t' + str(GetHomopolymerLength(pentanucleotide[i], new_position1[i], new_position[i], int(len(pentanucleotide[i])/2) + 1)[0]))
             file_2.write('\n')
+    for j in range(0, len(pentanucleotide)):
+        #if new_strand[j] == '-':
+            #file_3.write(GetReverseComplement(pentanucleotide[j]))
+            #file_3.write('\n')
+        #else:
+            file_3.write(pentanucleotide[j])
+            file_3.write('\n')
+        
 
     return pentanucleotide, new_strand, new_chromosome, new_position,  new_trinucleotide, new_mutation, new_allele, lengths, new_position1, new_isolate
 
@@ -1035,8 +1330,24 @@ f4 = open("rad26_UV_bothruns_Muts_allSNVs_sorted.bed")
 f4a = open("rad26_substitutions_multinucleotide.bed", 'w+')
 f10 = open("rad30_UV_bothruns_Muts_allSNVs_sorted.bed")
 f10a = open("rad30_substitutions_multinucleotide.bed", 'w+')
+f2b = open('WT_multinucleotide', 'w+')
+f3b = open('rad16_multinucleotide', 'w+')
+f4b = open('rad26_multinucleotide', 'w+')
+f10b = open('rad30_multinucleotide', 'w+')
+f11 = open("WT_UVB_Muts_allSNVs_sorted.bed")
+f12 = open("rad16_UVB_Muts_allSNVs_sorted.bed")
+f13 = open("rad26_UVB_Muts_allSNVs_sorted.bed")
+f14 = open("rad30_UVB_Muts_allSNVs_sorted.bed")
+f11a = open("WT_UVB_substitutions_sorted_multinucleotide.bed", 'w+')
+f12a = open("rad16_UVB_substitutions_sorted_multinucleotide.bed", 'w+')
+f13a = open("rad26_UVB_substitutions_sorted_multinucleotide.bed", 'w+')
+f14a = open("rad30_UVB_substitutions_sorted_multinucleotide.bed", 'w+')
+f11b = open('WT_UVB_multinucleotide', 'w+')
+f12b = open('rad16_UVB_multinucleotide', 'w+')
+f13b = open('rad26_UVB_multinucleotide', 'w+')
+f14b = open('rad30_UVB_multinucleotide', 'w+')
 
-WT_data = MakePentaNucFile(f2, f2a)
+WT_data = MakePentaNucFile(f2, f2a, f2b)
 WT_isolate = WT_data[9]
 WT_chromosome = WT_data[2]
 WT_position1 = WT_data[8]
@@ -1048,7 +1359,7 @@ WT_multinucleotide = WT_data[0]
 WT_lengths = WT_data[7]
 
 
-rad16_data = MakePentaNucFile(f3, f3a)
+rad16_data = MakePentaNucFile(f3, f3a, f3b)
 rad16_isolate = rad16_data[9]
 rad16_chromosome = rad16_data[2]
 rad16_position1 = rad16_data[8]
@@ -1059,26 +1370,26 @@ rad16_strand = rad16_data[1]
 rad16_multinucleotide = rad16_data[0] 
 rad16_lengths = rad16_data[7]
 
-rad26_data = MakePentaNucFile(f4, f4a)
+rad26_data = MakePentaNucFile(f4, f4a, f4b)
 
-rad26_chromosome = rad26_data[2]
-rad26_position1 = rad26_data[8]
-rad26_position = rad26_data[3]
-rad26_trinucleotide = rad26_data[4]
-rad26_mutation = rad26_data[5]
-rad26_strand = rad26_data[1]
-rad26_multinucleotide = rad26_data[0] 
-rad26_lengths = rad26_data[7]
+#rad26_chromosome = rad26_data[2]
+#rad26_position1 = rad26_data[8]
+#rad26_position = rad26_data[3]
+#rad26_trinucleotide = rad26_data[4]
+#rad26_mutation = rad26_data[5]
+#rad26_strand = rad26_data[1]
+#rad26_multinucleotide = rad26_data[0] 
+#rad26_lengths = rad26_data[7]
 
-rad30_data = MakePentaNucFile(f10, f10a)
-rad30_chromosome = rad30_data[2]
+rad30_data = MakePentaNucFile(f10, f10a, f10b)
+#rad30_chromosome = rad30_data[2]
 #rad30_position1 = rad30_data[8]
-rad30_position = rad30_data[3]
-rad30_trinucleotide = rad30_data[4]
-rad30_mutation = rad30_data[5]
-rad30_strand = rad30_data[1]
-rad30_multinucleotide = rad30_data[0] 
-rad30_lengths = rad30_data[7]
+#rad30_position = rad30_data[3]
+#rad30_trinucleotide = rad30_data[4]
+#rad30_mutation = rad30_data[5]
+#rad30_strand = rad30_data[1]
+#rad30_multinucleotide = rad30_data[0] 
+#rad30_lengths = rad30_data[7]
 
 
 
@@ -1089,21 +1400,43 @@ rad16_polymer_counts = GetPolymerCounts(rad16_data[0],  rad16_data[2], rad16_dat
 rad16_Ccount = rad16_polymer_counts[0]
 rad16_Tcount = rad16_polymer_counts[1]
 #WT_homopolymers = GetPolymerCounts(WT_data[0],  WT_data[2], WT_data[3],  WT_data[4], WT_data[5], WT_data[6], WT_data[7], WT_isolate)[1]
-rad26_polymer_counts = GetPolymerCounts(rad26_data[0],  rad26_data[2], rad26_data[3], rad26_data[4], rad26_data[5], rad26_data[6], rad26_data[7])[0]
-rad26_Ccount = rad26_polymer_counts[0]
-rad26_Tcount = rad26_polymer_counts[1]
-rad30_polymer_counts = GetPolymerCounts(rad30_data[0],  rad30_data[2], rad30_data[3], rad30_data[4], rad30_data[5], rad30_data[6], rad30_data[7])[0]
-rad30_Ccount = rad30_polymer_counts[0]
-rad30_Tcount = rad30_polymer_counts[1]
+#rad26_polymer_counts = GetPolymerCounts(rad26_data[0],  rad26_data[2], rad26_data[3], rad26_data[4], rad26_data[5], rad26_data[6], rad26_data[7])[0]
+#rad26_Ccount = rad26_polymer_counts[0]
+#rad26_Tcount = rad26_polymer_counts[1]
+#rad30_polymer_counts = GetPolymerCounts(rad30_data[0],  rad30_data[2], rad30_data[3], rad30_data[4], rad30_data[5], rad30_data[6], rad30_data[7])[0]
+#rad30_Ccount = rad30_polymer_counts[0]
+#rad30_Tcount = rad30_polymer_counts[1]
 
 f2.close()
 f2a.close()
+f2b.close()
 f3.close()
 f3a.close()
+f3b.close()
 f4.close()
 f4a.close()
+f4b.close()
 f10.close()
 f10a.close()
+f10b.close()
+
+MakePentaNucFile(f11, f11a, f11b)
+MakePentaNucFile(f12, f12a, f12b)
+MakePentaNucFile(f13, f13a, f13b)
+MakePentaNucFile(f14, f14a, f14b)
+
+f11.close()
+f11a.close()
+f11b.close()
+f12.close()
+f12a.close()
+f12b.close()
+f13.close()
+f13a.close()
+f13b.close()
+f14.close()
+f14a.close()
+f14b.close()
 
 WT_isolate_list = {}
 for i1 in range(0, len(WT_isolate)):
