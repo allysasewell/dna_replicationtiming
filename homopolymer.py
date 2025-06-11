@@ -1285,6 +1285,7 @@ def GetPolymerCounts(pentanucleotide,  new_chromosome, new_position, new_trinucl
     homopolymers = {}
     homopolymer_list = {}
     polymer_counts = []
+    homopolymer_number = 0
     for j in range(0, 4):
         polymer_counts.append({})
     for i in range (0, len(lengths)):
@@ -1296,7 +1297,8 @@ def GetPolymerCounts(pentanucleotide,  new_chromosome, new_position, new_trinucl
             #elif strand[i] == '-':
                 #key = GetHomopolymerLength(GetReverseComplement(sequence), )[1]
             
-            #if key >= 4:
+            if key >= 4:
+                homopolymer_number = homopolymer_number + 1
                 #homopolymers[(new_isolate[i], new_chromosome[i], new_position[i])] = key
                 #homopolymer_list[key[1]] = [(new_chromosome[i], key[0][0], key[0][1])]
             print(new_trinucleotide[i])
@@ -1348,7 +1350,7 @@ f13b = open('rad26_UVB_multinucleotide', 'w+')
 f14b = open('rad30_UVB_multinucleotide', 'w+')
 
 WT_data = MakePentaNucFile(f2, f2a, f2b)
-WT_isolate = WT_data[9]
+#WT_isolate = WT_data[9]
 WT_chromosome = WT_data[2]
 WT_position1 = WT_data[8]
 WT_position = WT_data[3]
@@ -1360,7 +1362,7 @@ WT_lengths = WT_data[7]
 
 
 rad16_data = MakePentaNucFile(f3, f3a, f3b)
-rad16_isolate = rad16_data[9]
+#rad16_isolate = rad16_data[9]
 rad16_chromosome = rad16_data[2]
 rad16_position1 = rad16_data[8]
 rad16_position = rad16_data[3]
@@ -1372,24 +1374,69 @@ rad16_lengths = rad16_data[7]
 
 rad26_data = MakePentaNucFile(f4, f4a, f4b)
 
-#rad26_chromosome = rad26_data[2]
-#rad26_position1 = rad26_data[8]
-#rad26_position = rad26_data[3]
-#rad26_trinucleotide = rad26_data[4]
-#rad26_mutation = rad26_data[5]
-#rad26_strand = rad26_data[1]
-#rad26_multinucleotide = rad26_data[0] 
-#rad26_lengths = rad26_data[7]
+rad26_chromosome = rad26_data[2]
+rad26_position1 = rad26_data[8]
+rad26_position = rad26_data[3]
+rad26_trinucleotide = rad26_data[4]
+rad26_mutation = rad26_data[5]
+rad26_strand = rad26_data[1]
+rad26_multinucleotide = rad26_data[0] 
+rad26_lengths = rad26_data[7]
 
 rad30_data = MakePentaNucFile(f10, f10a, f10b)
-#rad30_chromosome = rad30_data[2]
-#rad30_position1 = rad30_data[8]
-#rad30_position = rad30_data[3]
-#rad30_trinucleotide = rad30_data[4]
-#rad30_mutation = rad30_data[5]
-#rad30_strand = rad30_data[1]
-#rad30_multinucleotide = rad30_data[0] 
-#rad30_lengths = rad30_data[7]
+rad30_chromosome = rad30_data[2]
+rad30_position1 = rad30_data[8]
+rad30_position = rad30_data[3]
+rad30_trinucleotide = rad30_data[4]
+rad30_mutation = rad30_data[5]
+rad30_strand = rad30_data[1]
+rad30_multinucleotide = rad30_data[0] 
+rad30_lengths = rad30_data[7]
+
+
+WT_dataB = MakePentaNucFile(f11, f11a, f11b)
+#WT_isolateB = WT_dataB[9]
+WT_chromosomeB = WT_dataB[2]
+WT_position1B = WT_dataB[8]
+WT_positionB = WT_dataB[3]
+WT_trinucleotideB = WT_dataB[4]
+WT_mutationB = WT_dataB[5]
+WT_strandB = WT_dataB[1]
+WT_multinucleotideB = WT_dataB[0] 
+WT_lengthsB = WT_dataB[7]
+
+
+rad16_dataB = MakePentaNucFile(f12, f12a, f12b)
+#rad16_isolateB = rad16_dataB[9]
+rad16_chromosomeB = rad16_dataB[2]
+rad16_position1B = rad16_dataB[8]
+rad16_positionB = rad16_dataB[3]
+rad16_trinucleotideB = rad16_dataB[4]
+rad16_mutationB = rad16_dataB[5]
+rad16_strandB = rad16_dataB[1]
+rad16_multinucleotideB = rad16_dataB[0] 
+rad16_lengthsB = rad16_dataB[7]
+
+rad26_dataB = MakePentaNucFile(f13, f13a, f13b)
+
+rad26_chromosomeB = rad26_dataB[2]
+rad26_position1B = rad26_dataB[8]
+rad26_positionB = rad26_dataB[3]
+rad26_trinucleotideB = rad26_dataB[4]
+rad26_mutationB = rad26_dataB[5]
+rad26_strandB = rad26_dataB[1]
+rad26_multinucleotideB = rad26_dataB[0] 
+rad26_lengthsB = rad26_dataB[7]
+
+rad30_dataB = MakePentaNucFile(f14, f14a, f14b)
+rad30_chromosomeB = rad30_dataB[2]
+rad30_position1B = rad30_dataB[8]
+rad30_positionB = rad30_dataB[3]
+rad30_trinucleotideB = rad30_dataB[4]
+rad30_mutationB = rad30_dataB[5]
+rad30_strandB = rad30_dataB[1]
+rad30_multinucleotideB = rad30_dataB[0] 
+rad30_lengthsB = rad30_dataB[7]
 
 
 
@@ -1400,12 +1447,26 @@ rad16_polymer_counts = GetPolymerCounts(rad16_data[0],  rad16_data[2], rad16_dat
 rad16_Ccount = rad16_polymer_counts[0]
 rad16_Tcount = rad16_polymer_counts[1]
 #WT_homopolymers = GetPolymerCounts(WT_data[0],  WT_data[2], WT_data[3],  WT_data[4], WT_data[5], WT_data[6], WT_data[7], WT_isolate)[1]
-#rad26_polymer_counts = GetPolymerCounts(rad26_data[0],  rad26_data[2], rad26_data[3], rad26_data[4], rad26_data[5], rad26_data[6], rad26_data[7])[0]
-#rad26_Ccount = rad26_polymer_counts[0]
-#rad26_Tcount = rad26_polymer_counts[1]
-#rad30_polymer_counts = GetPolymerCounts(rad30_data[0],  rad30_data[2], rad30_data[3], rad30_data[4], rad30_data[5], rad30_data[6], rad30_data[7])[0]
-#rad30_Ccount = rad30_polymer_counts[0]
-#rad30_Tcount = rad30_polymer_counts[1]
+rad26_polymer_counts = GetPolymerCounts(rad26_data[0],  rad26_data[2], rad26_data[3], rad26_data[4], rad26_data[5], rad26_data[6], rad26_data[7])[0]
+rad26_Ccount = rad26_polymer_counts[0]
+rad26_Tcount = rad26_polymer_counts[1]
+rad30_polymer_counts = GetPolymerCounts(rad30_data[0],  rad30_data[2], rad30_data[3], rad30_data[4], rad30_data[5], rad30_data[6], rad30_data[7])[0]
+rad30_Ccount = rad30_polymer_counts[0]
+rad30_Tcount = rad30_polymer_counts[1]
+
+WT_polymer_countsB = GetPolymerCounts(WT_dataB[0],  WT_dataB[2], WT_dataB[3],  WT_dataB[4], WT_dataB[5], WT_dataB[6], WT_dataB[7])[0]
+WT_CcountB = WT_polymer_countsB[0]
+WT_TcountB = WT_polymer_countsB[1]
+rad16_polymer_countsB = GetPolymerCounts(rad16_dataB[0],  rad16_dataB[2], rad16_dataB[3], rad16_dataB[4] , rad16_dataB[5], rad16_dataB[6], rad16_dataB[7])[0]
+rad16_CcountB = rad16_polymer_countsB[0]
+rad16_TcountB = rad16_polymer_countsB[1]
+#WT_homopolymers = GetPolymerCounts(WT_data[0],  WT_data[2], WT_data[3],  WT_data[4], WT_data[5], WT_data[6], WT_data[7], WT_isolate)[1]
+rad26_polymer_countsB = GetPolymerCounts(rad26_dataB[0],  rad26_dataB[2], rad26_dataB[3], rad26_dataB[4], rad26_dataB[5], rad26_dataB[6], rad26_dataB[7])[0]
+rad26_CcountB = rad26_polymer_countsB[0]
+rad26_TcountB = rad26_polymer_countsB[1]
+rad30_polymer_countsB = GetPolymerCounts(rad30_dataB[0],  rad30_dataB[2], rad30_dataB[3], rad30_dataB[4], rad30_dataB[5], rad30_dataB[6], rad30_dataB[7])[0]
+rad30_CcountB = rad30_polymer_countsB[0]
+rad30_TcountB = rad30_polymer_countsB[1]
 
 f2.close()
 f2a.close()
@@ -1420,10 +1481,7 @@ f10.close()
 f10a.close()
 f10b.close()
 
-MakePentaNucFile(f11, f11a, f11b)
-MakePentaNucFile(f12, f12a, f12b)
-MakePentaNucFile(f13, f13a, f13b)
-MakePentaNucFile(f14, f14a, f14b)
+
 
 f11.close()
 f11a.close()
@@ -1438,20 +1496,20 @@ f14.close()
 f14a.close()
 f14b.close()
 
-WT_isolate_list = {}
-for i1 in range(0, len(WT_isolate)):
+#WT_isolate_list = {}
+#for i1 in range(0, len(WT_isolate)):
 
-    if WT_isolate[i1] not in WT_isolate_list.keys():
-            WT_isolate_list[WT_isolate[i1]] = [(WT_position[i1], 'chr' + str(WT_chromosome[i1]), WT_trinucleotide[i1], WT_mutation[i1], WT_strand[i1], WT_multinucleotide[i1], WT_isolate[i1], WT_position1[i1])]
-    else:
-        WT_isolate_list[WT_isolate[i1]] .append((WT_position[i1], 'chr' + str(WT_chromosome[i1]), WT_trinucleotide[i1], WT_mutation[i1], WT_strand[i1], WT_multinucleotide[i1], WT_isolate[i1], WT_position1[i1]))
-rad16_isolate_list = {}
-for i1 in range(0, len(rad16_isolate)):
+    #if WT_isolate[i1] not in WT_isolate_list.keys():
+            #WT_isolate_list[WT_isolate[i1]] = [(WT_position[i1], 'chr' + str(WT_chromosome[i1]), WT_trinucleotide[i1], WT_mutation[i1], WT_strand[i1], WT_multinucleotide[i1], WT_isolate[i1], WT_position1[i1])]
+    #else:
+        #WT_isolate_list[WT_isolate[i1]] .append((WT_position[i1], 'chr' + str(WT_chromosome[i1]), WT_trinucleotide[i1], WT_mutation[i1], WT_strand[i1], WT_multinucleotide[i1], WT_isolate[i1], WT_position1[i1]))
+#rad16_isolate_list = {}
+#for i1 in range(0, len(rad16_isolate)):
 
-    if rad16_isolate[i1] not in rad16_isolate_list.keys():
-            rad16_isolate_list[rad16_isolate[i1]] = [(rad16_position[i1], 'chr' + str(rad16_chromosome[i1]), rad16_trinucleotide[i1], rad16_mutation[i1], rad16_strand[i1], rad16_multinucleotide[i1], rad16_isolate[i1], rad16_position1[i1])]
-    else:
-        rad16_isolate_list[rad16_isolate[i1]] .append((rad16_position[i1], 'chr' + str(rad16_chromosome[i1]), rad16_trinucleotide[i1], rad16_mutation[i1], rad16_strand[i1], rad16_multinucleotide[i1], rad16_isolate[i1], rad16_position1[i1]))
+    #if rad16_isolate[i1] not in rad16_isolate_list.keys():
+            #rad16_isolate_list[rad16_isolate[i1]] = [(rad16_position[i1], 'chr' + str(rad16_chromosome[i1]), rad16_trinucleotide[i1], rad16_mutation[i1], rad16_strand[i1], rad16_multinucleotide[i1], rad16_isolate[i1], rad16_position1[i1])]
+    #else:
+        #rad16_isolate_list[rad16_isolate[i1]] .append((rad16_position[i1], 'chr' + str(rad16_chromosome[i1]), rad16_trinucleotide[i1], rad16_mutation[i1], rad16_strand[i1], rad16_multinucleotide[i1], rad16_isolate[i1], rad16_position1[i1]))
 
 def NormalizeHomopolymer(sequences,  file):
     homopolymer_dict = {}
@@ -1560,7 +1618,9 @@ def NormalizeHomopolymer(sequences,  file):
                                    #T_dict[polymer_count] = T_dict[polymer_count] + 1
              
                 b = b + length
-         
+    for key in homopolymer_dict.keys():
+        file.write(str(key) + '\t' + str(homopolymer_dict[key]))
+        file.write('\n')
     
     return homopolymer_dict, C_dict, T_dict
 f5 = open('Homopolymer_numbers', 'w+')
@@ -1577,7 +1637,18 @@ f7a = open('rad16_THomopolymer_counts', 'w+')
 f8a = open('rad26_THomopolymer_counts', 'w+')
 f9a = open('rad30_THomopolymer_counts', 'w+')
 
-
+f16 = open('WT_UVB_Homopolymer_counts', 'w+')
+f17 = open('rad16_UVB_Homopolymer_counts', 'w+')
+f18 = open('rad26_UVB_Homopolymer_counts', 'w+')
+f19 = open('rad30_UVB_Homopolymer_counts', 'w+')
+f16a = open('WT_UVB_CHomopolymer_counts', 'w+')
+f17a = open('rad16_UVB_CHomopolymer_counts', 'w+')
+f18a = open('rad26_UVB_CHomopolymer_counts', 'w+')
+f19a = open('rad30_UVB_CHomopolymer_counts', 'w+')
+f16b = open('WT_UVB_THomopolymer_counts', 'w+')
+f17b = open('rad16_UVB_THomopolymer_counts', 'w+')
+f18b = open('rad26_UVB_THomopolymer_counts', 'w+')
+f19b = open('rad30_UVB_THomopolymer_counts', 'w+')
 
 def PrintFrequencies(homopolymer_dict, lengths, file):
     homopolymer_counts = {}
@@ -1643,6 +1714,15 @@ def PrintCTFrequencies(homopolymer_dict, counts, file):
                 file.write(str(key) + ':' + str(homopolymer_counts[key]))
                 file.write('\n')
 
+PrintFrequencies(new_homopolymer_dict[0], WT_lengthsB, f16 )
+PrintFrequencies(new_homopolymer_dict[0], rad16_lengthsB, f17 )
+PrintFrequencies(new_homopolymer_dict[0], rad26_lengthsB, f18 )
+PrintFrequencies(new_homopolymer_dict[0], rad30_lengthsB, f19 )
+f16.close()
+f17.close()
+f18.close()
+f19.close()
+
 PrintCTFrequencies(new_homopolymer_dict[1], WT_Ccount, f6)
 PrintCTFrequencies(new_homopolymer_dict[1], rad16_Ccount, f7)
 PrintCTFrequencies(new_homopolymer_dict[1], rad26_Ccount, f8)
@@ -1651,6 +1731,14 @@ PrintCTFrequencies(new_homopolymer_dict[2], WT_Tcount, f6a)
 PrintCTFrequencies(new_homopolymer_dict[2], rad16_Tcount, f7a)
 PrintCTFrequencies(new_homopolymer_dict[2], rad26_Tcount, f8a)
 PrintCTFrequencies(new_homopolymer_dict[2], rad30_Tcount, f9a)
+PrintCTFrequencies(new_homopolymer_dict[1], WT_CcountB, f16a)
+PrintCTFrequencies(new_homopolymer_dict[1], rad16_CcountB, f17a)
+PrintCTFrequencies(new_homopolymer_dict[1], rad26_CcountB, f18a)
+PrintCTFrequencies(new_homopolymer_dict[1], rad30_CcountB, f19a)
+PrintCTFrequencies(new_homopolymer_dict[2], WT_TcountB, f16b)
+PrintCTFrequencies(new_homopolymer_dict[2], rad16_TcountB, f17b)
+PrintCTFrequencies(new_homopolymer_dict[2], rad26_TcountB, f18b)
+PrintCTFrequencies(new_homopolymer_dict[2], rad30_TcountB, f19b)
 
 f6.close()
 f6a.close()
@@ -1660,6 +1748,16 @@ f8.close()
 f8a.close()
 f9.close()
 f9a.close()
+
+f16a.close()
+f16b.close()
+f17a.close()
+f17b.close()
+f18a.close()
+f18b.close()
+f19a.close()
+f19b.close()
+
 
 def index(tuple):
     return tuple[1]   
