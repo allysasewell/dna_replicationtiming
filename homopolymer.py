@@ -1268,7 +1268,7 @@ def MakePentaNucFile(file_1, file_2, file_3):
             #file_2.write(new_chromosome[i] + '\t' + str(int(new_position[i]) - 1) + '\t'  +str(new_position[i]) + '\t' + new_trinucleotide[i] + '\t' + new_mutation[i] + '\t' + new_strand[i]  + '\t'+ GetReverseComplement(pentanucleotide[i]) + '\t' +str(GetHomopolymerLength(GetReverseComplement(pentanucleotide[i]), new_position1[i], new_position[i], int(len(pentanucleotide[i])/2) + 1)[0]))
             #file_2.write('\n')
         #if new_strand[i] == '+':
-            file_2.write(new_chromosome[i] + '\t' + str(int(new_position[i]) - 1)  + '\t' + str(new_position[i]) + '\t' + new_trinucleotide[i] + '\t' +  new_mutation[i] + '\t' + new_strand[i] + '\t' + pentanucleotide[i] + '\t' + str(GetHomopolymerLength(pentanucleotide[i], new_position1[i], new_position[i], int(len(pentanucleotide[i])/2) + 1)[0]))
+            file_2.write(new_chromosome[i] + '\t' + str(int(new_position[i]) - 1)  + '\t' + str(new_position[i]) + '\t' + new_trinucleotide[i] + '\t' +  new_mutation[i] + '\t' + new_strand[i] + '\t' + pentanucleotide[i] + '\t' + str(GetHomopolymerLength(pentanucleotide[i], new_position1[i], new_position[i], int(len(pentanucleotide[i])/2) + 1)[0]), + '\t' + isolate[i])
             file_2.write('\n')
     for j in range(0, len(pentanucleotide)):
         #if new_strand[j] == '-':
@@ -1281,7 +1281,7 @@ def MakePentaNucFile(file_1, file_2, file_3):
 
     return pentanucleotide, new_strand, new_chromosome, new_position,  new_trinucleotide, new_mutation, new_allele, lengths, new_position1, new_isolate
 
-def GetPolymerCounts(pentanucleotide,  new_chromosome, new_position, new_trinucleotide, new_mutation, new_allele, lengths):# new_isolate):
+def GetPolymerCounts(pentanucleotide,  new_chromosome, new_position, new_trinucleotide, new_mutation, new_allele, lengths, new_isolate):
     homopolymers = {}
     homopolymer_list = {}
     polymer_counts = []
@@ -1299,8 +1299,8 @@ def GetPolymerCounts(pentanucleotide,  new_chromosome, new_position, new_trinucl
             
             if key >= 4:
                 homopolymer_number = homopolymer_number + 1
-                #homopolymers[(new_isolate[i], new_chromosome[i], new_position[i])] = key
-                #homopolymer_list[key[1]] = [(new_chromosome[i], key[0][0], key[0][1])]
+                homopolymers[(new_isolate[i], new_chromosome[i], new_position[i])] = key
+                homopolymer_list[key[1]] = [(new_chromosome[i], key[0][0], key[0][1])]
             print(new_trinucleotide[i])
             print(pentanucleotide[i])
             print(key)
@@ -1320,37 +1320,49 @@ def GetPolymerCounts(pentanucleotide,  new_chromosome, new_position, new_trinucl
             
     return polymer_counts, homopolymers, homopolymer_list
 
-f2 = open("WT_UV_bothruns_Muts_allSNVs_sorted.bed")
-#f2 = open("WT_mutations_sorted_tandem.bed")
-f2a = open("WT_substitutions_sorted_multinucleotide.bed", 'w+')
-#f2a = open("WT_all_sorted_multinucleotide.bed", 'w+')
-f3 = open("rad16_UV_bothruns_Muts_allSNVs_sorted.bed")
-#f3 = open("rad16_mutations_sorted_tandem.bed")
-f3a = open("rad16_substitutions_multinucleotide.bed", 'w+')
-#f3a = open("rad16_all_sorted_multinucleotide.bed", 'w+')
-f4 = open("rad26_UV_bothruns_Muts_allSNVs_sorted.bed")
-f4a = open("rad26_substitutions_multinucleotide.bed", 'w+')
-f10 = open("rad30_UV_bothruns_Muts_allSNVs_sorted.bed")
-f10a = open("rad30_substitutions_multinucleotide.bed", 'w+')
+#f2 = open("WT_UV_bothruns_Muts_allSNVs_sorted.bed")
+f2 = open("WT_mutations_sorted_tandem.bed")
+#f2a = open("WT_substitutions_sorted_multinucleotide.bed", 'w+')
+f2a = open("WT_all_sorted_multinucleotide.bed", 'w+')
+#f3 = open("rad16_UV_bothruns_Muts_allSNVs_sorted.bed")
+f3 = open("rad16_mutations_sorted_tandem.bed")
+#f3a = open("rad16_substitutions_multinucleotide.bed", 'w+')
+f3a = open("rad16_all_sorted_multinucleotide.bed", 'w+')
+#f4 = open("rad26_UV_bothruns_Muts_allSNVs_sorted.bed")
+f4 = open("rad26_mutations_sorted_tandem.bed")
+#f4a = open("rad26_substitutions_multinucleotide.bed", 'w+')
+f4a = open("rad26_all_multinucleotide.bed", 'w+')
+#f10 = open("rad30_UV_bothruns_Muts_allSNVs_sorted.bed")
+#f10a = open("rad30_substitutions_multinucleotide.bed", 'w+')
+f10 = open("rad30_mutations_sorted_tandem.bed")
+f10a = open("rad30_all_multinucleotide.bed", 'w+')
 f2b = open('WT_multinucleotide', 'w+')
 f3b = open('rad16_multinucleotide', 'w+')
 f4b = open('rad26_multinucleotide', 'w+')
 f10b = open('rad30_multinucleotide', 'w+')
-f11 = open("WT_UVB_Muts_allSNVs_sorted.bed")
-f12 = open("rad16_UVB_Muts_allSNVs_sorted.bed")
-f13 = open("rad26_UVB_Muts_allSNVs_sorted.bed")
-f14 = open("rad30_UVB_Muts_allSNVs_sorted.bed")
-f11a = open("WT_UVB_substitutions_sorted_multinucleotide.bed", 'w+')
-f12a = open("rad16_UVB_substitutions_sorted_multinucleotide.bed", 'w+')
-f13a = open("rad26_UVB_substitutions_sorted_multinucleotide.bed", 'w+')
-f14a = open("rad30_UVB_substitutions_sorted_multinucleotide.bed", 'w+')
+#f11 = open("WT_UVB_Muts_allSNVs_sorted.bed")
+f11 = open("WT_UVB_mutations_sorted_tandem.bed")
+#f12 = open("rad16_UVB_Muts_allSNVs_sorted.bed")
+f12 = open("rad16_UVB_mutations_sorted_tandem.bed")
+#f13 = open("rad26_UVB_Muts_allSNVs_sorted.bed")
+f13 = open("rad26_UVB_mutations_sorted_tandem.bed")
+#f14 = open("rad30_UVB_Muts_allSNVs_sorted.bed")
+f14 = open("rad30_UVB_mutations_sorted_tandem.bed")
+#f11a = open("WT_UVB_substitutions_sorted_multinucleotide.bed", 'w+')
+#f12a = open("rad16_UVB_substitutions_sorted_multinucleotide.bed", 'w+')
+#f13a = open("rad26_UVB_substitutions_sorted_multinucleotide.bed", 'w+')
+#f14a = open("rad30_UVB_substitutions_sorted_multinucleotide.bed", 'w+')
+f11a = open("WT_UVB_all_sorted_multinucleotide.bed", 'w+')
+f12a = open("rad16_UVB_all_sorted_multinucleotide.bed", 'w+')
+f13a = open("rad26_UVB_all_sorted_multinucleotide.bed", 'w+')
+f14a = open("rad30_UVB_all_sorted_multinucleotide.bed", 'w+')
 f11b = open('WT_UVB_multinucleotide', 'w+')
 f12b = open('rad16_UVB_multinucleotide', 'w+')
 f13b = open('rad26_UVB_multinucleotide', 'w+')
 f14b = open('rad30_UVB_multinucleotide', 'w+')
 
 WT_data = MakePentaNucFile(f2, f2a, f2b)
-#WT_isolate = WT_data[9]
+WT_isolate = WT_data[9]
 WT_chromosome = WT_data[2]
 WT_position1 = WT_data[8]
 WT_position = WT_data[3]
@@ -1362,7 +1374,7 @@ WT_lengths = WT_data[7]
 
 
 rad16_data = MakePentaNucFile(f3, f3a, f3b)
-#rad16_isolate = rad16_data[9]
+rad16_isolate = rad16_data[9]
 rad16_chromosome = rad16_data[2]
 rad16_position1 = rad16_data[8]
 rad16_position = rad16_data[3]
@@ -1395,7 +1407,7 @@ rad30_lengths = rad30_data[7]
 
 
 WT_dataB = MakePentaNucFile(f11, f11a, f11b)
-#WT_isolateB = WT_dataB[9]
+WT_isolateB = WT_dataB[9]
 WT_chromosomeB = WT_dataB[2]
 WT_position1B = WT_dataB[8]
 WT_positionB = WT_dataB[3]
@@ -1407,7 +1419,7 @@ WT_lengthsB = WT_dataB[7]
 
 
 rad16_dataB = MakePentaNucFile(f12, f12a, f12b)
-#rad16_isolateB = rad16_dataB[9]
+rad16_isolateB = rad16_dataB[9]
 rad16_chromosomeB = rad16_dataB[2]
 rad16_position1B = rad16_dataB[8]
 rad16_positionB = rad16_dataB[3]
@@ -1446,7 +1458,7 @@ WT_Tcount = WT_polymer_counts[1]
 rad16_polymer_counts = GetPolymerCounts(rad16_data[0],  rad16_data[2], rad16_data[3], rad16_data[4] , rad16_data[5], rad16_data[6], rad16_data[7])[0]
 rad16_Ccount = rad16_polymer_counts[0]
 rad16_Tcount = rad16_polymer_counts[1]
-#WT_homopolymers = GetPolymerCounts(WT_data[0],  WT_data[2], WT_data[3],  WT_data[4], WT_data[5], WT_data[6], WT_data[7], WT_isolate)[1]
+WT_homopolymers = GetPolymerCounts(WT_data[0],  WT_data[2], WT_data[3],  WT_data[4], WT_data[5], WT_data[6], WT_data[7], WT_isolate)[1]
 rad26_polymer_counts = GetPolymerCounts(rad26_data[0],  rad26_data[2], rad26_data[3], rad26_data[4], rad26_data[5], rad26_data[6], rad26_data[7])[0]
 rad26_Ccount = rad26_polymer_counts[0]
 rad26_Tcount = rad26_polymer_counts[1]
@@ -1460,7 +1472,7 @@ WT_TcountB = WT_polymer_countsB[1]
 rad16_polymer_countsB = GetPolymerCounts(rad16_dataB[0],  rad16_dataB[2], rad16_dataB[3], rad16_dataB[4] , rad16_dataB[5], rad16_dataB[6], rad16_dataB[7])[0]
 rad16_CcountB = rad16_polymer_countsB[0]
 rad16_TcountB = rad16_polymer_countsB[1]
-#WT_homopolymers = GetPolymerCounts(WT_data[0],  WT_data[2], WT_data[3],  WT_data[4], WT_data[5], WT_data[6], WT_data[7], WT_isolate)[1]
+WT_homopolymers = GetPolymerCounts(WT_data[0],  WT_data[2], WT_data[3],  WT_data[4], WT_data[5], WT_data[6], WT_data[7], WT_isolate)[1]
 rad26_polymer_countsB = GetPolymerCounts(rad26_dataB[0],  rad26_dataB[2], rad26_dataB[3], rad26_dataB[4], rad26_dataB[5], rad26_dataB[6], rad26_dataB[7])[0]
 rad26_CcountB = rad26_polymer_countsB[0]
 rad26_TcountB = rad26_polymer_countsB[1]
@@ -1496,20 +1508,20 @@ f14.close()
 f14a.close()
 f14b.close()
 
-#WT_isolate_list = {}
-#for i1 in range(0, len(WT_isolate)):
+WT_isolate_list = {}
+for i1 in range(0, len(WT_isolate)):
 
-    #if WT_isolate[i1] not in WT_isolate_list.keys():
-            #WT_isolate_list[WT_isolate[i1]] = [(WT_position[i1], 'chr' + str(WT_chromosome[i1]), WT_trinucleotide[i1], WT_mutation[i1], WT_strand[i1], WT_multinucleotide[i1], WT_isolate[i1], WT_position1[i1])]
-    #else:
-        #WT_isolate_list[WT_isolate[i1]] .append((WT_position[i1], 'chr' + str(WT_chromosome[i1]), WT_trinucleotide[i1], WT_mutation[i1], WT_strand[i1], WT_multinucleotide[i1], WT_isolate[i1], WT_position1[i1]))
-#rad16_isolate_list = {}
-#for i1 in range(0, len(rad16_isolate)):
+    if WT_isolate[i1] not in WT_isolate_list.keys():
+            WT_isolate_list[WT_isolate[i1]] = [(WT_position[i1], 'chr' + str(WT_chromosome[i1]), WT_trinucleotide[i1], WT_mutation[i1], WT_strand[i1], WT_multinucleotide[i1], WT_isolate[i1], WT_position1[i1])]
+    else:
+        WT_isolate_list[WT_isolate[i1]] .append((WT_position[i1], 'chr' + str(WT_chromosome[i1]), WT_trinucleotide[i1], WT_mutation[i1], WT_strand[i1], WT_multinucleotide[i1], WT_isolate[i1], WT_position1[i1]))
+rad16_isolate_list = {}
+for i1 in range(0, len(rad16_isolate)):
 
-    #if rad16_isolate[i1] not in rad16_isolate_list.keys():
-            #rad16_isolate_list[rad16_isolate[i1]] = [(rad16_position[i1], 'chr' + str(rad16_chromosome[i1]), rad16_trinucleotide[i1], rad16_mutation[i1], rad16_strand[i1], rad16_multinucleotide[i1], rad16_isolate[i1], rad16_position1[i1])]
-    #else:
-        #rad16_isolate_list[rad16_isolate[i1]] .append((rad16_position[i1], 'chr' + str(rad16_chromosome[i1]), rad16_trinucleotide[i1], rad16_mutation[i1], rad16_strand[i1], rad16_multinucleotide[i1], rad16_isolate[i1], rad16_position1[i1]))
+    if rad16_isolate[i1] not in rad16_isolate_list.keys():
+            rad16_isolate_list[rad16_isolate[i1]] = [(rad16_position[i1], 'chr' + str(rad16_chromosome[i1]), rad16_trinucleotide[i1], rad16_mutation[i1], rad16_strand[i1], rad16_multinucleotide[i1], rad16_isolate[i1], rad16_position1[i1])]
+    else:
+        rad16_isolate_list[rad16_isolate[i1]] .append((rad16_position[i1], 'chr' + str(rad16_chromosome[i1]), rad16_trinucleotide[i1], rad16_mutation[i1], rad16_strand[i1], rad16_multinucleotide[i1], rad16_isolate[i1], rad16_position1[i1]))
 
 def NormalizeHomopolymer(sequences,  file):
     homopolymer_dict = {}
