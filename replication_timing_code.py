@@ -1,3 +1,5 @@
+
+
 def GetReverseComplement(str):
     if str == 'NA':
         return 
@@ -35,11 +37,11 @@ with open("WT_UV_run1_Muts_allSNVs_sorted.bed") as fr1:
     datar1 = fr1.read()
 with open("WT_UV_run2_Muts_allSNVs_sorted.bed") as fr2:
     datar2 = fr2.read()
-with open("clusters16.bed") as c:
+with open("nonclusters16.bed") as c:
     datac = c.read()
 with open("clusters16_UVB.bed") as c1:
     datac1 = c1.read()
-with open("clusters.bed") as w:
+with open("clusters_TDIP.bed") as w:
     dataw = w.read()
 with open("clusters_UVB.bed") as w1:
     dataw1 = w1.read()
@@ -51,22 +53,56 @@ with open("rad26_combined_sorted_tandem.bed") as d1:
     datad1 = d1.read()
 with open("rad30_combined_sorted_tandem.bed") as e1:
     datae1 = e1.read()
-with open("WT_deletions_sorted_tandem.bed") as a2:
+with open("WT_singlebase_deletions_Trinuc.bed") as a2:
     dataa2 = a2.read()
-with open("rad16_deletions_sorted_tandem.bed") as b2:
+with open("rad16_singlebase_deletions_Trinuc.bed") as b2:
     datab2 = b2.read()
-with open("rad26_deletions_sorted_tandem.bed") as d2:
+with open("rad26_singlebase_deletions_Trinuc.bed") as d2:
     datad2 = d2.read()
 with open("rad30_deletions_sorted_tandem.bed") as e2:
     datae2 = e2.read()
-with open("WT_insertions_sorted_tandem.bed") as a3:
+with open("WT_singlebase_insertions.bed") as a3:
     dataa3 = a3.read()
-with open("rad16_insertions_sorted_tandem.bed") as b3:
+with open("rad16_singlebase_insertions.bed") as b3:
     datab3 = b3.read()
-with open("rad26_insertions_sorted_tandem.bed") as d3:
+with open("rad26_singlebase_insertions.bed") as d3:
     datad3 = d3.read()
 with open("rad30_insertions_sorted_tandem.bed") as e3:
     datae3 = e3.read()
+with open("nonLOH_WT_substitutions_UVB.bed") as l1:
+    datal1 = l1.read()
+with open("nonLOH_rad16_substitutions_UVB.bed") as l2:
+    datal2 = l2.read()
+with open("nonLOH_rad26_substitutions_UVB.bed") as l3:
+    datal3 = l3.read()
+with open("nonLOH_rad30_substitutions_UVB.bed") as l4:
+    datal4 = l4.read()
+with open("WT_sorted_homopolymer_singleinsertions_25nuc.bed") as h:
+    datah = h.read()
+with open("rad16_sorted_homopolymer_singleinsertions_25nuc.bed") as h16:
+    datah16 = h16.read()
+with open("rad26_sorted_homopolymer_singleinsertions_25nuc.bed") as h26:
+    datah26 = h26.read()
+with open("WT_sorted_nonhomopolymer_singleinsertions_25nuc.bed") as n:
+    datan = n.read()
+with open("rad16_sorted_nonhomopolymer_singleinsertions_25nuc.bed") as n16:
+    datan16 = n16.read()
+with open("rad26_sorted_nonhomopolymer_singleinsertions_25nuc.bed") as n26:
+    datan26 = n26.read()
+with open("UVB_WT_sorted_homopolymer_singleinsertions_25nuc.bed") as hB:
+    datahB = hB.read()
+with open("UVB_rad16_sorted_homopolymer_singleinsertions_25nuc.bed") as h16B:
+    datah16B = h16B.read()
+with open("UVB_rad26_sorted_homopolymer_singleinsertions_25nuc.bed") as h26B:
+    datah26B = h26B.read()
+with open("UVB_WT_sorted_nonhomopolymer_singleinsertions_25nuc.bed") as nB:
+    datanB = nB.read()
+with open("UVB_rad16_sorted_nonhomopolymer_singleinsertions_25nuc.bed") as n16B:
+    datan16B = n16B.read()
+with open("UVB_rad26_sorted_nonhomopolymer_singleinsertions_25nuc.bed") as n26B:
+    datan26B = n26B.read()
+
+
 
 #with open("GSM2109562_0hr_UV2_A1_dipy_bkgd.bed") as a1:
     #dataa1 = a1.read()
@@ -131,6 +167,22 @@ chromosomea3 = getChromosome(dataa3)
 chromosomeb3 = getChromosome(datab3)
 chromosomed3 = getChromosome(datad3)
 chromosomee3 = getChromosome(datae3)
+chromosomel1 = getChromosome(datal1)
+chromosomel2 = getChromosome(datal2)
+chromosomel3 = getChromosome(datal3)
+chromosomel4 = getChromosome(datal4)
+chromosomeh = getChromosome(datah)
+chromosomeh16 = getChromosome(datah16)
+chromosomeh26 = getChromosome(datah26)
+chromosomen = getChromosome(datan)
+chromosomen16 = getChromosome(datan16)
+chromosomen26 = getChromosome(datan26)
+chromosomehB = getChromosome(datahB)
+chromosomeh16B = getChromosome(datah16B)
+chromosomeh26B = getChromosome(datah26B)
+chromosomenB = getChromosome(datanB)
+chromosomen16B = getChromosome(datan16B)
+chromosomen26B = getChromosome(datan26B)
 
 #chromosomea2 = getChromosome(dataa2)
 #chromosomea3 = getChromosome(dataa3)
@@ -176,6 +228,22 @@ position1_a3 = getPosition1(dataa3)
 position1_b3 = getPosition1(datab3)
 position1_d3 = getPosition1(datad3)
 position1_e3 = getPosition1(datae3)
+position1_l1 = getPosition1(datal1)
+position1_l2 = getPosition1(datal2)
+position1_l3 = getPosition1(datal3)
+position1_l4 = getPosition1(datal4)
+position1_h = getPosition1(datah)
+position1_h16 = getPosition1(datah16)
+position1_h26 = getPosition1(datah26)
+position1_n = getPosition1(datan)
+position1_n16 = getPosition1(datan16)
+position1_n26 = getPosition1(datan26)
+position1_hB = getPosition1(datahB)
+position1_h16B = getPosition1(datah16B)
+position1_h26B = getPosition1(datah26B)
+position1_nB = getPosition1(datanB)
+position1_n16B = getPosition1(datan16B)
+position1_n26B = getPosition1(datan26B)
 #position1_a2 = getPosition1(dataa2)
 #position1_a3 = getPosition1(dataa3)
 #position1_j60 = getPosition1(dataj60)
@@ -221,6 +289,22 @@ position2_a3 = getPosition2(dataa3)
 position2_b3 = getPosition2(datab3)
 position2_d3 = getPosition2(datad3)
 position2_e3 = getPosition2(datae3)
+position2_l1 = getPosition2(datal1)
+position2_l2 = getPosition2(datal2)
+position2_l3 = getPosition2(datal3)
+position2_l4 = getPosition2(datal4)
+position2_h = getPosition2(datah)
+position2_h16 = getPosition2(datah16)
+position2_h26 = getPosition2(datah26)
+position2_n = getPosition2(datan)
+position2_n16 = getPosition2(datan16)
+position2_n26 = getPosition2(datan26)
+position2_hB = getPosition2(datahB)
+position2_h16B = getPosition2(datah16B)
+position2_h26B = getPosition2(datah26B)
+position2_nB = getPosition2(datanB)
+position2_n16B = getPosition2(datan16B)
+position2_n26B = getPosition2(datan26B)
 #position2_a2 = getPosition2(dataa2)
 #position2_a3 = getPosition2(dataa3)
 #position2_j60 = getPosition2(dataj60)
@@ -266,6 +350,50 @@ trinucleotidea3 = getTrinucleotide(dataa3)
 trinucleotideb3 = getTrinucleotide(datab3)
 trinucleotided3 = getTrinucleotide(datad3)
 trinucleotidee3 = getTrinucleotide(datae3)
+trinucleotidel1 = getTrinucleotide(datal1)
+trinucleotidel2 = getTrinucleotide(datal2)
+trinucleotidel3 = getTrinucleotide(datal3)
+trinucleotidel4 = getTrinucleotide(datal4)
+trinucleotideh = getTrinucleotide(datah)
+trinucleotideh16 = getTrinucleotide(datah16)
+trinucleotideh26 = getTrinucleotide(datah26)
+trinucleotiden = getTrinucleotide(datan)
+trinucleotiden16 = getTrinucleotide(datan16)
+trinucleotiden26 = getTrinucleotide(datan26)
+trinucleotidehB = getTrinucleotide(datahB)
+trinucleotideh16B = getTrinucleotide(datah16B)
+trinucleotideh26B = getTrinucleotide(datah26B)
+trinucleotidenB = getTrinucleotide(datanB)
+trinucleotiden16B = getTrinucleotide(datan16B)
+trinucleotiden26B = getTrinucleotide(datan26B)
+
+
+
+def getStrand(data):
+    lines = [s.strip().split() for s in data.splitlines()]   
+    strand = []
+    
+    for s in range (0, len(lines)):
+        #if lines[n][0] != "chrXII" or (lines[n][2] < 451430) or (lines[n][2] > 468920 and lines[n][2] < 489928) or (lines[n][2] > 490455):
+        strand.append(lines[s][5])
+    return strand
+
+
+stranda3 = getStrand(dataa3)
+strandb3 = getStrand(datab3)
+strandd3 = getStrand(datad3)  
+strandh = getStrand(datah)
+strandh16 = getStrand(datah16)
+strandh26 = getStrand(datah26)
+strandn = getStrand(datan)
+strandn16 = getStrand(datan16)
+strandn26 = getStrand(datan26)
+strandhB = getStrand(datahB)
+strandh16B = getStrand(datah16B)
+strandh26B = getStrand(datah26B)
+strandnB = getStrand(datanB)
+strandn16B = getStrand(datan16B)
+strandn26B = getStrand(datan26B)    
 
 
 def getCounts(data):
@@ -533,6 +661,22 @@ timesa3 = AssignTimes(chromosomea3, position2_a3, start, scores)
 timesb3 = AssignTimes(chromosomeb3, position2_b3, start, scores)
 timesd3 = AssignTimes(chromosomed3, position2_d3, start, scores)
 timese3 = AssignTimes(chromosomee3, position2_e3, start, scores)
+timesl1 = AssignTimes(chromosomel1, position2_l1, start, scores)
+timesl2 = AssignTimes(chromosomel2, position2_l2, start, scores)
+timesl3 = AssignTimes(chromosomel3, position2_l3, start, scores)
+timesl4 = AssignTimes(chromosomel4, position2_l4, start, scores)
+timesh = AssignTimes(chromosomeh, position2_h, start, scores)
+timesh16 = AssignTimes(chromosomeh16, position2_h16, start, scores)
+timesh26 = AssignTimes(chromosomeh26, position2_h26, start, scores)
+timesn = AssignTimes(chromosomen, position2_n, start, scores)
+timesn16 = AssignTimes(chromosomen16, position2_n16, start, scores)
+timesn26 = AssignTimes(chromosomen26, position2_n26, start, scores)
+timeshB = AssignTimes(chromosomehB, position2_hB, start, scores)
+timesh16B = AssignTimes(chromosomeh16B, position2_h16B, start, scores)
+timesh26B = AssignTimes(chromosomeh26B, position2_h26B, start, scores)
+timesnB = AssignTimes(chromosomenB, position2_nB, start, scores)
+timesn16B = AssignTimes(chromosomen16B, position2_n16B, start, scores)
+timesn26B = AssignTimes(chromosomen26B, position2_n26B, start, scores)
 #timesa2 = AssignTimes(chromosomea2, position2_a2, start, scores)
 #timesa3 = AssignTimes(chromosomea3, position2_a3, start, scores)
 #timesj60 = AssignTimes(chromosomej60, position2_j60, start, scores)
@@ -681,7 +825,7 @@ muts_r2 = CountMutations("WT_r2_mutations", timesr2, chromosomer2, 'chrII')
 early_mut_r2 = muts_r2[0]
 middle_mut_r2 = muts_r2[1]
 late_mut_r2 = muts_r2[2]
-mutsc = CountMutations("complex_rad16_mutations", timesc, chromosomec, 'chrVI')
+mutsc = CountMutations("complex_rad16_mutations_TDIP", timesc, chromosomec, 'chrVI')
 early_mutc = mutsc[0]
 middle_mutc = mutsc[1]
 late_mutc = mutsc[2]
@@ -689,7 +833,7 @@ mutsc1 = CountMutations("complex_rad16_UVB_mutations", timesc1, chromosomec1, 'c
 early_mutc1 = mutsc1[0]
 middle_mutc1 = mutsc1[1]
 late_mutc1 = mutsc1[2]
-mutsw = CountMutations("complex_mutations", timesw, chromosomew, 'chrVI')
+mutsw = CountMutations("complex_mutations_TDIP", timesw, chromosomew, 'chrVI')
 early_mutw = mutsw[0]
 middle_mutw = mutsw[1]
 late_mutw = mutsw[2]
@@ -745,10 +889,70 @@ muts_e3 = CountMutations("rad30_insertions", timese3, chromosomee3, 'chrVI')
 early_mut_e3 = muts_e3[0]
 middle_mut_e3 = muts_e3[1]
 late_mut_e3 = muts_e3[2]
-#muts_a2 = CountMutations("WT_a2_mutations", timesa2 chromosomea2, 'chrVI')
-#early_mut_a2 = muts_a2[0]
-#middle_mut_a2 = muts_a2[1]
-#late_mut_a2 = muts_a2[2]
+muts_l1 = CountMutations("WT_nonLOH_substitutions_UVB", timesl1, chromosomel1, 'chrVI')
+early_mut_l1 = muts_l1[0]
+middle_mut_l1 = muts_l1[1]
+late_mut_l1 = muts_l1[2]
+muts_l2 = CountMutations("rad16_nonLOH_substitutions_UVB", timesl2, chromosomel2, 'chrVI')
+early_mut_l2 = muts_l2[0]
+middle_mut_l2 = muts_l2[1]
+late_mut_l2 = muts_l2[2]
+muts_l3 = CountMutations("rad26_nonLOH_substitutions_UVB", timesl3, chromosomel3, 'chrVI')
+early_mut_l3 = muts_l3[0]
+middle_mut_l3 = muts_l3[1]
+late_mut_l3 = muts_l3[2]
+muts_l4 = CountMutations("rad30_nonLOH_substitutions_UVB", timesl4, chromosomel4, 'chrVI')
+early_mut_l4 = muts_l4[0]
+middle_mut_l4 = muts_l4[1]
+late_mut_l4 = muts_l4[2]
+mutsh = CountMutations("singleinsertion_homopolymer", timesh, chromosomeh, 'chrVI')
+early_mut_h = mutsh[0]
+middle_mut_h = mutsh[1]
+late_mut_h = mutsh[2]
+muts_h16 = CountMutations("singleinsertion_rad16_homopolymer", timesh16, chromosomeh16, 'chrVI')
+early_mut_h16 = muts_h16[0]
+middle_mut_h16 = muts_h16[1]
+late_mut_h16 = muts_h16[2]
+muts_h26 = CountMutations("singleinsertion_rad26_homopolymer", timesh26, chromosomeh26, 'chrVI')
+early_mut_h26 = muts_h26[0]
+middle_mut_h26 = muts_h26[1]
+late_mut_h26 = muts_h26[2]
+mutsn = CountMutations("singleinsertion_nonhomopolymer", timesn, chromosomen, 'chrVI')
+early_mut_n = mutsn[0]
+middle_mut_n = mutsn[1]
+late_mut_n = mutsn[2]
+muts_n16 = CountMutations("singleinsertion_rad16_nonhomopolymer", timesn16, chromosomen16, 'chrVI')
+early_mut_n16 = muts_n16[0]
+middle_mut_n16 = muts_n16[1]
+late_mut_n16 = muts_n16[2]
+muts_n26 = CountMutations("singleinsertion_rad26_nonhomopolymer", timesn26, chromosomen26, 'chrVI')
+early_mut_n26 = muts_n26[0]
+middle_mut_n26 = muts_n26[1]
+late_mut_n26 = muts_n26[2]
+muts_hB = CountMutations("singleinsertion_UVB_homopolymer", timeshB, chromosomehB, 'chrVI')
+early_mut_hB = muts_hB[0]
+middle_mut_hB = muts_hB[1]
+late_mut_hB = muts_hB[2]
+muts_h16B = CountMutations("singleinsertion_UVB_rad16_homopolymer", timesh16B, chromosomeh16B, 'chrVI')
+early_mut_h16B = muts_h16B[0]
+middle_mut_h16B = muts_h16B[1]
+late_mut_h16B = muts_h16B[2]
+muts_h26B = CountMutations("singleinsertion_UVB_rad26_homopolymer", timesh26B, chromosomeh26B, 'chrVI')
+early_mut_h26B = muts_h26B[0]
+middle_mut_h26B = muts_h26B[1]
+late_mut_h26B = muts_h26B[2]
+muts_nB = CountMutations("singleinsertion_UVB_nonhomopolymer", timesnB, chromosomenB, 'chrVI')
+early_mut_nB = muts_nB[0]
+middle_mut_nB = muts_nB[1]
+late_mut_nB = muts_nB[2]
+muts_n16B = CountMutations("singleinsertion _UVB_rad16_nonhomopolymer", timesn16B, chromosomen16B, 'chrVI')
+early_mut_n16B = muts_n16B[0]
+middle_mut_n16B = muts_n16B[1]
+late_mut_n16B = muts_n16B[2]
+muts_n26B = CountMutations("singleinsertion_UVB_rad26_nonhomopolymer", timesn26B, chromosomen26B, 'chrVI')
+early_mut_n26B = muts_n26B[0]
+middle_mut_n26B = muts_n26B[1]
+late_mut_n26B = muts_n26B[2]
 #muts_a3 = CountMutations("WT_a3_mutations", timesa3, chromosomea3, 'chrVI')
 #early_mut_a3 = muts_a3[0]
 #middle_mut_a3 = muts_a3[1]
@@ -824,7 +1028,10 @@ def AverageTimes(muts, file):
     sum9 = 0
     for mut9 in late3_mut.keys():
         sum9 = sum9 + late3_mut[mut9]
-    average9 = sum9/len(late3_mut)
+    if sum9 != 0:
+        average9 = sum9/len(late3_mut)
+    else:
+        average9 = 0
     f = open(file, 'w+')
     f.write('Bin1: ' + str(average1))
     f.write('\n')
@@ -876,6 +1083,22 @@ AverageTimes(mutsc, 'average_times_rad16_complex')
 AverageTimes(mutsc1, 'average_times_rad16_complex_UVB')
 AverageTimes(mutsw, 'average_times_complex')
 AverageTimes(mutsw1, 'average_times_complex_UVB')
+AverageTimes(muts_l1, 'average_times_nonLOH_subs_UVB' )
+AverageTimes(muts_l2, 'average_times_rad16_nonLOH_subs_UVB' )
+AverageTimes(muts_l3, 'average_times_rad26_nonLOH_subs_UVB' )
+AverageTimes(muts_l4, 'average_times_rad30_nonLOH_subs_UVB' )
+#AverageTimes(mutsh, 'average_times_singledeletion_homopolymer' )
+# #AverageTimes(muts_h16, 'average_times_singledeletion_rad16_homopolymer' )
+# AverageTimes(muts_h26, 'average_times_singledeletion_rad26_homopolymer' )
+# AverageTimes(mutsn, 'average_times_singledeletion_nonhomopolymer' )
+# AverageTimes(muts_n16, 'average_times_singledeletion_rad16_nonhomopolymer' )
+# AverageTimes(muts_n26, 'average_times_singledeletion_rad26_nonhomopolymer' )
+# AverageTimes(muts_hB, 'average_times_singledeletion_UVB_homopolymer' )
+# AverageTimes(muts_h16B, 'average_times_singledeletion_UVB_rad16_homopolymer' )
+# AverageTimes(muts_h26B, 'average_times_singledeletion_UVB_rad26_homopolymer' )
+# AverageTimes(muts_nB, 'average_times_singledeletion_UVB__nonhomopolymer' )
+# AverageTimes(muts_n16B, 'average_times_singledeletion_UVB_rad16_nonhomopolymer' )
+# AverageTimes(muts_n26B, 'average_times_singledeletion_UVB_rad26_nonhomopolymer' )
 #AverageTimes(muts_a1, 'average_times_indels')
 #AverageTimes(muts_b1, 'average_times_indels_rad16')
 #AverageTimes(muts_d1, 'average_times_indels_rad26')
@@ -941,7 +1164,7 @@ AddTimeColumn("Rad26_UVB_allSNVs_sorted.bed", "early_mutations_rad26UVB.bed", "m
 AddTimeColumn("Rad30_UVB_allSNVs_sorted.bed", "early_mutations_rad30UVB.bed", "middle_mutations_rad30UVB.bed", "late_mutations_rad30UVB.bed",dataB30, timesB30, early_mut_B30, middle_mut_B30, late_mut_B30)
 AddTimeColumn("WT_UV_run1_allSNVs_sorted.bed", "early_mutations_r1.bed", "middle_mutations_r1.bed", "late_mutations_r1.bed",datar1, timesr1, early_mut_r1, middle_mut_r1, late_mut_r1 )
 AddTimeColumn("WT_UV_run2_allSNVs_sorted.bed", "early_mutations_r2.bed", "middle_mutations_r2.bed", "late_mutations_r2.bed",datar2, timesr2, early_mut_r2, middle_mut_r2, late_mut_r2 )
-AddTimeColumn("clusters_rad16_allSNVs_sorted.bed", "clusters_rad16_early_mutations.bed", "clusters_rad16_middle_mutations.bed", "clusters_rad16_late_mutations.bed",datac, timesc, early_mutc, middle_mutc, late_mutc)
+AddTimeColumn("nonclusters_rad16_allSNVs_sorted.bed", "nonclusters_rad16_early_mutations.bed", "nonclusters_rad16_middle_mutations.bed", "nonclusters_rad16_late_mutations.bed",datac, timesc, early_mutc, middle_mutc, late_mutc)
 AddTimeColumn("clusters_rad16_UVB_allSNVs_sorted.bed", "clusters_rad16_early_mutations_UVB.bed", "clusters_rad16_middle_mutations_UVB.bed", "clusters_rad16_late_mutations_UVB.bed",datac1, timesc1, early_mutc1, middle_mutc1, late_mutc1)
 AddTimeColumn("clusters_allSNVs_sorted.bed", "clusters_early_mutations.bed", "clusters_middle_mutations.bed", "clusters_late_mutations.bed",dataw, timesw, early_mutw, middle_mutw, late_mutw)
 AddTimeColumn("clusters_UVB_allSNVs_sorted.bed", "clusters_early_mutations_UVB.bed", "clusters_middle_mutations_UVB.bed", "clusters_late_mutations_UVB.bed",dataw1, timesw1, early_mutw1, middle_mutw1, late_mutw1)
@@ -957,6 +1180,22 @@ AddTimeColumn("WT_insertions.bed", "early_insertions.bed", "middle_insertions.be
 AddTimeColumn("rad16_insertions.bed", "early_insertions_rad16.bed", "middle_insertions_rad16.bed", "late_insertions_rad16.bed",datab3, timesb3, early_mut_b3, middle_mut_b3, late_mut_b3)
 AddTimeColumn("rad26_insertions.bed", "early_insertions_rad26.bed", "middle_insertions_rad26.bed", "late_insertions_rad26.bed",datad3, timesd3, early_mut_d3, middle_mut_d3, late_mut_d3)
 AddTimeColumn("rad30_insertions.bed", "early_insertions_rad30.bed", "middle_insertions_rad30.bed", "late_insertions_rad30.bed",datae3, timese3, early_mut_e3, middle_mut_e3, late_mut_e3)
+AddTimeColumn("nonLOH_subs_UVB.bed", "early_nonLOH_subs_UVB.bed", "middle_nonLOH_subs_UVB.bed", "late_nonLOH_subs_UVB.bed",datal1, timesl1, early_mut_l1, middle_mut_l1, late_mut_l1 )
+AddTimeColumn("nonLOH_rad16_subs_UVB.bed", "early_nonLOH_rad16_subs_UVB.bed", "middle_nonLOH_rad16_subs_UVB.bed", "late_nonLOH_rad16_subs_UVB.bed",datal2, timesl2, early_mut_l2, middle_mut_l2, late_mut_l2 )
+AddTimeColumn("nonLOH_rad26_subs_UVB.bed", "early_nonLOH_rad26_subs_UVB.bed", "middle_nonLOH_rad26_subs_UVB.bed", "late_nonLOH_rad26_subs_UVB.bed",datal3, timesl3, early_mut_l3, middle_mut_l3, late_mut_l3 )
+AddTimeColumn("nonLOH_rad30_subs_UVB.bed", "early_nonLOH_rad30_subs_UVB.bed", "middle_nonLOH_rad30_subs_UVB.bed", "late_nonLOH_rad30_subs_UVB.bed",datal4, timesl4, early_mut_l4, middle_mut_l4, late_mut_l4 )
+AddTimeColumn("singledeletion_homopolymer.bed", "early_singledeletion_homopolymer.bed", "middle_singledeletion_homopolymer.bed", "late_singledeletion_homopolymer.bed",datah, timesh, early_mut_h, middle_mut_h, late_mut_h )
+AddTimeColumn("singledeletion_rad16_homopolymer.bed", "early_singledeletion_rad16_homopolymer.bed", "middle_singledeletion_rad16_homopolymer.bed", "late_singledeletion_rad16_homopolymer.bed",datah16, timesh16, early_mut_h16, middle_mut_h16, late_mut_h16 )
+AddTimeColumn("singledeletion_rad26_homopolymer.bed", "early_singledeletion_rad26_homopolymer.bed", "middle_singledeletion_rad26_homopolymer.bed", "late_singledeletion_rad26_homopolymer.bed",datah26, timesh26, early_mut_h26, middle_mut_h26, late_mut_h26 )
+AddTimeColumn("singledeletion_nonhomopolymer.bed", "early_singledeletion_nonhomopolymer.bed", "middle_singledeletion_nonhomopolymer.bed", "late_singledeletion_nonhomopolymer.bed",datan, timesn, early_mut_n, middle_mut_n, late_mut_n )
+AddTimeColumn("singledeletion_rad16_nonhomopolymer.bed", "early_singledeletion_rad16_nonhomopolymer.bed", "middle_singledeletion_rad16_nonhomopolymer.bed", "late_singledeletion_rad16_nonhomopolymer.bed",datan16, timesn16, early_mut_n16, middle_mut_n16, late_mut_n16)
+AddTimeColumn("singledeletion_rad26_nonhomopolymer.bed", "early_singledeletion_rad26_nonhomopolymer.bed", "middle_singledeletion_rad26_nonhomopolymer.bed", "late_singledeletion_rad26_nonhomopolymer.bed",datan26, timesn26, early_mut_n26, middle_mut_n26, late_mut_n26)
+AddTimeColumn("singledeletion_homopolymer_UVB.bed", "early_singledeletion_homopolymer_UVB.bed", "middle_singledeletion_homopolymer_UVB.bed", "late_singledeletion_homopolymer_UVB.bed",datahB, timeshB, early_mut_hB, middle_mut_hB, late_mut_hB )
+AddTimeColumn("singledeletion_rad16_homopolymer_UVB.bed", "early_singledeletion_rad16_homopolymer_UVB.bed", "middle_singledeletion_rad16_homopolymer_UVB.bed", "late_singledeletion_rad16_homopolymer_UVB.bed",datah16B, timesh16B, early_mut_h16B, middle_mut_h16B, late_mut_h16B )
+AddTimeColumn("singledeletion_rad26_homopolymer_UVB.bed", "early_singledeletion_rad26_homopolymer_UVB.bed", "middle_singledeletion_rad26_homopolymer_UVB.bed", "late_singledeletion_rad26_homopolymer_UVB.bed",datah26B, timesh26B, early_mut_h26B, middle_mut_h26B, late_mut_h26B )
+AddTimeColumn("singledeletion_nonhomopolymer_UVB.bed", "early_singledeletion_nonhomopolymer_UVB.bed", "middle_singledeletion_nonhomopolymer_UVB.bed", "late_singledeletion_nonhomopolymer_UVB.bed",datanB, timesnB, early_mut_nB, middle_mut_nB, late_mut_nB )
+AddTimeColumn("singledeletion_rad16_nonhomopolymer_UVB.bed", "early_singledeletion_rad16_nonhomopolymer_UVB.bed", "middle_singledeletion_rad16_nonhomopolymer_UVB.bed", "late_singledeletion_rad16_nonhomopolymer_UVB.bed",datan16B, timesn16B, early_mut_n16B, middle_mut_n16B, late_mut_n16B)
+AddTimeColumn("singledeletion_rad26_nonhomopolymer_UVB.bed", "early_singledeletion_rad26_nonhomopolymer_UVB.bed", "middle_singledeletion_rad26_nonhomopolymer_UVB.bed", "late_singledeletion_rad26_nonhomopolymer_UVB.bed",datan26B, timesn26B, early_mut_n26B, middle_mut_n26B, late_mut_n26B)
 #AddTimeColumn("UV2_A1_dipy_bkgd.bed", "early_mutations_UV2_A1_dipy_bkgd.bed", "middle_mutations_UV2_A1_dipy_bkgd.bed", "late_mutations_UV2_A1_dipy_bkgd.bed",dataa1, timesa1, early_mut_a1, middle_mut_a1, late_mut_a1 )
 #AddTimeColumn("UV_0hr_A2_dipy_bkgd.bed", "early_mutations_UV_0hr_A2_dipy_bkgd.bed", "middle_mutations_UV_0hr_A2_dipy_bkgd.bed", "late_mutations_UV_0hr_A2_dipy_bkgd.bed",dataa2, timesa2, early_mut_a2, middle_mut_a2, late_mut_a2 )
 #AddTimeColumn("UV90J_A3_dipy_bkgd.bed", "early_mutations_UV90J_A3_dipy_bkgd.bed", "middle_mutations_UV90J_A3_dipy_bkgd.bed", "late_mutations_UV90J_A3_dipy_bkgd.bed",dataa3, timesa3, early_mut_a3, middle_mut_a3, late_mut_a3 )
@@ -967,8 +1206,142 @@ AddTimeColumn("rad30_insertions.bed", "early_insertions_rad30.bed", "middle_inse
 #AddTimeColumn("rad26_0hr_rep2_dipy_bkgd.bed", "early_mutations_rad26_0hr_rep2_dipy_bkgd.bed", "middle_mutations_rad26_0hr_rep2_dipy_bkgd.bed", "late_mutations_rad26_0hr_rep2_dipy_bkgd.bed",dataa_r26, timesa_r26, early_mut_ar26, middle_mut_ar26, late_mut_ar26)
 #AddTimeColumn("rad26_2hr_rep2_dipy_bk.bed", "early_mutations_rad26_2hr_rep2_dipy_bk.bed", "middle_mutations_rad26_2hr_rep2_dipy_bk.bed", "late_mutations_rad26_2hr_rep2_dipy_bk.bed",dataa3_r26, timesa3_r26, early_mut_a3r26, middle_mut_a3r26, late_mut_a3r26 )
 
+dinucleotidea3 = []
+for i in range(0, len(trinucleotidea3)):
+        if stranda3 == '-':
+            dinucleotidea3.append(trinucleotidea3[i][1:3])
+        else:
+            dinucleotidea3.append(trinucleotidea3[i][0:2])
+
+dinucleotideb3 = []
+for j in range(0, len(trinucleotideb3)):
+        if strandb3 == '-':
+            dinucleotideb3.append(trinucleotideb3[j][1:3])
+        else:
+            dinucleotideb3.append(trinucleotideb3[j][0:2])
+
+
+dinucleotided3 = []
+for k in range(0, len(trinucleotided3)):
+        if strandb3 == '-':
+            dinucleotided3.append(trinucleotided3[k][1:3])
+        else:
+            dinucleotided3.append(trinucleotided3[k][0:2])
+
+
+dinucleotideh = []
+for i in range(0, len(trinucleotideh)):
+        if strandh == '-':
+            dinucleotideh.append(trinucleotideh[i][1:3])
+        else:
+            dinucleotideh.append(trinucleotideh[i][0:2])
+
+dinucleotideh16 = []
+for j in range(0, len(trinucleotideh16)):
+        if strandh16 == '-':
+            dinucleotideh16.append(trinucleotideh16[j][1:3])
+        else:
+            dinucleotideh16.append(trinucleotideh16[j][0:2])
+
+
+dinucleotideh26 = []
+for k in range(0, len(trinucleotideh26)):
+        if strandh26 == '-':
+            dinucleotideh26.append(trinucleotideh26[k][1:3])
+        else:
+            dinucleotideh26.append(trinucleotideh26[k][0:2])
+
+
+
+
+dinucleotiden = []
+for i in range(0, len(trinucleotiden)):
+        if strandn == '-':
+            dinucleotiden.append(trinucleotiden[i][1:3])
+        else:
+            dinucleotiden.append(trinucleotiden[i][0:2])
+
+dinucleotiden16 = []
+for j in range(0, len(trinucleotiden16)):
+        if strandn16 == '-':
+            dinucleotiden16.append(trinucleotiden16[j][1:3])
+        else:
+            dinucleotiden16.append(trinucleotiden16[j][0:2])
+
+
+dinucleotiden26 = []
+for k in range(0, len(trinucleotiden26)):
+        if strandn26 == '-':
+            dinucleotiden26.append(trinucleotiden26[k][1:3])
+        else:
+            dinucleotiden26.append(trinucleotiden26[k][0:2])
+
+
+dinucleotidehB = []
+for i in range(0, len(trinucleotidehB)):
+        if strandhB == '-':
+            dinucleotidehB.append(trinucleotidehB[i][1:3])
+        else:
+            dinucleotidehB.append(trinucleotidehB[i][0:2])
+
+dinucleotideh16B = []
+for j in range(0, len(trinucleotideh16B)):
+        if strandh16B == '-':
+            dinucleotideh16B.append(trinucleotideh16B[j][1:3])
+        else:
+            dinucleotideh16B.append(trinucleotideh16B[j][0:2])
+
+
+dinucleotideh26B = []
+for k in range(0, len(trinucleotideh26B)):
+        if strandh26B == '-':
+            dinucleotideh26B.append(trinucleotideh26B[k][1:3])
+        else:
+            dinucleotideh26B.append(trinucleotideh26B[k][0:2])
+
+
+
+
+dinucleotidenB = []
+for i in range(0, len(trinucleotidenB)):
+        if strandnB == '-':
+            dinucleotidenB.append(trinucleotidenB[i][1:3])
+        else:
+            dinucleotidenB.append(trinucleotidenB[i][0:2])
+
+dinucleotiden16B = []
+for j in range(0, len(trinucleotiden16B)):
+        if strandn16B == '-':
+            dinucleotiden16B.append(trinucleotiden16B[j][1:3])
+        else:
+            dinucleotiden16B.append(trinucleotiden16B[j][0:2])
+
+
+dinucleotiden26B = []
+for k in range(0, len(trinucleotiden26B)):
+        if strandn26B == '-':
+            dinucleotiden26B.append(trinucleotiden26B[k][1:3])
+        else:
+            dinucleotiden26B.append(trinucleotiden26B[k][0:2])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #Calculates number of mutations for each codon
 def MutationRate(file1, trinucleotides, muts, file2):
+
+
     mutationRates = {}
     base_percentages = {}
     mutationRates_early = {}
@@ -994,25 +1367,26 @@ def MutationRate(file1, trinucleotides, muts, file2):
     for key in mutationRates.keys():
         for t in range (0, len(trinucleotides)):
             if trinucleotides[t][1] == 'C' or trinucleotides[t][1] == 'T':
-                if trinucleotides[t] == key and t in muts[0].keys():
-                    mutationRates_early[key] = mutationRates_early[key] + 1
-                    base_percentages_early[key] = (mutationRates_early[key] / len(muts[0].keys()))
-                    mutationRates[key] = mutationRates[key] + 1
-                    base_percentages[key] = (mutationRates[key] / len(trinucleotides))
-                if trinucleotides[t] == key and t in muts[1].keys():
-                    mutationRates_middle[key] = mutationRates_middle[key] + 1
-                    base_percentages_middle[key] = (mutationRates_middle[key] / len(muts[1].keys()))
-                    mutationRates[key] = mutationRates[key] + 1
-                    base_percentages[key] = (mutationRates[key] / len(trinucleotides))
-                if trinucleotides[t] == key and t in muts[2].keys():
-                    mutationRates_late[key] = mutationRates_late[key] + 1
-                    base_percentages_late[key] = (mutationRates_late[key] / len(muts[2].keys()))
-                    mutationRates[key] = mutationRates[key] + 1
-                    base_percentages[key] = (mutationRates[key] / len(trinucleotides))
+                if t in muts[0].keys():
+                    if trinucleotides[t] == key:
+                        mutationRates_early[key] = mutationRates_early[key] + 1
+                        base_percentages_early[key] = (mutationRates_early[key] / len(muts[0].keys()))
+                        mutationRates[key] = mutationRates[key] + 1
+                        base_percentages[key] = (mutationRates[key] / len(trinucleotides))
+                if t in muts[1].keys():
+                    if trinucleotides[t] == key:
+                        mutationRates_middle[key] = mutationRates_middle[key] + 1
+                        base_percentages_middle[key] = (mutationRates_middle[key] / len(muts[1].keys()))
+                        mutationRates[key] = mutationRates[key] + 1
+                        base_percentages[key] = (mutationRates[key] / len(trinucleotides))
+                if t in muts[2].keys():
+                    if trinucleotides[t] == key:
+                        mutationRates_late[key] = mutationRates_late[key] + 1
+                        base_percentages_late[key] = (mutationRates_late[key] / len(muts[2].keys()))
+                        mutationRates[key] = mutationRates[key] + 1
+                        base_percentages[key] = (mutationRates[key] / len(trinucleotides))
             if trinucleotides[t][1] == 'A' or trinucleotides[t][1] == 'G':
                 if GetReverseComplement(trinucleotides[t]) == key:
-                    mutationRates[key] = mutationRates[key] + 1
-                    base_percentages[key] = (mutationRates[key] / len(trinucleotides))
                     if t in muts[0].keys():
                         mutationRates_early[key] = mutationRates_early[key] + 1
                         base_percentages_early[key] = (mutationRates_early[key] / len(muts[0].keys()))
@@ -1048,7 +1422,7 @@ def MutationRate(file1, trinucleotides, muts, file2):
         fm2.write('\n')
     return(mutationRates)
 
-mutationRates = MutationRate('mutationrates.txt', trinucleotide, muts, 'mutationrate_results')
+mutationRates = MutationRate('mutationrates.txt', trinucleotide,  muts, 'mutationrate_results')
 mutationRates16 = MutationRate('mutationrates.txt', trinucleotide16, muts_16, 'mutationrate16_results')
 mutationRatesr1 = MutationRate('mutationrates.txt', trinucleotider1, muts_r1, 'mutationrate_r1_results')
 mutationRatesr2 = MutationRate('mutationrates.txt', trinucleotider2, muts_r2, 'mutationrate_r2_results')
@@ -1069,10 +1443,27 @@ mutationRatesa2 = MutationRate('mutationrates.txt', trinucleotidea2, muts_a2, 'm
 mutationRatesb2 = MutationRate('mutationrates.txt', trinucleotideb2, muts_b2, 'mutationrate16_deletion_results')
 mutationRatesd2 = MutationRate('mutationrates.txt', trinucleotided2, muts_d2, 'mutationrate26_deletion_results')
 mutationRatese2 = MutationRate('mutationrates.txt', trinucleotidee2, muts_e2, 'mutationrate30_deletion_results')
-mutationRatesa3 = MutationRate('dinucleotide_rates.txt', trinucleotidea3, muts_a3, 'mutationrate_insertion_results')
-mutationRatesb3 = MutationRate('dinucleotide_rates.txt', trinucleotideb3, muts_b3, 'mutationrate16_insertion_results')
-mutationRatesd3 = MutationRate('dinucleotide_rates.txt', trinucleotided3, muts_d3, 'mutationrate26_insertion_results')
+mutationRatesa3 = MutationRate('dinucleotide_rates.txt', dinucleotidea3, muts_a3, 'mutationrate_insertion_results')
+mutationRatesb3 = MutationRate('dinucleotide_rates.txt', dinucleotideb3, muts_b3, 'mutationrate16_insertion_results')
+mutationRatesd3 = MutationRate('dinucleotide_rates.txt', dinucleotided3, muts_d3, 'mutationrate26_insertion_results')
 mutationRatese3 = MutationRate('dinucleotide_rates.txt', trinucleotidee3, muts_e3, 'mutationrate30_insertion_results')
+mutationRatesl1 = MutationRate('mutationrates.txt', trinucleotidel1, muts_l1, 'mutationrate_nonLOH_results_subs_UVB')
+mutationRatesl2 = MutationRate('mutationrates.txt', trinucleotidel2, muts_l2, 'mutationrate_nonLOH_rad16_results_subs_UVB')
+mutationRatesl3 = MutationRate('mutationrates.txt', trinucleotidel3, muts_l3, 'mutationrate_nonLOH_rad26_results_subs_UVB')
+mutationRatesl4 = MutationRate('mutationrates.txt', trinucleotidel4, muts_l4, 'mutationrate_nonLOH_rad30_results_subs_UVB')
+mutationRatesh = MutationRate('dinucleotide_rates.txt', dinucleotideh, mutsh, 'mutationrate_singledeletion_homopolymer_results')
+mutationRatesh16 = MutationRate('dinucleotide_rates.txt', dinucleotideh16, muts_h16, 'mutationrate_singledeletion_rad16_homopolymer_results')
+mutationRatesh26 = MutationRate('dinucleotide_rates.txt', dinucleotideh26, muts_h26, 'mutationrate_singledeletion_rad26_homopolymer_results')
+mutationRatesn = MutationRate('dinucleotide_rates.txt', dinucleotiden, mutsn, 'mutationrate_singledeletion_nonhomopolymer_results')
+mutationRatesn16 = MutationRate('dinucleotide_rates.txt', dinucleotiden16, muts_n16, 'mutationrate_singledeletion_rad16_nonhomopolymer_results')
+mutationRatesn26 = MutationRate('dinucleotide_rates.txt', dinucleotiden26, muts_n26, 'mutationrate_singledeletion_rad26_nonhomopolymer_results')
+mutationRateshB = MutationRate('dinucleotide_rates.txt', dinucleotidehB, muts_hB, 'mutationrate_singledeletion_UVB_homopolymer_results')
+mutationRatesh16B = MutationRate('dinucleotide_rates.txt', dinucleotideh16B, muts_h16B, 'mutationrate_singledeletion_rad16_UVB_homopolymer_results')
+mutationRatesh26B = MutationRate('dinucleotide_rates.txt', dinucleotideh26B, muts_h26B, 'mutationrate_singledeletion_rad26_UVB_homopolymer_results')
+mutationRatesnB = MutationRate('dinucleotide_rates.txt', dinucleotidenB, muts_nB, 'mutationrate_singledeletion_UVB_nonhomopolymer_results')
+mutationRatesn16B = MutationRate('dinucleotide_rates.txt', dinucleotiden16B, muts_n16B, 'mutationrate_singledeletion_UVB_rad16_nonhomopolymer_results')
+mutationRatesn26B = MutationRate('dinucleotide_rates.txt', dinucleotiden26B, muts_n26B, 'mutationrate_singledeletion_UVB_rad26_nonhomopolymer_results')
+
 
 
 rep_times = []
@@ -1261,11 +1652,15 @@ dicts = [early_TrinucCounts, middle_TrinucCounts, late_TrinucCounts]
 dinuc_dicts = [early_DinucCounts, middle_DinucCounts, late_DinucCounts]
 di_dict = {0:{'CC':0, 'CT':0, 'TC':0, 'TT':0}, 1:{'CC':0, 'CT':0, 'TC':0, 'TT':0}, 2:{'CC':0, 'CT':0, 'TC':0, 'TT':0}}
 #Counts numbers of trinucleotides in early, middle, and late replicating regions (only regions included in the timing map)
+hp_counts = {0:{}, 1:{}, 2:{}}
+non_hp_counts = {0:{}, 1:{}, 2:{}}
+
 #based on input from yeast genome assembly R64
-def TrinucleotideContext(file, name, start, scores, early, middle, dicts, num, counts):
+def TrinucleotideContext(file, name, start, scores, early, middle, dicts, num, counts, hp_counts, non_hp_counts):
     early_TrinucCounts = dicts[0]
     middle_TrinucCounts = dicts[1]
     late_TrinucCounts = dicts[2]
+
     
     
     
@@ -1276,77 +1671,129 @@ def TrinucleotideContext(file, name, start, scores, early, middle, dicts, num, c
     sequence = ''.join(sequence.split('\n'))
     di_counts = counts
        
-            
+    coordinates = []       
     for i in range(1, len(scores)):
         if chr[i] == name and chr[i - 1] == name:
             
             for q in range(int(start[i -1]) - 1, int(start[i]) - 1):
+                if sequence[q] != 'N':# and q not in coordinates:
+                    length = 1
+                    j = 1
+                
+                    while sequence[q] == sequence[q + j]:
+                        length = length + 1
+                
+                        if (q + j) < len(sequence) - 1:
+                            j = j + 1
+                        else:
+                            break
+                    #for a in range(0, length):
+                        #coordinates.append(q + a)
                 #if chr[i] != "chrXII" or (q < 451430) or (q  > 468920 and q  < 489928) or (q  > 490455):
-                    if sequence[(q - 1):(q+num - 1)][1] == 'A' or sequence[(q-1):(q+num -1)][1] == 'G':
+                if sequence[(q - 1):(q+num - 1)][1] == 'A' or sequence[(q-1):(q+num -1)][1] == 'G':
                         seq1 =GetReverseComplement (sequence[(q-1):(q + num - 1)])
-                    else:
+                else:
                         seq1 = sequence[(q-1):(q + num - 1)]
+                     
+                
+        #for b in range(0, len(sequence) - 1):
+            
+                    
 
-                    time = calculateTime(scores[i - 1], scores[i],q, start[i - 1] - 1, start[i] - 1)
-                    if time < early:
+
+                time = calculateTime(scores[i - 1], scores[i],q, start[i - 1] - 1, start[i] - 1)
+                if time < early:
+                        if length >= 4:
+                            if seq1 not in hp_counts[0].keys():
+                                hp_counts[0][seq1] = 1
+                            else:
+                                hp_counts[0][seq1] = hp_counts[0][seq1] + 1
+                        else:
+                            if seq1 not in non_hp_counts[0].keys():
+                                non_hp_counts[0][seq1] = 1
+                            else:
+                                non_hp_counts[0][seq1] = non_hp_counts[0][seq1] + 1
                         if seq1 not in early_TrinucCounts.keys():
                             early_TrinucCounts[seq1] = 1
                         else:
                             early_TrinucCounts[seq1] = early_TrinucCounts[seq1] + 1
                         di_counts = GetDipyrimidineCounts(di_counts, sequence[q-1:q+1], 0)
-                    if time >= early and time < middle:
+                if time >= early and time < middle:
+                        if length >= 4:
+                            if seq1 not in hp_counts[1].keys():
+                                hp_counts[1][seq1] = 1
+                            else:
+                                hp_counts[1][seq1] = hp_counts[1][seq1] + 1
+                        else:
+                            if seq1 not in non_hp_counts[1].keys():
+                                non_hp_counts[1][seq1] = 1
+                            else:
+                                non_hp_counts[1][seq1] = non_hp_counts[1][seq1] + 1
                         if seq1 not in middle_TrinucCounts.keys():
                             middle_TrinucCounts[seq1] = 1
                         else:
                             middle_TrinucCounts[seq1] = middle_TrinucCounts[seq1] + 1
                         di_counts = GetDipyrimidineCounts(di_counts, sequence[q-1:q+1], 1)
 
-                    if time >= middle:
-                        if seq1 not in late_TrinucCounts.keys():
-                            late_TrinucCounts[seq1] = 1
+                if time >= middle:
+                    if length >= 4:
+                        if seq1 not in hp_counts[2].keys():
+                                hp_counts[2][seq1] = 1
                         else:
+                                hp_counts[2][seq1] = hp_counts[2][seq1] + 1
+                    else:
+                            if seq1 not in non_hp_counts[2].keys():
+                                non_hp_counts[2][seq1] = 1
+                            else:
+                                non_hp_counts[2][seq1] = non_hp_counts[2][seq1] + 1
+                    if seq1 not in late_TrinucCounts.keys():
+                            late_TrinucCounts[seq1] = 1
+                    else:
                             late_TrinucCounts[seq1] = late_TrinucCounts[seq1] + 1
-                        di_counts = GetDipyrimidineCounts(di_counts, sequence[q-1:q+1], 2)
+                    di_counts = GetDipyrimidineCounts(di_counts, sequence[q-1:q+1], 2)
                     
 
 
                                          
     ft.close()
-    return [early_TrinucCounts, middle_TrinucCounts, late_TrinucCounts], di_counts
-di_dict1 = TrinucleotideContext('chr1.txt', 'chrI', start, scores, early_2, middle_2, dinuc_dicts, 2, di_dict)
-di_dict2 = TrinucleotideContext('chr2.txt', 'chrII', start, scores, early_2, middle_2, di_dict1[0], 2, di_dict1[1])
-di_dict3 = TrinucleotideContext('chr3.txt', 'chrIII', start, scores, early_2, middle_2, di_dict2[0], 2, di_dict2[1])
-di_dict4 = TrinucleotideContext('chr4.txt', 'chrIV', start, scores, early_2, middle_2, di_dict3[0], 2, di_dict3[1])
-di_dict5 = TrinucleotideContext('chr5.txt', 'chrV', start, scores, early_2, middle_2, di_dict4[0], 2, di_dict4[1])
-di_dict6 = TrinucleotideContext('chr6.txt', 'chrVI', start, scores, early_2, middle_2, di_dict5[0], 2, di_dict5[1])
-di_dict7 = TrinucleotideContext('chr7.txt', 'chrVII', start, scores, early_2, middle_2, di_dict6[0], 2, di_dict6[1])
-di_dict8 = TrinucleotideContext('chr8.txt', 'chrVIII', start, scores, early_2, middle_2, di_dict7[0], 2, di_dict7[1])
-di_dict9 = TrinucleotideContext('chr9.txt', 'chrIX', start, scores, early_2, middle_2, di_dict8[0], 2, di_dict8[1])
-di_dict10 = TrinucleotideContext('chr10.txt', 'chrX', start, scores, early_2, middle_2, di_dict9[0], 2, di_dict9[1])
-di_dict11 = TrinucleotideContext('chr11.txt', 'chrXI', start, scores, early_2, middle_2, di_dict10[0], 2, di_dict10[1])
-di_dict12 = TrinucleotideContext('chr12.txt', 'chrXII', start, scores, early_2, middle_2, di_dict11[0], 2, di_dict11[1])
-di_dict13 = TrinucleotideContext('chr13.txt', 'chrXIII', start, scores, early_2, middle_2, di_dict12[0], 2, di_dict12[1])
-di_dict14 = TrinucleotideContext('chr14.txt', 'chrXIV', start, scores, early_2, middle_2, di_dict13[0], 2, di_dict13[1])
-di_dict15 = TrinucleotideContext('chr15.txt', 'chrXV', start, scores, early_2, middle_2, di_dict14[0], 2, di_dict14[1])
-dinuc_counts = TrinucleotideContext('chr16.txt', 'chrXVI', start, scores, early_2, middle_2, di_dict15[0], 2, di_dict15[1])
+    return [early_TrinucCounts, middle_TrinucCounts, late_TrinucCounts], di_counts, hp_counts, non_hp_counts
+di_dict1 = TrinucleotideContext('chr1.txt', 'chrI', start, scores, early_2, middle_2, dinuc_dicts, 2, di_dict, hp_counts, non_hp_counts)
+di_dict2 = TrinucleotideContext('chr2.txt', 'chrII', start, scores, early_2, middle_2, di_dict1[0], 2, di_dict1[1], di_dict1[2], di_dict1[3])
+di_dict3 = TrinucleotideContext('chr3.txt', 'chrIII', start, scores, early_2, middle_2, di_dict2[0], 2, di_dict2[1], di_dict2[2], di_dict2[3])
+di_dict4 = TrinucleotideContext('chr4.txt', 'chrIV', start, scores, early_2, middle_2, di_dict3[0], 2, di_dict3[1], di_dict3[2], di_dict3[3])
+di_dict5 = TrinucleotideContext('chr5.txt', 'chrV', start, scores, early_2, middle_2, di_dict4[0], 2, di_dict4[1], di_dict4[2], di_dict4[3])
+di_dict6 = TrinucleotideContext('chr6.txt', 'chrVI', start, scores, early_2, middle_2, di_dict5[0], 2, di_dict5[1], di_dict5[2], di_dict5[3])
+di_dict7 = TrinucleotideContext('chr7.txt', 'chrVII', start, scores, early_2, middle_2, di_dict6[0], 2, di_dict6[1], di_dict6[2], di_dict6[3])
+di_dict8 = TrinucleotideContext('chr8.txt', 'chrVIII', start, scores, early_2, middle_2, di_dict7[0], 2, di_dict7[1], di_dict7[2], di_dict7[3])
+di_dict9 = TrinucleotideContext('chr9.txt', 'chrIX', start, scores, early_2, middle_2, di_dict8[0], 2, di_dict8[1], di_dict8[2], di_dict8[3])
+di_dict10 = TrinucleotideContext('chr10.txt', 'chrX', start, scores, early_2, middle_2, di_dict9[0], 2, di_dict9[1], di_dict9[2], di_dict9[3])
+di_dict11 = TrinucleotideContext('chr11.txt', 'chrXI', start, scores, early_2, middle_2, di_dict10[0], 2, di_dict10[1], di_dict10[2], di_dict10[3])
+di_dict12 = TrinucleotideContext('chr12.txt', 'chrXII', start, scores, early_2, middle_2, di_dict11[0], 2, di_dict11[1], di_dict11[2], di_dict11[3])
+di_dict13 = TrinucleotideContext('chr13.txt', 'chrXIII', start, scores, early_2, middle_2, di_dict12[0], 2, di_dict12[1], di_dict12[2], di_dict12[3])
+di_dict14 = TrinucleotideContext('chr14.txt', 'chrXIV', start, scores, early_2, middle_2, di_dict13[0], 2, di_dict13[1], di_dict13[2], di_dict13[3])
+di_dict15 = TrinucleotideContext('chr15.txt', 'chrXV', start, scores, early_2, middle_2, di_dict14[0], 2, di_dict14[1], di_dict14[2], di_dict14[3])
+dinuc_counts = TrinucleotideContext('chr16.txt', 'chrXVI', start, scores, early_2, middle_2, di_dict15[0], 2, di_dict15[1], di_dict15[2], di_dict15[3])
 
 
-dict1 = TrinucleotideContext('chr1.txt', 'chrI', start, scores, early_2, middle_2, dicts, 3, di_dict)
-dict2 = TrinucleotideContext('chr2.txt', 'chrII', start, scores, early_2, middle_2, dict1[0], 3, dict1[1])
-dict3 = TrinucleotideContext('chr3.txt', 'chrIII', start, scores, early_2, middle_2, dict2[0], 3, dict2[1])
-dict4 = TrinucleotideContext('chr4.txt', 'chrIV', start, scores, early_2, middle_2, dict3[0], 3, dict3[1])
-dict5 = TrinucleotideContext('chr5.txt', 'chrV', start, scores, early_2, middle_2, dict4[0], 3, dict4[1])
-dict6 = TrinucleotideContext('chr6.txt', 'chrVI', start, scores, early_2, middle_2, dict5[0], 3, dict5[1])
-dict7 = TrinucleotideContext('chr7.txt', 'chrVII', start, scores, early_2, middle_2, dict6[0], 3, dict6[1])
-dict8 = TrinucleotideContext('chr8.txt', 'chrVIII', start, scores, early_2, middle_2, dict7[0], 3, dict7[1])
-dict9 = TrinucleotideContext('chr9.txt', 'chrIX', start, scores, early_2, middle_2, dict8[0], 3, dict8[1])
-dict10 = TrinucleotideContext('chr10.txt', 'chrX', start, scores, early_2, middle_2, dict9[0], 3, dict9[1])
-dict11 = TrinucleotideContext('chr11.txt', 'chrXI', start, scores, early_2, middle_2, dict10[0], 3, dict10[1])
-dict12 = TrinucleotideContext('chr12.txt', 'chrXII', start, scores, early_2, middle_2, dict11[0], 3, dict11[1])
-dict13 = TrinucleotideContext('chr13.txt', 'chrXIII', start, scores, early_2, middle_2, dict12[0], 3, dict12[1])
-dict14 = TrinucleotideContext('chr14.txt', 'chrXIV', start, scores, early_2, middle_2, dict13[0], 3, dict13[1])
-dict15 = TrinucleotideContext('chr15.txt', 'chrXV', start, scores, early_2, middle_2, dict14[0], 3, dict14[1])
-counts = TrinucleotideContext('chr16.txt', 'chrXVI', start, scores, early_2, middle_2, dict15[0], 3, dict15[1])
+hp_counts = {0:{}, 1:{}, 2:{}}
+non_hp_counts = {0:{}, 1:{}, 2:{}}
+
+dict1 = TrinucleotideContext('chr1.txt', 'chrI', start, scores, early_2, middle_2, dicts, 3, di_dict, hp_counts, non_hp_counts)
+dict2 = TrinucleotideContext('chr2.txt', 'chrII', start, scores, early_2, middle_2, dict1[0], 3, dict1[1], dict1[2], dict1[3])
+dict3 = TrinucleotideContext('chr3.txt', 'chrIII', start, scores, early_2, middle_2, dict2[0], 3, dict2[1], dict2[2], dict2[3])
+dict4 = TrinucleotideContext('chr4.txt', 'chrIV', start, scores, early_2, middle_2, dict3[0], 3, dict3[1], dict3[2], dict3[3])
+dict5 = TrinucleotideContext('chr5.txt', 'chrV', start, scores, early_2, middle_2, dict4[0], 3, dict4[1], dict4[2], dict4[3])
+dict6 = TrinucleotideContext('chr6.txt', 'chrVI', start, scores, early_2, middle_2, dict5[0], 3, dict5[1], dict5[2], dict5[3])
+dict7 = TrinucleotideContext('chr7.txt', 'chrVII', start, scores, early_2, middle_2, dict6[0], 3, dict6[1], dict6[2], dict6[3])
+dict8 = TrinucleotideContext('chr8.txt', 'chrVIII', start, scores, early_2, middle_2, dict7[0], 3, dict7[1], dict7[2], dict7[3])
+dict9 = TrinucleotideContext('chr9.txt', 'chrIX', start, scores, early_2, middle_2, dict8[0], 3, dict8[1], dict8[2], dict8[3])
+dict10 = TrinucleotideContext('chr10.txt', 'chrX', start, scores, early_2, middle_2, dict9[0], 3, dict9[1], dict9[2], dict9[3])
+dict11 = TrinucleotideContext('chr11.txt', 'chrXI', start, scores, early_2, middle_2, dict10[0], 3, dict10[1], dict10[2], dict10[3])
+dict12 = TrinucleotideContext('chr12.txt', 'chrXII', start, scores, early_2, middle_2, dict11[0], 3, dict11[1], dict11[2], dict11[3])
+dict13 = TrinucleotideContext('chr13.txt', 'chrXIII', start, scores, early_2, middle_2, dict12[0], 3, dict12[1], dict12[2], dict12[3])
+dict14 = TrinucleotideContext('chr14.txt', 'chrXIV', start, scores, early_2, middle_2, dict13[0], 3, dict13[1], dict13[2], dict13[3])
+dict15 = TrinucleotideContext('chr15.txt', 'chrXV', start, scores, early_2, middle_2, dict14[0], 3, dict14[1], dict14[2], dict14[3])
+counts = TrinucleotideContext('chr16.txt', 'chrXVI', start, scores, early_2, middle_2, dict15[0], 3, dict15[1], dict15[2], dict15[3])
 
 
 
@@ -1385,9 +1832,9 @@ early_Trinuc = {}
 middle_Trinuc = {}
 late_Trinuc = {}
 
-chr_dicts = [early_Trinuc, middle_Trinuc, late_Trinuc]
-chr_di_dict = {0:{'CC':0, 'CT':0, 'TC':0, 'TT':0}, 1:{'CC':0, 'CT':0, 'TC':0, 'TT':0}, 2:{'CC':0, 'CT':0, 'TC':0, 'TT':0}}
-chr16_counts =   TrinucleotideContext('chr16.txt', 'chrXVI', start, scores, early_2, middle_2, chr_dicts, 3, chr_di_dict)  
+#chr_dicts = [early_Trinuc, middle_Trinuc, late_Trinuc]
+#chr_di_dict = {0:{'CC':0, 'CT':0, 'TC':0, 'TT':0}, 1:{'CC':0, 'CT':0, 'TC':0, 'TT':0}, 2:{'CC':0, 'CT':0, 'TC':0, 'TT':0}}
+#chr16_counts =   TrinucleotideContext('chr16.txt', 'chrXVI', start, scores, early_2, middle_2, chr_dicts, 3, chr_di_dict)  
 #file = open('chrXVI_dipyrimidines', 'w+')
 #PrintTotalDipyrimidineCounts(chr16_counts[1], file)
 
@@ -1397,16 +1844,18 @@ def GetNewMutationRates(mutationRates, count):
     late_totals = count[2] 
 
     for key in mutationRates.keys():
+        if mutationRates[key] != 0:
         
     #mutated over total for each codon
-        if key in late_totals.keys() and key in middle_totals.keys() and key in early_totals.keys():
-            mutationRates[key] = mutationRates[key]/(count[0][key] + count[1][key] + count[2][key])
-        elif key not in late_totals.keys():
-            mutationRates[key] = mutationRates[key]/(count[0][key] + count[1][key]) 
-        elif key not in middle_totals.keys():
-            mutationRates[key] = mutationRates[key]/(count[0][key] + count[2][key])
-        elif key not in early_totals.keys():
-            mutationRates[key] = mutationRates[key]/(count[1][key] + count[2][key])
+            if key in late_totals.keys() and key in middle_totals.keys() and key in early_totals.keys():
+                mutationRates[key] = mutationRates[key]/(count[0][key] + count[1][key] + count[2][key])
+            elif key not in late_totals.keys():
+                mutationRates[key] = mutationRates[key]/(count[0][key] + count[1][key]) 
+            elif key not in middle_totals.keys():
+                mutationRates[key] = mutationRates[key]/(count[0][key] + count[2][key])
+            elif key not in early_totals.keys():
+                mutationRates[key] = mutationRates[key]/(count[1][key] + count[2][key])
+        
     return mutationRates
 
 new_mutationRates = GetNewMutationRates(mutationRates, counts[0])
@@ -1421,18 +1870,179 @@ new_mutationRatesUVA = GetNewMutationRates(mutationRatesUVA, counts[0])
 new_mutationRatesOg =  GetNewMutationRates(mutationRatesOg, counts[0])
 new_mutationRatesr1 = GetNewMutationRates(mutationRatesr1, counts[0])
 new_mutationRatesr2 = GetNewMutationRates(mutationRatesr2, counts[0])
+new_mutationRatesl1 = GetNewMutationRates(mutationRatesl1, counts[0])
+new_mutationRatesl2 = GetNewMutationRates(mutationRatesl2, counts[0])
+new_mutationRatesl3 = GetNewMutationRates(mutationRatesl3, counts[0])
+new_mutationRatesl4 = GetNewMutationRates(mutationRatesl4, counts[0])
+new_mutationRatesh = GetNewMutationRates(mutationRatesh, dinuc_counts[2])
+new_mutationRatesh16 = GetNewMutationRates(mutationRatesh16, dinuc_counts[2])
+new_mutationRatesh26 = GetNewMutationRates(mutationRatesh26, dinuc_counts[2])
+new_mutationRatesn = GetNewMutationRates(mutationRatesn, dinuc_counts[3])
+new_mutationRatesn16 = GetNewMutationRates(mutationRatesn16, dinuc_counts[3])
+new_mutationRatesn26 = GetNewMutationRates(mutationRatesn26, dinuc_counts[3])
+new_mutationRateshB = GetNewMutationRates(mutationRateshB, dinuc_counts[2])
+new_mutationRatesh16B = GetNewMutationRates(mutationRatesh16B, dinuc_counts[2])
+new_mutationRatesh26B = GetNewMutationRates(mutationRatesh26B, dinuc_counts[2])
+new_mutationRatesnB = GetNewMutationRates(mutationRatesnB, dinuc_counts[3])
+new_mutationRatesn16B = GetNewMutationRates(mutationRatesn16B, dinuc_counts[3])
+new_mutationRatesn26B = GetNewMutationRates(mutationRatesn26B, dinuc_counts[3])
+
 #new_mutationRatesa1 = GetNewMutationRates(mutationRatesa1, counts[0])
 #new_mutationRatesb1 = GetNewMutationRates(mutationRatesb1, counts[0])
 #new_mutationRatesd1 = GetNewMutationRates(mutationRatesd1, counts[0])
 #new_mutationRatese1 = GetNewMutationRates(mutationRatese1, counts[0])
-#new_mutationRatesa2 = GetNewMutationRates(mutationRatesa2, counts[0])
-#new_mutationRatesb2 = GetNewMutationRates(mutationRatesb2, counts[0])
-#new_mutationRatesd2 = GetNewMutationRates(mutationRatesd2, counts[0])
-#new_mutationRatese2 = GetNewMutationRates(mutationRatese2, counts[0])
-#new_mutationRatesa3 = GetNewMutationRates(mutationRatesa3, dinuc_counts[0])
-#new_mutationRatesb3 = GetNewMutationRates(mutationRatesb3, dinuc_counts[0])
-#new_mutationRatesd3 = GetNewMutationRates(mutationRatesd3, dinuc_counts[0])
-#new_mutationRatese3 = GetNewMutationRates(mutationRatese3, dinuc_counts[0])
+new_mutationRatesa2 = GetNewMutationRates(mutationRatesa2, counts[0])
+new_mutationRatesb2 = GetNewMutationRates(mutationRatesb2, counts[0])
+new_mutationRatesd2 = GetNewMutationRates(mutationRatesd2, counts[0])
+new_mutationRatese2 = GetNewMutationRates(mutationRatese2, counts[0])
+new_mutationRatesa3 = GetNewMutationRates(mutationRatesa3, dinuc_counts[0])
+new_mutationRatesb3 = GetNewMutationRates(mutationRatesb3, dinuc_counts[0])
+new_mutationRatesd3 = GetNewMutationRates(mutationRatesd3, dinuc_counts[0])
+new_mutationRatese3 = GetNewMutationRates(mutationRatese3, dinuc_counts[0])
+
+def NormalizeHomopolymer(sequences,  scores, start, chr):
+    homopolymer_dict = {}
+    sequence_dict = {}
+    C_del = counts[0]
+    T_del = counts[1]
+    C_ins = counts[2]
+    T_ins = counts[3]
+    C_dict = {}
+    T_dict = {}
+
+    homopolymer_counts = {}
+    for a in range(1, 21):
+        if a in C_del.keys():
+            homopolymer_counts[a] = C_del[a]
+            if a in T_del.keys():
+                homopolymer_counts[a] = homopolymer_counts[a] + T_del[a]
+        elif a in T_del.keys():
+            homopolymer_counts[a] = T_del[a]
+    #for length in lengths:
+        #if length not in homopolymer_counts.keys():
+            #homopolymer_counts[length] = 1
+            #homopolymer_dict[length] = 0
+        #else:
+            #homopolymer_counts[length] = homopolymer_counts[length] + 1
+    homopolymer_dict[1] = 0
+    C_dict[1] = 0
+    T_dict[1] = 0
+    for seq in sequences:
+        #coordinates = []
+        sequence = seq
+        if sequence[len(sequence) - 1] != sequence[len(sequence) - 2]:
+            homopolymer_dict[1] = homopolymer_dict[1] + 1
+            if sequence[len(sequence) - 1] == 'C' or sequence[len(sequence) - 1] == 'G':
+                C_dict[1] = C_dict[1] + 1
+            elif sequence[len(sequence) - 1] == 'T' or sequence[len(sequence) - 1] == 'A':
+                T_dict[1] = T_dict[1] + 1
+        b = 0
+        while b < len(sequence) - 1:
+        #for b in range(0, len(sequence) - 1):
+            polymer_range = {}
+            if sequence[b] != 'N':# and b not in coordinates:
+                length = 1
+                i = 1
+                polymer_range[0] = b
+                while sequence[b] == sequence[b + i]:
+                    length = length + 1
+                    polymer_range[1] = b + i
+                    if (b + i) < len(sequence) - 1:
+                        i = i + 1
+                    else:
+                        break
+                #if ( b != len(sequence) - 1 and sequence[b] == sequence[b + 1]) or (b!= 0 and sequence[b] == sequence[b - 1]):
+                    #if b <= 50:
+                        #number = GetHomopolymerLength(sequence[0:b + 50], b + 1, b + 1)
+                        #print(sequence[0:b + 50])
+                        #polymer_count = number[0]
+                        #polymer_range = number[1]
+                    #elif b > (len(sequence) - 50):
+                        #number = GetHomopolymerLength(sequence[b - 51:len(sequence)] , b + 1, 52)
+                        #polymer_count = number[0]
+                        #polymer_range = number[1]
+                    #else:
+                        #number = GetHomopolymerLength(sequence[b - 51:b + 50], b + 1, int(len(sequence[b - 51:b + 50])/2) + 1)
+                        #print(sequence[b - 51:b + 50])
+                polymer_count = length
+                
+                        #polymer_range = number[1]
+                #if length > 1:
+                if polymer_count in homopolymer_dict.keys():
+                            #homopolymer_dict[polymer_count] = homopolymer_dict[polymer_count] + 1
+                            #for i in range (polymer_range[0], polymer_range[1] + 1):
+                            homopolymer_dict[polymer_count] = homopolymer_dict[polymer_count] + length
+                                #coordinates.append(i)
+                            if sequence[b] == 'C' or sequence[b] == 'G':
+                                if polymer_count in C_dict.keys():
+                                    #C_dict[polymer_count] = C_dict[polymer_count] + 1
+                                    #for k in range (polymer_range[0], polymer_range[1] + 1):
+                                    C_dict[polymer_count] = C_dict[polymer_count] + length
+                                else:
+                                    C_dict[polymer_count] = length
+                                    #for l in range (polymer_range[0], polymer_range[1] + 1):
+                                        #C_dict[polymer_count] = C_dict[polymer_count] + 1
+                            if sequence[b] == 'T' or sequence[b] == 'A':
+                                if polymer_count in T_dict.keys():
+                                    #T_dict[polymer_count] = T_dict[polymer_count] + 1
+                                    #for k in range (polymer_range[0], polymer_range[1] + 1):
+                                    T_dict[polymer_count] = T_dict[polymer_count] + length
+                                else:
+                                    T_dict[polymer_count] = length
+                                    #for l in range (polymer_range[0], polymer_range[1] + 1):
+                                        #T_dict[polymer_count] = T_dict[polymer_count] + 1
+
+    
+
+                else:
+                            homopolymer_dict[polymer_count] = length
+                            #for j in range (polymer_range[0], polymer_range[1] + 1):
+                                #homopolymer_dict[polymer_count] = homopolymer_dict[polymer_count] + 1
+                                #coordinates.append(j)
+                            if sequence[b] == 'C' or sequence[b] == 'G':
+                                C_dict[polymer_count] = length
+                                #for m in range (polymer_range[0], polymer_range[1] + 1):
+                                    #C_dict[polymer_count] = C_dict[polymer_count] + 1
+                            if sequence[b] == 'T' or sequence[b] == 'A':
+                                T_dict[polymer_count] = length
+                                #for n in range (polymer_range[0], polymer_range[1] + 1):
+                                    #T_dict[polymer_count] = T_dict[polymer_count] + 1
+                #else:
+                    #if 1 in homopolymer_dict.keys():
+                            #homopolymer_dict[1] = homopolymer_dict[polymer_count] + 1
+                    #else:
+                            #homopolymer_dict[1] = 1
+                    #if sequence[b] == 'C' or sequence[b] == 'G':
+                        #if 1 in C_dict.keys():
+                            #C_dict[1] = C_dict[polymer_count] + 1
+                        #else:
+                            #C_dict[1] = 1
+                    #if sequence[b] == 'T' or sequence[b] == 'A':
+                        #if 1 in T_dict.keys():
+                            #T_dict[1] = T_dict[polymer_count] + 1
+                        #else:   
+                
+                            #T_dict[1] = 1
+                b = b + length
+         
+    for key in homopolymer_counts.keys():
+        homopolymer_counts[key] = homopolymer_counts[key]/homopolymer_dict[key]
+    for key in C_dict.keys():
+        if key in C_del.keys():
+            C_del[key] = C_del[key]/C_dict[key]
+        if key in C_ins.keys():
+            C_ins[key] = C_ins[key]/C_dict[key]
+    for key in T_dict.keys():
+        if key in T_del.keys():
+            T_del[key] = T_del[key]/T_dict[key]
+        if key in T_ins.keys():
+            T_ins[key] = T_ins[key]/T_dict[key]
+    print(C_del)
+    print(T_del)
+    print(C_ins)
+    print(T_ins)
+
+    return C_del, T_del, C_ins, T_ins, C_dict, T_dict
 
 
 def FindExpected(mutationRates, count, file):
@@ -1497,13 +2107,30 @@ FindExpected(new_mutationRatesUVB, counts[0], 'Rates_UVB.txt')
 FindExpected(new_mutationRatesB16, counts[0], 'Rates_UVB16.txt')
 FindExpected(new_mutationRatesB26, counts[0], 'Rates_UVB26.txt')
 FindExpected(new_mutationRatesB30,  counts[0], 'Rates_UVB30.txt')
-#WT_deletions = FindExpected(new_mutationRatesa2, counts[0], 'Rates_deletions.txt')
-#rad16_deletions = FindExpected(new_mutationRatesb1, counts[0], 'Rates16_deletions.txt')
-#rad26_deletions =FindExpected(new_mutationRatesd2, counts[0], 'Rates26_deletions.txt')
-#rad30_deletions = FindExpected(new_mutationRatese2, counts[0], 'Rates30_deletions.txt')
-#WT_insertions = FindExpected(new_mutationRatesa3, dinuc_counts[0], 'Rates_insertions.txt')
-#rad26_insertions =FindExpected(new_mutationRatesd3, dinuc_counts[0], 'Rates26_insertions.txt')
-#rad16_insertions = FindExpected(new_mutationRatesb3, dinuc_counts[0], 'Rates16_insertions.txt')
+FindExpected(new_mutationRatesl1, counts[0], 'Rates_nonLOH_subs_UVB.txt')
+FindExpected(new_mutationRatesl2, counts[0], 'Rates_nonLOH_rad16_subs_UVB.txt')
+FindExpected(new_mutationRatesl3, counts[0], 'Rates_nonLOH_rad26_subs_UVB.txt')
+FindExpected(new_mutationRatesl4, counts[0], 'Rates_nonLOH_rad30_subs_UVB.txt')
+WT_deletions = FindExpected(new_mutationRatesa2, counts[0], 'Rates_deletions.txt')
+rad16_deletions = FindExpected(new_mutationRatesb2, counts[0], 'Rates16_deletions.txt')
+rad26_deletions =FindExpected(new_mutationRatesd2, counts[0], 'Rates26_deletions.txt')
+rad30_deletions = FindExpected(new_mutationRatese2, counts[0], 'Rates30_deletions.txt')
+WT_insertions = FindExpected(new_mutationRatesa3, dinuc_counts[0], 'Rates_insertions.txt')
+rad26_insertions =FindExpected(new_mutationRatesd3, dinuc_counts[0], 'Rates26_insertions.txt')
+rad16_insertions = FindExpected(new_mutationRatesb3, dinuc_counts[0], 'Rates16_insertions.txt')
+FindExpected(new_mutationRatesh, dinuc_counts[2], 'Rates_singledeletion_homopolymer.txt')
+FindExpected(new_mutationRatesh16, dinuc_counts[2], 'Rates_singledeletion_rad16_homopolymer.txt')
+FindExpected(new_mutationRatesh26, dinuc_counts[2], 'Rates_singledeletion_rad26_homopolymer.txt')
+FindExpected(new_mutationRatesn, dinuc_counts[3], 'Rates_singledeletion_nonhomopolymer.txt')
+FindExpected(new_mutationRatesn16, dinuc_counts[3], 'Rates_singledeletion_rad16_nonhomopolymer.txt')
+FindExpected(new_mutationRatesn26, dinuc_counts[3], 'Rates_singledeletion_rad26_nonhomopolymer.txt')
+FindExpected(new_mutationRateshB, dinuc_counts[2], 'Rates_singledeletion_homopolymer_UVB.txt')
+FindExpected(new_mutationRatesh16B, dinuc_counts[2], 'Rates_singledeletion_rad16_homopolymer_UVB.txt')
+FindExpected(new_mutationRatesh26B, dinuc_counts[2], 'Rates_singledeletion_rad26_homopolymer_UVB.txt')
+FindExpected(new_mutationRatesnB, dinuc_counts[3], 'Rates_singledeletion_nonhomopolymer_UVB.txt')
+FindExpected(new_mutationRatesn16B, dinuc_counts[3], 'Rates_singledeletion_rad16_nonhomopolymer_UVB.txt')
+FindExpected(new_mutationRatesn26B, dinuc_counts[3], 'Rates_singledeletion_rad26_nonhomopolymer_UVB.txt')
+
 #rad30_insertions = FindExpected(new_mutationRatese3, dinuc_counts[0], 'Rates30_insertions.txt')
 
 
@@ -1523,9 +2150,9 @@ FindExpected(new_mutationRatesB30,  counts[0], 'Rates_UVB30.txt')
 
 
 
-expected_percentages = FindExpected(new_mutationRates, chr16_counts[0], 'Rates_chr16.txt')
-expected_percentages16 = FindExpected(new_mutationRates16, chr16_counts[0], 'Rates16_chr16.txt')
-expected_percentagesUVB = FindExpected(new_mutationRatesUVB, chr16_counts[0], 'Rates_UVB_chr16.txt')
+# expected_percentages = FindExpected(new_mutationRates, chr16_counts[0], 'Rates_chr16.txt')
+# expected_percentages16 = FindExpected(new_mutationRates16, chr16_counts[0], 'Rates16_chr16.txt')
+# expected_percentagesUVB = FindExpected(new_mutationRatesUVB, chr16_counts[0], 'Rates_UVB_chr16.txt')
 #expected_percentages26 = FindExpected(new_mutationRates26, chr1_counts[0], 'Rates26_chr1.txt')
 #expected_percentagesB26 = FindExpected(new_mutationRatesB26, chr1_counts[0], 'Rates26_UVB_chr1.txt')
-expected_percentagesB16 = FindExpected(new_mutationRatesB16, chr16_counts[0], 'Rates_UVB16_chr16.txt')
+#expected_percentagesB16 = FindExpected(new_mutationRatesB16, chr16_counts[0], 'Rates_UVB16_chr16.txt')
